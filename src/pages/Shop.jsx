@@ -1,5 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { ProductFilter } from '../components/product/ProductFilter';
 import { ProductGrid } from '../components/product/ProductGrid';
 import { ProductQuickView } from '../components/product/ProductQuickView';
@@ -96,16 +97,26 @@ export const Shop = () => {
 
   return (
     <div className="zenji-shop-page">
-      {/* Editorial Header */}
-      <div className="zenji-shop-hero">
+      {/* Editorial Header with Scroll Reveal */}
+      <motion.div
+        className="zenji-shop-hero"
+        initial={{ opacity: 0, y: 22 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span className="zenji-shop-hero__badge">DROP ARCHIVES // SS26</span>
         <h1 className="zenji-shop-hero__title">SEASONAL CATALOGUE</h1>
         <p className="zenji-shop-hero__sub">
           Explore bespoke 500 GSM loopback cotton, tactical Cordura® ripstop outerwear, and articulated Tokyo streetwear pieces.
         </p>
-      </div>
+      </motion.div>
 
-      <div className="zenji-shop-container">
+      <motion.div
+        className="zenji-shop-container"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.65, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+      >
         <ProductFilter
           selectedCategory={selectedCategory}
           onSelectCategory={handleSelectCategory}
@@ -128,7 +139,7 @@ export const Shop = () => {
           onQuickView={(product) => setQuickViewProduct(product)}
           onResetFilters={handleResetFilters}
         />
-      </div>
+      </motion.div>
 
       {quickViewProduct && (
         <ProductQuickView

@@ -3,13 +3,13 @@ import { ProductCard } from './ProductCard';
 import { ShoppingBag, RefreshCw } from 'lucide-react';
 
 const cardVariants = {
-  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  hidden: { opacity: 0, scale: 0.94, y: 28 },
   visible: {
     opacity: 1,
     scale: 1,
     y: 0,
     transition: {
-      duration: 0.45,
+      duration: 0.65,
       ease: [0.16, 1, 0.3, 1]
     }
   },
@@ -17,7 +17,18 @@ const cardVariants = {
     opacity: 0,
     scale: 0.95,
     y: 15,
-    transition: { duration: 0.2 }
+    transition: { duration: 0.25 }
+  }
+};
+
+const gridContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.05
+    }
   }
 };
 
@@ -52,6 +63,10 @@ export const ProductGrid = ({ products, onQuickView, gridCols = 4, onResetFilter
     <motion.div
       layout
       className={`zenji-product-grid zenji-product-grid--cols-${gridCols}`}
+      variants={gridContainerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-40px', amount: 0.05 }}
     >
       <AnimatePresence mode="popLayout">
         {products.map((product) => (
@@ -59,9 +74,8 @@ export const ProductGrid = ({ products, onQuickView, gridCols = 4, onResetFilter
             key={product.id}
             layout
             variants={cardVariants}
-            initial="hidden"
-            animate="visible"
             exit="exit"
+            style={{ willChange: 'transform, opacity' }}
           >
             <ProductCard
               product={product}

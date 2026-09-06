@@ -3,26 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProductCard } from '../product/ProductCard';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.15
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-  }
-};
+import { scrollStaggerContainer, scrollCardItem, scrollSectionHeader } from '../../utils/motionVariants';
 
 export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
   const featured = useMemo(
@@ -30,15 +11,14 @@ export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
     [products]
   );
 
-
   return (
-    <section className="zenji-section">
+    <section className="zenji-section" id="featured-drops">
       <motion.div
         className="zenji-section__header"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-50px' }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        variants={scrollSectionHeader}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
       >
         <div>
           <div className="zenji-section__tag-group">
@@ -64,13 +44,17 @@ export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
 
       <motion.div
         className="zenji-product-grid"
-        variants={containerVariants}
+        variants={scrollStaggerContainer(0.12, 0.08)}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-50px' }}
+        viewport={{ once: true, margin: '-60px', amount: 0.1 }}
       >
         {featured.map((product) => (
-          <motion.div key={product.id} variants={itemVariants}>
+          <motion.div
+            key={product.id}
+            variants={scrollCardItem}
+            style={{ willChange: 'transform, opacity' }}
+          >
             <ProductCard
               product={product}
               onQuickView={onQuickView}

@@ -303,9 +303,15 @@ export const ProductDetail = () => {
         </motion.div>
       </div>
 
-      {/* Related Products with Staggered View */}
+      {/* Related Products with Scroll Reveal */}
       {relatedProducts.length > 0 && (
-        <section className="zenji-detail-related">
+        <motion.section
+          className="zenji-detail-related"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="zenji-section__header">
             <div>
               <span className="zenji-section__tag">CURATED MATCHES</span>
@@ -317,7 +323,7 @@ export const ProductDetail = () => {
               <ProductCard key={relProduct.id} product={relProduct} />
             ))}
           </div>
-        </section>
+        </motion.section>
       )}
     </div>
   );

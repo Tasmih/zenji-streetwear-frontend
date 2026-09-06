@@ -22,8 +22,9 @@ export const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 25);
+      setIsScrolled(window.scrollY > 20);
     };
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -53,18 +54,33 @@ export const Navbar = () => {
 
   return (
     <header className={`zenji-header ${isScrolled ? 'zenji-header--scrolled' : ''}`}>
-      {/* Top Announcement Ticker */}
-      <div className="zenji-ticker">
-        <div className="zenji-ticker__content">
-          <span>{ANNOUNCEMENT}</span>
-          <span className="zenji-ticker__dot">•</span>
-          <span>TYO-SHIBUYA 35.6580° N // ARCHIVE 04</span>
-          <span className="zenji-ticker__dot">•</span>
-          <span>LIMITED 150 PCS WORLDWIDE</span>
-          <span className="zenji-ticker__dot">•</span>
-          <span>AUTHENTIC TOKYO TAILORING</span>
-          <span className="zenji-ticker__dot">•</span>
-          <span>{ANNOUNCEMENT}</span>
+      {/* Top Announcement Infinite Marquee Ticker */}
+      <div className="zenji-ticker" aria-label="Storefront Announcements">
+        <div className="zenji-ticker__track">
+          <div className="zenji-ticker__content">
+            <span className="zenji-ticker__highlight">{ANNOUNCEMENT}</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>TYO-SHIBUYA 35.6580° N // ARCHIVE DROP 004</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>LIMITED 150 PCS SMALL-BATCH EDITION</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>500 GSM BESPOKE FLEECE HOODIES</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>EXPRESS WORLDWIDE DISPATCH</span>
+            <span className="zenji-ticker__dot">•</span>
+          </div>
+          <div className="zenji-ticker__content" aria-hidden="true">
+            <span className="zenji-ticker__highlight">{ANNOUNCEMENT}</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>TYO-SHIBUYA 35.6580° N // ARCHIVE DROP 004</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>LIMITED 150 PCS SMALL-BATCH EDITION</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>500 GSM BESPOKE FLEECE HOODIES</span>
+            <span className="zenji-ticker__dot">•</span>
+            <span>EXPRESS WORLDWIDE DISPATCH</span>
+            <span className="zenji-ticker__dot">•</span>
+          </div>
         </div>
       </div>
 

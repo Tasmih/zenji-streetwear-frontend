@@ -1,25 +1,6 @@
 import { ShieldCheck, Zap, Layers, RefreshCw } from 'lucide-react';
 import { motion } from 'framer-motion';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.1
-    }
-  }
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
-  }
-};
+import { scrollFadeUp, scrollStaggerContainer, scrollCardItem } from '../../utils/motionVariants';
 
 export const BrandManifesto = () => {
   const pillars = [
@@ -49,10 +30,10 @@ export const BrandManifesto = () => {
     <section className="zenji-manifesto">
       <motion.div
         className="zenji-manifesto__banner"
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-60px' }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        variants={scrollFadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-70px' }}
       >
         <div className="zenji-manifesto__tag-wrap">
           <span className="zenji-manifesto__dot-live" />
@@ -69,10 +50,10 @@ export const BrandManifesto = () => {
 
       <motion.div
         className="zenji-manifesto__grid"
-        variants={containerVariants}
+        variants={scrollStaggerContainer(0.12, 0.1)}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
+        viewport={{ once: true, margin: '-70px', amount: 0.1 }}
       >
         {pillars.map((pillar, idx) => {
           const Icon = pillar.icon;
@@ -81,9 +62,10 @@ export const BrandManifesto = () => {
             <motion.div
               key={idx}
               className="zenji-manifesto__card"
-              variants={cardVariants}
-              whileHover={{ y: -6 }}
+              variants={scrollCardItem}
+              whileHover={{ y: -6, scale: 1.015 }}
               transition={{ duration: 0.25 }}
+              style={{ willChange: 'transform, opacity' }}
             >
               <div className="zenji-manifesto__card-header">
                 <div className="zenji-manifesto__icon-wrap">
