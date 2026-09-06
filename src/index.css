@@ -637,7 +637,7 @@ img {
 }
 
 /* ==========================================================================
-   Hero Section — Luxury Streetwear Editorial
+   Hero Section — Luxury Streetwear Editorial & Cinematic Motion
    ========================================================================== */
 
 .zenji-hero {
@@ -666,13 +666,19 @@ img {
 
 .zenji-hero__grid-pattern {
   position: absolute;
-  inset: 0;
+  inset: -100px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 80px 80px;
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 70px 70px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 65%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 65%, transparent 100%);
+  animation: gridDrift 25s linear infinite;
+}
+
+@keyframes gridDrift {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(70px, 70px, 0); }
 }
 
 .zenji-hero__noise-overlay {
@@ -680,13 +686,45 @@ img {
   inset: 0;
   background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
   background-size: 24px 24px;
-  opacity: 0.3;
+  opacity: 0.35;
+}
+
+/* Floating Luminous Particles */
+.zenji-hero__particles-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.zenji-hero__particle {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon), 0 0 16px var(--accent-neon);
 }
 
 .zenji-hero__glow {
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
+  animation: morphGlow 14s infinite ease-in-out alternate;
+}
+
+@keyframes morphGlow {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(30px, -20px) scale(1.12);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-25px, 25px) scale(0.92);
+    opacity: 0.75;
+  }
 }
 
 .zenji-hero__glow--primary {
@@ -694,7 +732,7 @@ img {
   left: 20%;
   width: 650px;
   height: 520px;
-  background: radial-gradient(circle, rgba(212, 255, 0, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.12) 0%, transparent 70%);
 }
 
 .zenji-hero__glow--secondary {
@@ -702,7 +740,8 @@ img {
   right: 10%;
   width: 550px;
   height: 480px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.09) 0%, transparent 70%);
+  animation-delay: -5s;
 }
 
 .zenji-hero__glow--tertiary {
@@ -710,7 +749,8 @@ img {
   left: 5%;
   width: 400px;
   height: 350px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+  animation-delay: -9s;
 }
 
 /* Cybernetic Top Coordinate Markers */
@@ -849,6 +889,11 @@ img {
   gap: 12px;
 }
 
+.zenji-hero__stagger-word {
+  display: inline-flex;
+  overflow: hidden;
+}
+
 .zenji-hero__title {
   font-family: var(--font-display);
   line-height: 0.95;
@@ -979,6 +1024,11 @@ img {
   perspective: 1200px;
 }
 
+.zenji-hero__card-float-wrapper {
+  position: relative;
+  width: 100%;
+}
+
 .zenji-hero__card--cinematic {
   position: relative;
   border-radius: var(--radius-lg);
@@ -987,6 +1037,29 @@ img {
   background: var(--bg-secondary);
   box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95), 0 0 50px rgba(212, 255, 0, 0.04);
   aspect-ratio: 4/5.3;
+}
+
+/* Rotating Glow Border Beam */
+.zenji-hero__card-border-beam {
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-lg);
+  padding: 1px;
+  background: linear-gradient(120deg, transparent 40%, rgba(212, 255, 0, 0.6) 50%, rgba(168, 85, 247, 0.6) 60%, transparent 70%);
+  background-size: 300% 300%;
+  animation: borderBeam 6s linear infinite;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  z-index: 6;
+}
+
+@keyframes borderBeam {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Corner Precision Marks */
@@ -1021,6 +1094,12 @@ img {
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.7);
   pointer-events: none;
   z-index: 2;
+}
+
+.zenji-hero__img-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .zenji-hero__card-top-tag {
