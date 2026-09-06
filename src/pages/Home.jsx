@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
 import { Hero } from '../components/home/Hero';
-import { FeaturedDrops } from '../components/home/FeaturedDrops';
-import { BrandManifesto } from '../components/home/BrandManifesto';
+import { CategoryShowcase } from '../components/home/CategoryShowcase';
+import { ProductShowcase } from '../components/home/ProductShowcase';
+import { BrandStory } from '../components/home/BrandStory';
 import { Newsletter } from '../components/home/Newsletter';
 import { ProductQuickView } from '../components/product/ProductQuickView';
-import { PRODUCTS } from '../data/products';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const Home = () => {
@@ -26,11 +26,9 @@ export const Home = () => {
   return (
     <div className="zenji-page">
       <Hero />
-      <FeaturedDrops
-        products={PRODUCTS}
-        onQuickView={handleOpenQuickView}
-      />
-      <BrandManifesto />
+      <CategoryShowcase />
+      <ProductShowcase onQuickView={handleOpenQuickView} />
+      <BrandStory />
       <Newsletter />
 
       {quickViewProduct && (

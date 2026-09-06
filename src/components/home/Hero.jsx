@@ -15,7 +15,7 @@ const LOOKBOOK_SLIDES = [
     price: '$165',
     spec: '500 GSM BESPOKE FRENCH TERRY • BOXY CUT',
     details: 'Custom loopback knit with drop shoulders, double-layered structured hood & Fidlock® collar.',
-    image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1000&q=80',
+    image: '/lookbook/look-01.jpg',
     link: '/shop?category=hoodies'
   },
   {
@@ -27,7 +27,7 @@ const LOOKBOOK_SLIDES = [
     price: '$85',
     spec: '300 GSM COMBED ORGANIC COTTON • VINTAGE WASH',
     details: 'High-density screenprinted dystopian anime artwork with distressed raw edge treatment.',
-    image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80',
+    image: '/lookbook/look-02.jpg',
     link: '/shop?category=tees'
   },
   {
@@ -39,7 +39,7 @@ const LOOKBOOK_SLIDES = [
     price: '$280',
     spec: '500D CORDURA® RIPSTOP • DWR WEATHERPROOF',
     details: 'Multi-pocket articulated storm jacket with detachable Fidlock® magnetic sling harness.',
-    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80',
+    image: '/lookbook/look-03.jpg',
     link: '/shop?category=outerwear'
   }
 ];
@@ -139,11 +139,13 @@ export const Hero = () => {
   });
 
   // Layered movement: model moves noticeably slower than foreground elements during scroll
+  const hudY = useTransform(scrollYProgress, [0, 1], [0, -15]);
   const bgScrollY = useTransform(scrollYProgress, [0, 1], [0, -18]);
   const bgTextY = useTransform(scrollYProgress, [0, 1], [0, -32]);
   const modelY = useTransform(scrollYProgress, [0, 1], [0, -28]); // Midground: moves slower
   const typographyY = useTransform(scrollYProgress, [0, 1], [0, -56]); // Foreground text: moves faster
   const cardY = useTransform(scrollYProgress, [0, 1], [0, -78]); // Foreground card: moves fastest
+  const floatingCardY = useTransform(scrollYProgress, [0, 1], [0, -45]);
   const glowOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
 
   // Mouse tilt perspective for visual lookbook card

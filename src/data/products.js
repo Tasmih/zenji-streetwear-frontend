@@ -9,9 +9,10 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 42,
     images: [
-      'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=1000&q=85'
     ],
+    localFallback: '/products/prod-hoodie.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Obsidian Black', hex: '#111111' },
@@ -29,6 +30,36 @@ export const PRODUCTS = [
     inStock: true
   },
   {
+    id: 'zenji-t01',
+    name: 'CYBERPUNK GRAPHIC OVERSIZED TEE',
+    category: 'tees',
+    price: 85,
+    originalPrice: null,
+    tag: 'NEW DROP',
+    rating: 4.7,
+    reviewsCount: 29,
+    images: [
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=85'
+    ],
+    localFallback: '/products/prod-tee.jpg',
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: [
+      { name: 'Washed Black', hex: '#222222' },
+      { name: 'Chalk White', hex: '#eaeaea' }
+    ],
+    description: '300 GSM combed cotton vintage wash tee featuring high-density screenprinted dystopian anime-inspired graphic artwork on the reverse and minimalist chest insignia.',
+    features: [
+      '300 GSM ultra-heavyweight combed organic cotton',
+      'Relaxed dropped shoulder vintage boxy cut',
+      'High-density crack-resistant screen print',
+      'Thick 1.25" seamless collar ribbing',
+      'Pre-shrunk treatment'
+    ],
+    isFeatured: true,
+    inStock: true
+  },
+  {
     id: 'zenji-j01',
     name: 'NEO-TACTICAL MODULAR BOMBER',
     category: 'outerwear',
@@ -38,9 +69,10 @@ export const PRODUCTS = [
     rating: 5.0,
     reviewsCount: 18,
     images: [
-      'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1000&q=85'
     ],
+    localFallback: '/products/prod-jacket.jpg',
     sizes: ['M', 'L', 'XL'],
     colors: [
       { name: 'Cyber Matte Black', hex: '#0a0a0a' },
@@ -67,9 +99,10 @@ export const PRODUCTS = [
     rating: 4.8,
     reviewsCount: 64,
     images: [
-      'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=1000&q=85',
+      'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=1000&q=85'
     ],
+    localFallback: '/products/prod-cargo.jpg',
     sizes: ['30', '32', '34', '36'],
     colors: [
       { name: 'Pitch Black', hex: '#141414' },
@@ -82,35 +115,6 @@ export const PRODUCTS = [
       'Bungee cord adjustable leg opening for tapered or wide styling',
       'Reinforced seat and knee panels',
       'Custom matte hardware'
-    ],
-    isFeatured: true,
-    inStock: true
-  },
-  {
-    id: 'zenji-t01',
-    name: 'CYBERPUNK GRAPHIC OVERSIZED TEE',
-    category: 'tees',
-    price: 85,
-    originalPrice: null,
-    tag: 'NEW DROP',
-    rating: 4.7,
-    reviewsCount: 29,
-    images: [
-      'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80'
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-    colors: [
-      { name: 'Washed Black', hex: '#222222' },
-      { name: 'Chalk White', hex: '#eaeaea' }
-    ],
-    description: '300 GSM combed cotton vintage wash tee featuring high-density screenprinted dystopian anime-inspired graphic artwork on the reverse and minimalist chest insignia.',
-    features: [
-      '300 GSM ultra-heavyweight combed organic cotton',
-      'Relaxed dropped shoulder vintage boxy cut',
-      'High-density crack-resistant screen print',
-      'Thick 1.25" seamless collar ribbing',
-      'Pre-shrunk treatment'
     ],
     isFeatured: true,
     inStock: true
@@ -153,8 +157,8 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 71,
     images: [
-      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1000&q=80',
+      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1000&q=80'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
@@ -181,7 +185,7 @@ export const PRODUCTS = [
     reviewsCount: 38,
     images: [
       'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80'
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=80'
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
