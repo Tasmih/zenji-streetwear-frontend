@@ -41,8 +41,14 @@ export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <div>
-          <span className="zenji-section__tag">FEATURED SELECTION</span>
-          <h2 className="zenji-section__title">KEY PIECES FROM DROP 004</h2>
+          <div className="zenji-section__tag-group">
+            <span className="zenji-section__tag">TOKYO ARCHIVE // 35.6580° N</span>
+            <span className="zenji-section__live-pill">
+              <span className="zenji-section__live-dot" />
+              DROP 004 LIVE
+            </span>
+          </div>
+          <h2 className="zenji-section__title">KEY PIECES FROM ARCHIVE 04</h2>
         </div>
         <Link to="/shop" className="zenji-section__link">
           <motion.div
@@ -50,7 +56,7 @@ export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
             whileHover={{ x: 5 }}
             transition={{ duration: 0.2 }}
           >
-            <span>VIEW ALL ARCHIVES</span>
+            <span>EXPLORE FULL ARCHIVE</span>
             <ArrowRight size={16} />
           </motion.div>
         </Link>

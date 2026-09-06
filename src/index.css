@@ -3,26 +3,34 @@
    ========================================================================== */
 
 :root {
-  /* Color Palette */
-  --bg-primary: #09090b;
-  --bg-secondary: #121216;
-  --bg-surface: #18181e;
-  --bg-surface-elevated: #22222b;
-  --bg-glass: rgba(18, 18, 22, 0.85);
+  /* Tokyo Futuristic Color Palette */
+  --bg-primary: #080808;
+  --bg-secondary: #0e0e13;
+  --bg-surface: #14141b;
+  --bg-surface-elevated: #1b1b24;
+  --bg-glass: rgba(14, 14, 19, 0.85);
 
-  --text-primary: #f4f4f6;
-  --text-secondary: #a1a1aa;
-  --text-muted: #71717a;
-  --text-inverse: #09090b;
+  --text-primary: #f4f4f7;
+  --text-secondary: #a0a0ab;
+  --text-muted: #6b6b77;
+  --text-inverse: #080808;
 
-  --accent-neon: #d4ff00;
-  --accent-neon-glow: rgba(212, 255, 0, 0.25);
-  --accent-violet: #a855f7;
-  --accent-red: #f43f5e;
+  /* Tokyo Brand Accent System */
+  --accent-neon: #d4ff00;            /* Acid Lime */
+  --accent-neon-glow: rgba(212, 255, 0, 0.28);
+  --accent-cyan: #00f5ff;            /* Tokyo Neon Cyan */
+  --accent-cyan-glow: rgba(0, 245, 255, 0.28);
+  --accent-silver: #c8c8c8;          /* Warm Silver */
+  --accent-silver-dim: rgba(200, 200, 200, 0.18);
+  --accent-crimson: #ff304f;         /* Crimson Drop Accent */
+  --accent-crimson-glow: rgba(255, 48, 79, 0.35);
+  --accent-violet: #8a2be2;
 
-  --border-subtle: #27272a;
-  --border-focus: #3f3f46;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(255, 255, 255, 0.18);
   --border-neon: rgba(212, 255, 0, 0.4);
+  --border-cyan: rgba(0, 245, 255, 0.35);
+  --border-crimson: rgba(255, 48, 79, 0.4);
 
   /* Typography */
   --font-display: 'Syne', sans-serif;
@@ -39,10 +47,12 @@
   --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Elevation */
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
-  --shadow-neon: 0 0 20px rgba(212, 255, 0, 0.35);
+  /* Elevation & Glows */
+  --shadow-card: 0 12px 36px -10px rgba(0, 0, 0, 0.85);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.92);
+  --shadow-neon: 0 0 22px rgba(212, 255, 0, 0.35);
+  --shadow-cyan: 0 0 22px rgba(0, 245, 255, 0.35);
+  --shadow-crimson: 0 0 20px rgba(255, 48, 79, 0.35);
 }
 
 @keyframes pulseNeon {
@@ -605,17 +615,30 @@ img {
   border-color: var(--border-focus);
 }
 
-/* Badges */
+/* Badges & Drop Status System */
 .zenji-badge {
   display: inline-flex;
   align-items: center;
-  padding: 4px 8px;
+  gap: 6px;
+  padding: 4px 9px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9.5px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   border-radius: var(--radius-sm);
+  line-height: 1;
+  position: relative;
+  transition: all var(--transition-fast);
+}
+
+.zenji-badge__status-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 6px currentColor;
+  animation: pulseBeacon 1.8s infinite ease-in-out;
 }
 
 .zenji-badge--default {
@@ -627,13 +650,42 @@ img {
 .zenji-badge--neon {
   background: var(--accent-neon);
   color: var(--text-inverse);
-  box-shadow: 0 0 10px var(--accent-neon-glow);
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--accent-neon-glow);
+}
+
+.zenji-badge--cyan {
+  background: var(--accent-cyan);
+  color: var(--text-inverse);
+  font-weight: 800;
+  box-shadow: 0 0 12px var(--accent-cyan-glow);
+}
+
+.zenji-badge--crimson {
+  background: rgba(255, 48, 79, 0.14);
+  color: var(--accent-crimson);
+  border: 1px solid var(--border-crimson);
+  box-shadow: 0 0 14px var(--accent-crimson-glow);
+}
+
+.zenji-badge--archive {
+  background: rgba(200, 200, 200, 0.08);
+  color: var(--accent-silver);
+  border: 1px solid var(--accent-silver-dim);
+  letter-spacing: 0.16em;
+}
+
+.zenji-badge--silver {
+  background: var(--accent-silver);
+  color: #080808;
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(200, 200, 200, 0.3);
 }
 
 .zenji-badge--accent {
-  background: rgba(168, 85, 247, 0.2);
-  color: var(--accent-violet);
-  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: rgba(138, 43, 226, 0.16);
+  color: #c084fc;
+  border: 1px solid rgba(138, 43, 226, 0.4);
 }
 
 /* ==========================================================================
@@ -732,7 +784,7 @@ img {
   left: 20%;
   width: 650px;
   height: 520px;
-  background: radial-gradient(circle, rgba(212, 255, 0, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.12) 0%, rgba(0, 245, 255, 0.05) 50%, transparent 70%);
 }
 
 .zenji-hero__glow--secondary {
@@ -740,7 +792,7 @@ img {
   right: 10%;
   width: 550px;
   height: 480px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 245, 255, 0.12) 0%, transparent 70%);
   animation-delay: -5s;
 }
 
@@ -749,7 +801,7 @@ img {
   left: 5%;
   width: 400px;
   height: 350px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 48, 79, 0.08) 0%, transparent 70%);
   animation-delay: -9s;
 }
 
@@ -779,31 +831,38 @@ img {
 }
 
 .zenji-hero__hud-marker {
-  color: var(--accent-neon);
+  color: var(--accent-cyan);
   font-weight: 700;
+}
+
+.zenji-hero__coord-cyan {
+  color: var(--accent-cyan);
+  font-weight: 700;
+  letter-spacing: 0.12em;
 }
 
 .zenji-hero__sys-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(212, 255, 0, 0.08);
-  border: 1px solid rgba(212, 255, 0, 0.25);
-  color: var(--accent-neon);
+  background: rgba(255, 48, 79, 0.1);
+  border: 1px solid var(--border-crimson);
+  color: var(--accent-crimson);
   padding: 4px 12px;
   border-radius: var(--radius-full);
   font-weight: 700;
   font-size: 10px;
   letter-spacing: 0.15em;
   backdrop-filter: blur(8px);
+  box-shadow: 0 0 14px var(--accent-crimson-glow);
 }
 
 .zenji-hero__sys-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent-neon);
-  box-shadow: 0 0 8px var(--accent-neon);
+  background: var(--accent-crimson);
+  box-shadow: 0 0 8px var(--accent-crimson);
   animation: pulseBeacon 2s infinite ease-in-out;
 }
 
@@ -1045,9 +1104,9 @@ img {
   inset: -1px;
   border-radius: var(--radius-lg);
   padding: 1px;
-  background: linear-gradient(120deg, transparent 40%, rgba(212, 255, 0, 0.6) 50%, rgba(168, 85, 247, 0.6) 60%, transparent 70%);
+  background: linear-gradient(120deg, transparent 35%, rgba(212, 255, 0, 0.7) 45%, rgba(0, 245, 255, 0.7) 55%, rgba(255, 48, 79, 0.6) 65%, transparent 75%);
   background-size: 300% 300%;
-  animation: borderBeam 6s linear infinite;
+  animation: borderBeam 7s linear infinite;
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask-composite: exclude;
@@ -1373,14 +1432,44 @@ img {
   margin-bottom: 36px;
 }
 
+.zenji-section__tag-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
 .zenji-section__tag {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--accent-neon);
+  color: var(--accent-cyan);
   font-weight: 700;
   letter-spacing: 0.15em;
   display: block;
-  margin-bottom: 6px;
+}
+
+.zenji-section__live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 48, 79, 0.12);
+  border: 1px solid var(--border-crimson);
+  color: var(--accent-crimson);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.zenji-section__live-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-crimson);
+  box-shadow: 0 0 6px var(--accent-crimson);
+  animation: pulseBeacon 1.8s infinite ease-in-out;
 }
 
 .zenji-section__title {
@@ -1403,7 +1492,7 @@ img {
 }
 
 .zenji-section__link:hover {
-  color: var(--accent-neon);
+  color: var(--accent-cyan);
   transform: translateX(4px);
 }
 
@@ -1425,7 +1514,7 @@ img {
 }
 
 /* ==========================================================================
-   Product Card — Premium Streetwear
+   Product Card — Tokyo Archive Streetwear
    ========================================================================== */
 
 .zenji-card {
@@ -1440,16 +1529,31 @@ img {
 }
 
 .zenji-card--premium:hover {
-  border-color: rgba(212, 255, 0, 0.4);
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 255, 0, 0.08);
+  border-color: rgba(0, 245, 255, 0.4);
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 20px rgba(0, 245, 255, 0.1);
 }
 
 .zenji-card__media {
   position: relative;
   aspect-ratio: 1/1.22;
-  background: #15151b;
+  background: #121218;
   overflow: hidden;
 }
+
+.zenji-card__corner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+  z-index: 2;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.zenji-card__corner--tl { top: 6px; left: 6px; }
+.zenji-card__corner--tr { top: 6px; right: 6px; }
+.zenji-card__corner--bl { bottom: 6px; left: 6px; }
+.zenji-card__corner--br { bottom: 6px; right: 6px; }
 
 .zenji-card__link {
   display: block;
@@ -1468,7 +1572,7 @@ img {
 .zenji-card__sheen {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  background: linear-gradient(135deg, rgba(0, 245, 255, 0.06) 0%, transparent 60%);
   opacity: 0;
   transition: opacity var(--transition-fast);
   pointer-events: none;
@@ -1501,12 +1605,12 @@ img {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--text-muted);
-  background: rgba(9, 9, 11, 0.8);
+  color: var(--accent-silver);
+  background: rgba(8, 8, 12, 0.88);
   backdrop-filter: blur(8px);
   padding: 3px 8px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--accent-silver-dim);
 }
 
 .zenji-card__actions {
@@ -1751,7 +1855,7 @@ img {
 }
 
 /* ==========================================================================
-   Brand Manifesto & Newsletter
+   Brand Manifesto & Newsletter — Tokyo Archive Protocol
    ========================================================================== */
 
 .zenji-manifesto {
@@ -1768,14 +1872,33 @@ img {
   margin: 0 auto 60px;
 }
 
+.zenji-manifesto__tag-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 245, 255, 0.08);
+  border: 1px solid var(--border-cyan);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  margin-bottom: 16px;
+}
+
+.zenji-manifesto__dot-live {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+  animation: pulseBeacon 1.8s infinite ease-in-out;
+}
+
 .zenji-manifesto__label {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  color: var(--accent-neon);
-  letter-spacing: 0.2em;
+  color: var(--accent-cyan);
+  letter-spacing: 0.18em;
   display: block;
-  margin-bottom: 12px;
 }
 
 .zenji-manifesto__heading {
@@ -1803,24 +1926,45 @@ img {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 28px 24px;
-  transition: var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-normal);
 }
 
 .zenji-manifesto__card:hover {
-  border-color: var(--border-focus);
-  transform: translateY(-4px);
+  border-color: rgba(0, 245, 255, 0.4);
+  background: var(--bg-surface-elevated);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 245, 255, 0.08);
+}
+
+.zenji-manifesto__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .zenji-manifesto__icon-wrap {
-  width: 44px;
-  height: 44px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-sm);
-  background: rgba(212, 255, 0, 0.08);
-  color: var(--accent-neon);
+  background: rgba(0, 245, 255, 0.08);
+  color: var(--accent-cyan);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+}
+
+.zenji-manifesto__serial {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-silver);
+  background: rgba(200, 200, 200, 0.08);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent-silver-dim);
+  letter-spacing: 0.12em;
 }
 
 .zenji-manifesto__card-title {
@@ -1835,6 +1979,21 @@ img {
   color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.5;
+}
+
+.zenji-manifesto__card-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-neon));
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.zenji-manifesto__card:hover .zenji-manifesto__card-bar {
+  opacity: 1;
 }
 
 /* Newsletter */

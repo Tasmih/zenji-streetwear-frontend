@@ -15,7 +15,7 @@ export const Footer = () => {
             Archival streetwear, heavy custom-milled textiles, and tactical silhouettes engineered for modern dystopias.
           </p>
           <div className="zenji-footer__coords">
-            <span>TOKYO 35.6764° N, 139.6500° E</span>
+            <span>TYO-SHIBUYA 35.6580° N, 139.7016° E // ARCHIVE LAB</span>
           </div>
         </div>
 

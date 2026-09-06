@@ -54,13 +54,16 @@ export const BrandManifesto = () => {
         viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
-        <span className="zenji-manifesto__label">DESIGN PHILOSOPHY</span>
+        <div className="zenji-manifesto__tag-wrap">
+          <span className="zenji-manifesto__dot-live" />
+          <span className="zenji-manifesto__label">TOKYO ARCHIVE PROTOCOL // ARC-26</span>
+        </div>
         <h2 className="zenji-manifesto__heading">
           NOT FASHION. <br />
           AN ARCHIVAL EXPERIMENT IN TACTICAL STREETWEAR.
         </h2>
         <p className="zenji-manifesto__text">
-          ZENJI bridges the gap between dystopian cyberpunk subcultures and Japanese tailoring precision. Every garment is constructed to endure the modern metropolis.
+          ZENJI bridges the gap between Tokyo dystopian subcultures and Japanese architectural tailoring precision. Every garment is constructed to endure the modern metropolis.
         </p>
       </motion.div>
 
@@ -73,19 +76,24 @@ export const BrandManifesto = () => {
       >
         {pillars.map((pillar, idx) => {
           const Icon = pillar.icon;
+          const serial = `ARC.0${idx + 1}`;
           return (
             <motion.div
               key={idx}
               className="zenji-manifesto__card"
               variants={cardVariants}
-              whileHover={{ y: -6, borderColor: 'var(--border-focus)' }}
+              whileHover={{ y: -6 }}
               transition={{ duration: 0.25 }}
             >
-              <div className="zenji-manifesto__icon-wrap">
-                <Icon size={22} />
+              <div className="zenji-manifesto__card-header">
+                <div className="zenji-manifesto__icon-wrap">
+                  <Icon size={20} />
+                </div>
+                <span className="zenji-manifesto__serial">{serial}</span>
               </div>
               <h3 className="zenji-manifesto__card-title">{pillar.title}</h3>
               <p className="zenji-manifesto__card-desc">{pillar.description}</p>
+              <div className="zenji-manifesto__card-bar" />
             </motion.div>
           );
         })}

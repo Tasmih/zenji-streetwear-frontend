@@ -71,6 +71,12 @@ export const ProductCard = memo(({ product, onQuickView }) => {
           <div className="zenji-card__sheen" />
         </Link>
 
+        {/* Corner Precision Crosshairs */}
+        <span className="zenji-card__corner zenji-card__corner--tl" aria-hidden="true">+</span>
+        <span className="zenji-card__corner zenji-card__corner--tr" aria-hidden="true">+</span>
+        <span className="zenji-card__corner zenji-card__corner--bl" aria-hidden="true">+</span>
+        <span className="zenji-card__corner zenji-card__corner--br" aria-hidden="true">+</span>
+
         {/* Animated Badge */}
         {product.tag && (
           <motion.div
@@ -84,9 +90,12 @@ export const ProductCard = memo(({ product, onQuickView }) => {
                 product.tag === 'NEW DROP'
                   ? 'neon'
                   : product.tag === 'LIMITED RUN'
-                  ? 'accent'
-                  : 'default'
+                  ? 'crimson'
+                  : product.tag === 'BESTSELLER'
+                  ? 'cyan'
+                  : 'archive'
               }
+              hasDot={product.tag === 'LIMITED RUN'}
               className="zenji-badge--glow"
             >
               {product.tag}
@@ -96,7 +105,7 @@ export const ProductCard = memo(({ product, onQuickView }) => {
 
         {/* Stock / Limited Batch Indicator */}
         <div className="zenji-card__top-right">
-          <span className="zenji-card__id-pill">SS26</span>
+          <span className="zenji-card__id-pill">ARC-26 // TYO</span>
         </div>
 
         {/* Floating Quick Action Buttons with Spring Entrance */}

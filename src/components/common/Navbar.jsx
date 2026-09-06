@@ -58,9 +58,11 @@ export const Navbar = () => {
         <div className="zenji-ticker__content">
           <span>{ANNOUNCEMENT}</span>
           <span className="zenji-ticker__dot">•</span>
-          <span>LIMITED RELEASE SS26</span>
+          <span>TYO-SHIBUYA 35.6580° N // ARCHIVE 04</span>
           <span className="zenji-ticker__dot">•</span>
-          <span>AUTHENTIC JAPANESE TAILORING</span>
+          <span>LIMITED 150 PCS WORLDWIDE</span>
+          <span className="zenji-ticker__dot">•</span>
+          <span>AUTHENTIC TOKYO TAILORING</span>
           <span className="zenji-ticker__dot">•</span>
           <span>{ANNOUNCEMENT}</span>
         </div>

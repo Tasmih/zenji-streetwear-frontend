@@ -190,22 +190,22 @@ export const Hero = () => {
       <motion.div className="zenji-hero__hud-top" style={{ y: hudY }}>
         <div className="zenji-hero__hud-left">
           <span className="zenji-hero__hud-marker">[+]</span>
-          <span className="zenji-hero__coord">35.6764° N / 139.6500° E • SHIBUYA PROTOCOL</span>
+          <span className="zenji-hero__coord">35.6580° N / 139.7016° E • TYO-SHIBUYA PROTOCOL</span>
         </div>
 
         <div className="zenji-hero__sys-badge">
           <span className="zenji-hero__sys-dot" />
-          <span>DROP 004 // LIVE CAMPAIGN</span>
+          <span>DROP 004 // LIVE ARCHIVE</span>
         </div>
 
         <div className="zenji-hero__hud-right">
-          <span className="zenji-hero__coord">LIMITED TOKYO RUN • 250 UNITS</span>
+          <span className="zenji-hero__coord-cyan">ARCHIVE SERIES // 150 PCS WORLDWIDE</span>
         </div>
       </motion.div>
 
       {/* Ambient Japanese Kanji Watermark */}
       <motion.div className="zenji-hero__kanji-bg" style={{ y: bgTextY }} aria-hidden="true">
-        <span>禅侍極限</span>
+        <span>禅侍未来</span>
       </motion.div>
 
       <div className="zenji-hero__container">
@@ -227,6 +227,9 @@ export const Hero = () => {
             <Badge variant="neon">
               <Zap size={10} className="zenji-badge__icon" />
               DROP 004 // CYBER OMNI
+            </Badge>
+            <Badge variant="cyan">
+              TOKYO SPEC
             </Badge>
             <div className="zenji-hero__season-tag">
               <span className="zenji-hero__season-dot" />
@@ -450,14 +453,14 @@ export const Hero = () => {
             initial={{ opacity: 0, x: -25, y: 25 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            whileHover={{ scale: 1.05, borderColor: 'var(--accent-neon)' }}
+            whileHover={{ scale: 1.05, borderColor: 'var(--accent-cyan)' }}
           >
             <div className="zenji-hero__floating-icon">
               <Eye size={15} />
             </div>
             <div className="zenji-hero__floating-text">
               <strong>EDITORIAL DROP 004</strong>
-              <span>LIMITED 250 PIECES • TOKYO SPEC</span>
+              <span>LIMITED 150 PCS • TYO ARCHIVE SPEC</span>
             </div>
             <CornerDownRight size={14} className="zenji-hero__floating-arrow" />
           </motion.div>
