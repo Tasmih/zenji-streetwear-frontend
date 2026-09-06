@@ -414,32 +414,37 @@ img {
   left: 0;
   right: 0;
   z-index: 100;
-  background: linear-gradient(180deg, rgba(12, 12, 16, 0.82) 0%, rgba(8, 8, 10, 0.72) 100%);
-  backdrop-filter: blur(24px) saturate(190%) contrast(105%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%) contrast(105%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  background: rgba(10, 10, 14, 0.62);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
   transition:
-    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-    backdrop-filter 0.4s ease;
-  will-change: background, border-color, box-shadow;
+    background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    -webkit-backdrop-filter 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: background, backdrop-filter, border-color, box-shadow;
 }
 
 .zenji-header--scrolled {
-  background: linear-gradient(180deg, rgba(8, 8, 11, 0.95) 0%, rgba(5, 5, 7, 0.97) 100%);
-  border-bottom-color: rgba(212, 255, 0, 0.22);
+  background: linear-gradient(180deg, rgba(9, 9, 13, 0.88) 0%, rgba(6, 6, 8, 0.94) 100%);
+  backdrop-filter: blur(32px) saturate(210%) contrast(106%);
+  -webkit-backdrop-filter: blur(32px) saturate(210%) contrast(106%);
+  border-bottom-color: rgba(212, 255, 0, 0.18);
   box-shadow:
-    0 14px 36px -8px rgba(0, 0, 0, 0.88),
-    0 0 24px rgba(212, 255, 0, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 16px 42px -10px rgba(0, 0, 0, 0.94),
+    0 6px 20px -4px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(212, 255, 0, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09),
+    inset 0 -1px 0 rgba(0, 245, 255, 0.04);
 }
 
 /* Announcement Infinite Marquee Ticker */
 .zenji-ticker {
-  background: #050507;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(90deg, #050507 0%, #09090e 50%, #050507 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   padding: 6px 0;
   overflow: hidden;
   width: 100%;
@@ -450,13 +455,17 @@ img {
   position: relative;
   z-index: 101;
   user-select: none;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 97%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 3%, rgba(0, 0, 0, 1) 97%, transparent 100%);
 }
 
 .zenji-ticker__track {
   display: flex;
   width: max-content;
-  animation: tickerContinuousMarquee 28s linear infinite;
+  animation: tickerContinuousMarquee 32s linear infinite;
   will-change: transform;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
 
 .zenji-ticker__track:hover {
@@ -495,7 +504,7 @@ img {
 /* Nav Container */
 .zenji-nav {
   padding: 14px 28px;
-  transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-header--scrolled .zenji-nav {
@@ -558,20 +567,27 @@ img {
 .zenji-nav__links {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 32px;
 }
 
 .zenji-nav__link {
   font-family: var(--font-mono);
   text-transform: uppercase;
   color: var(--text-secondary);
-  transition: all var(--transition-fast);
   position: relative;
-  padding: 8px 6px;
+  padding: 8px 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   border-radius: var(--radius-sm);
+  transition:
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zenji-nav__link:hover {
+  color: var(--text-primary);
+  transform: translateY(-1px);
 }
 
 .zenji-nav__link::before {
@@ -586,7 +602,36 @@ img {
 }
 
 .zenji-nav__link--active::before {
-  background: radial-gradient(circle, rgba(212, 255, 0, 0.08) 0%, transparent 75%);
+  content: '';
+  position: absolute;
+  inset: -2px -6px;
+  border-radius: var(--radius-sm);
+  background: radial-gradient(ellipse at 50% 100%, rgba(212, 255, 0, 0.12) 0%, rgba(0, 245, 255, 0.04) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+  animation: activeAuraBreathe 3s ease-in-out infinite alternate;
+}
+
+@keyframes activeAuraBreathe {
+  0% {
+    opacity: 0.55;
+    transform: scale(0.98);
+  }
+  100% {
+    opacity: 0.95;
+    transform: scale(1.02);
+  }
+}
+
+.zenji-nav__hover-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .zenji-nav__link-text {
@@ -595,7 +640,20 @@ img {
   font-size: 12.5px;
   font-weight: 700;
   letter-spacing: 0.12em;
-  transition: color var(--transition-fast), text-shadow var(--transition-fast);
+  transition:
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    letter-spacing 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zenji-nav__link:hover .zenji-nav__link-text {
+  color: #ffffff;
+  letter-spacing: 0.14em;
+}
+
+.zenji-nav__link--active .zenji-nav__link-text {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(212, 255, 0, 0.4);
 }
 
 .zenji-nav__link-jp {
@@ -605,48 +663,71 @@ img {
   color: var(--text-muted);
   letter-spacing: 0.1em;
   margin-top: 2px;
-  opacity: 0.6;
-  transition: all var(--transition-fast);
+  opacity: 0.55;
+  transition:
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.zenji-nav__link:hover .zenji-nav__link-text {
-  color: var(--text-primary);
+.zenji-nav__link:hover .zenji-nav__link-jp {
+  opacity: 0.95;
+  color: var(--accent-cyan);
+  text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+  transform: translateY(-0.5px);
 }
 
-.zenji-nav__link--active .zenji-nav__link-text {
-  color: #ffffff;
-  text-shadow: 0 0 14px rgba(212, 255, 0, 0.35);
-}
-
-.zenji-nav__link:hover .zenji-nav__link-jp,
 .zenji-nav__link--active .zenji-nav__link-jp {
   opacity: 1;
   color: var(--accent-neon);
-  text-shadow: 0 0 8px var(--accent-neon-glow);
+  text-shadow: 0 0 10px var(--accent-neon-glow);
 }
 
-/* Active Pill Underline with Animated Glow */
+/* Active Pill Underline with Animated Shimmer Glow Beam */
 .zenji-nav__active-pill {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 2.5px;
-  background: linear-gradient(90deg, #d4ff00 0%, #00f5ff 100%);
-  box-shadow: 0 0 10px var(--accent-neon), 0 0 20px rgba(212, 255, 0, 0.6);
+  height: 2px;
+  background: linear-gradient(90deg, #d4ff00 0%, #00f5ff 50%, #d4ff00 100%);
+  background-size: 200% 100%;
+  box-shadow:
+    0 0 10px rgba(212, 255, 0, 0.75),
+    0 0 22px rgba(0, 245, 255, 0.45);
   border-radius: 2px;
-  animation: activeGlowPulse 2.4s ease-in-out infinite alternate;
+  animation: activeGlowSweep 3.6s ease-in-out infinite;
+  overflow: hidden;
 }
 
-@keyframes activeGlowPulse {
+@keyframes activeGlowSweep {
   0% {
-    box-shadow: 0 0 8px var(--accent-neon), 0 0 16px rgba(212, 255, 0, 0.45);
-    opacity: 0.88;
+    background-position: 0% 50%;
+    box-shadow: 0 0 10px rgba(212, 255, 0, 0.7), 0 0 18px rgba(212, 255, 0, 0.4);
+  }
+  50% {
+    background-position: 100% 50%;
+    box-shadow: 0 0 14px rgba(0, 245, 255, 0.8), 0 0 24px rgba(0, 245, 255, 0.5);
   }
   100% {
-    box-shadow: 0 0 14px var(--accent-neon), 0 0 28px rgba(0, 245, 255, 0.7);
-    opacity: 1;
+    background-position: 200% 50%;
+    box-shadow: 0 0 10px rgba(212, 255, 0, 0.7), 0 0 18px rgba(212, 255, 0, 0.4);
   }
+}
+
+.zenji-nav__active-beam {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 45%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.9), transparent);
+  animation: activeBeamTravel 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes activeBeamTravel {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(350%); }
 }
 
 .zenji-nav__hover-dot {
@@ -655,8 +736,8 @@ img {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan-glow);
 }
 
 /* Nav Actions */
@@ -674,15 +755,34 @@ img {
   height: 40px;
   border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  transition: all var(--transition-fast);
+  background: rgba(18, 18, 24, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  transition:
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zenji-nav__action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
 }
 
 .zenji-nav__action-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--border-focus);
-  background: var(--bg-surface-elevated);
+  color: var(--accent-cyan);
+  border-color: rgba(0, 245, 255, 0.45);
+  background: rgba(24, 24, 34, 0.85);
+  box-shadow:
+    0 0 18px rgba(0, 245, 255, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 12px rgba(0, 245, 255, 0.06);
 }
 
 .zenji-cart-btn {
@@ -690,27 +790,50 @@ img {
   align-items: center;
   gap: 10px;
   padding: 9px 16px;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  background: rgba(18, 18, 24, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  transition: all var(--transition-fast);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  cursor: pointer;
   position: relative;
+  transition:
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-cart-btn:hover {
-  border-color: var(--accent-neon);
-  box-shadow: 0 0 14px var(--accent-neon-glow);
+  border-color: rgba(212, 255, 0, 0.5);
+  background: rgba(24, 24, 32, 0.9);
+  color: #ffffff;
+  box-shadow:
+    0 0 22px rgba(212, 255, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 0 14px rgba(212, 255, 0, 0.05);
 }
 
 .zenji-cart-btn__icon-wrap {
   position: relative;
   display: flex;
   align-items: center;
+  transform-origin: center bottom;
+}
+
+.zenji-cart-btn__label {
+  letter-spacing: 0.1em;
+  transition: letter-spacing 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zenji-cart-btn:hover .zenji-cart-btn__label {
+  letter-spacing: 0.13em;
 }
 
 .zenji-cart-btn__badge {
@@ -723,7 +846,17 @@ img {
   font-weight: 800;
   padding: 1px 5px;
   border-radius: var(--radius-full);
-  box-shadow: 0 0 8px var(--accent-neon);
+  box-shadow: 0 0 10px var(--accent-neon), 0 0 18px rgba(212, 255, 0, 0.45);
+  animation: badgeGlowPulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes badgeGlowPulse {
+  0% {
+    box-shadow: 0 0 6px var(--accent-neon), 0 0 12px rgba(212, 255, 0, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 12px var(--accent-neon), 0 0 22px rgba(212, 255, 0, 0.6);
+  }
 }
 
 .zenji-nav__toggle {
@@ -1597,17 +1730,25 @@ img {
 
 .zenji-hero__btn-glow {
   position: absolute;
-  inset: -2px;
-  background: var(--accent-neon);
+  inset: -3px;
+  background: linear-gradient(135deg, rgba(212, 255, 0, 0.65) 0%, rgba(0, 245, 255, 0.35) 100%);
   border-radius: var(--radius-sm);
   filter: blur(14px);
-  opacity: 0.4;
+  opacity: 0.35;
   z-index: -1;
-  transition: opacity var(--transition-normal);
+  pointer-events: none;
+  transform: scale(0.98);
+  will-change: opacity, filter, transform;
+  transition:
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-hero__cta-primary-wrap:hover .zenji-hero__btn-glow {
-  opacity: 0.8;
+  opacity: 0.85;
+  filter: blur(20px);
+  transform: scale(1.05);
 }
 
 /* Editorial Specs Strip */
@@ -1789,7 +1930,8 @@ img {
 /* 3D Visual Lookbook Card Showcase (Column 3 - Right, Foreground Layer) */
 .zenji-hero__visual-wrap {
   position: relative;
-  perspective: 1200px;
+  perspective: 1400px;
+  transform-style: preserve-3d;
   max-width: 340px;
   width: 100%;
   margin-left: auto;
@@ -1797,29 +1939,93 @@ img {
   z-index: 10;
 }
 
+/* Layered Architectural Depth Backplates */
+.zenji-hero__card-depth-layer {
+  position: absolute;
+  inset: -6px;
+  border-radius: calc(var(--radius-lg) + 3px);
+  background: linear-gradient(135deg, rgba(212, 255, 0, 0.08) 0%, rgba(0, 245, 255, 0.04) 50%, transparent 80%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transform: translateZ(-18px) translateY(8px) scale(0.97);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(1px);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.zenji-hero__card-depth-layer-2 {
+  position: absolute;
+  inset: -12px;
+  border-radius: calc(var(--radius-lg) + 6px);
+  background: radial-gradient(circle at 75% 75%, rgba(0, 245, 255, 0.12) 0%, rgba(138, 43, 226, 0.04) 50%, transparent 70%);
+  transform: translateZ(-36px) translateY(16px) scale(0.94);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+/* Dynamic Floating 3D Contact Shadow */
+.zenji-hero__card-floating-shadow {
+  position: absolute;
+  bottom: -22px;
+  left: 10%;
+  right: 10%;
+  height: 24px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.85) 0%, rgba(0, 245, 255, 0.1) 40%, transparent 75%);
+  filter: blur(12px);
+  pointer-events: none;
+  z-index: -1;
+  animation: cardShadowPulse 7s ease-in-out infinite;
+}
+
+@keyframes cardShadowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(0.88);
+    opacity: 0.5;
+  }
+}
+
 .zenji-hero__card-float-wrapper {
   position: relative;
   width: 100%;
+  transform-style: preserve-3d;
 }
 
 .zenji-hero__card--cinematic {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.13);
   background: var(--bg-secondary);
-  box-shadow: 0 16px 45px -10px rgba(0, 0, 0, 0.92), 0 0 30px rgba(0, 245, 255, 0.04);
+  box-shadow:
+    0 20px 50px -10px rgba(0, 0, 0, 0.94),
+    0 6px 22px rgba(0, 0, 0, 0.7),
+    0 0 35px rgba(0, 245, 255, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   aspect-ratio: 4/4.1;
   max-height: 310px;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-hero__card--cinematic:hover {
   transform: translateY(-6px);
-  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.95), 0 0 45px rgba(0, 245, 255, 0.08), 0 0 20px rgba(212, 255, 0, 0.04);
-  border-color: rgba(0, 245, 255, 0.2);
+  box-shadow:
+    0 30px 65px -12px rgba(0, 0, 0, 0.96),
+    0 10px 30px rgba(0, 0, 0, 0.8),
+    0 0 50px rgba(0, 245, 255, 0.1),
+    0 0 25px rgba(212, 255, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(0, 245, 255, 0.35);
 }
 
 /* Rotating Glow Border Beam */

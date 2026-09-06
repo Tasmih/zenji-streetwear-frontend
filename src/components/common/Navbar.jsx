@@ -143,25 +143,37 @@ export const Navbar = () => {
                   <span className="zenji-nav__link-text">{link.label}</span>
                   <span className="zenji-nav__link-jp">{link.jp}</span>
 
-                  {/* Active Route Indicator */}
+                  {/* Active Route Indicator with Moving Beam */}
                   {isActive && (
                     <motion.div
                       layoutId="activeNavIndicator"
                       className="zenji-nav__active-pill"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
-                    />
+                    >
+                      <span className="zenji-nav__active-beam" aria-hidden="true" />
+                    </motion.div>
                   )}
 
-                  {/* Hover Floating Dot */}
+                  {/* Hover Floating Capsule & Dot */}
                   {hoveredIndex === idx && !isActive && (
-                    <motion.div
-                      layoutId="hoverNavDot"
-                      className="zenji-nav__hover-dot"
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.5 }}
-                      transition={{ duration: 0.2 }}
-                    />
+                    <>
+                      <motion.div
+                        layoutId="hoverNavBg"
+                        className="zenji-nav__hover-bg"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                      <motion.div
+                        layoutId="hoverNavDot"
+                        className="zenji-nav__hover-dot"
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.2 }}
+                      />
+                    </>
                   )}
                 </Link>
               );
@@ -172,23 +184,37 @@ export const Navbar = () => {
           <div className="zenji-nav__actions">
             <Link to="/shop" aria-label="Search Archives">
               <motion.div
-                whileHover={{ scale: 1.08, borderColor: 'var(--accent-neon)' }}
+                whileHover="hover"
                 whileTap={{ scale: 0.92 }}
-                className="zenji-nav__action-btn"
+                className="zenji-nav__action-btn zenji-nav__action-btn--search"
                 title="Search Archives"
               >
-                <Search size={18} />
+                <motion.span
+                  className="zenji-nav__action-icon"
+                  variants={{
+                    hover: { rotate: 14, scale: 1.12 }
+                  }}
+                  transition={{ type: 'spring', stiffness: 420, damping: 20 }}
+                >
+                  <Search size={18} />
+                </motion.span>
               </motion.div>
             </Link>
 
             <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
+              whileHover="hover"
+              whileTap={{ scale: 0.95 }}
               className="zenji-cart-btn"
               onClick={toggleCart}
               aria-label={`Shopping Bag (${totalItemsCount} items)`}
             >
-              <div className="zenji-cart-btn__icon-wrap">
+              <motion.div
+                className="zenji-cart-btn__icon-wrap"
+                variants={{
+                  hover: { y: -2, rotate: -5 }
+                }}
+                transition={{ type: 'spring', stiffness: 450, damping: 22 }}
+              >
                 <ShoppingBag size={18} />
                 {totalItemsCount > 0 && (
                   <motion.span
@@ -201,7 +227,7 @@ export const Navbar = () => {
                     {totalItemsCount}
                   </motion.span>
                 )}
-              </div>
+              </motion.div>
               <span className="zenji-cart-btn__label">BAG</span>
             </motion.button>
           </div>

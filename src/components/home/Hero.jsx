@@ -51,8 +51,8 @@ const CATEGORY_CHIPS = [
   { label: 'MODULAR OUTERWEAR', path: '/shop?category=outerwear' }
 ];
 
-// Helper component for cinematic word-safe letter stagger animation with smooth luxury fade-up
-const AnimatedText = ({ text, className, delayOffset = 0, charDelay = 0.018 }) => {
+// Helper component for cinematic word stagger animation with luxury smooth fade-up & soft focus reveal
+const AnimatedText = ({ text, className, delayOffset = 0, wordDelay = 0.09 }) => {
   const words = text.split(' ');
 
   const containerVariants = {
@@ -60,30 +60,28 @@ const AnimatedText = ({ text, className, delayOffset = 0, charDelay = 0.018 }) =
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: charDelay,
+        staggerChildren: wordDelay,
         delayChildren: delayOffset
       }
     }
   };
 
-  const letterVariants = {
+  const wordVariants = {
     hidden: {
-      y: 18,
+      y: 28,
       opacity: 0,
-      filter: 'blur(3px)'
+      filter: 'blur(5px)'
     },
     visible: {
       y: 0,
       opacity: 1,
       filter: 'blur(0px)',
       transition: {
-        duration: 0.85,
+        duration: 0.82,
         ease: [0.16, 1, 0.3, 1]
       }
     }
   };
-
-  let globalCharIdx = 0;
 
   return (
     <motion.span
@@ -95,36 +93,22 @@ const AnimatedText = ({ text, className, delayOffset = 0, charDelay = 0.018 }) =
         display: 'inline-flex',
         flexWrap: 'nowrap',
         overflow: 'visible',
-        columnGap: '0.24em'
+        columnGap: '0.28em'
       }}
     >
       {words.map((word, wordIndex) => (
-        <span
+        <motion.span
           key={`word-${wordIndex}-${word}`}
+          variants={wordVariants}
           style={{
             display: 'inline-block',
             whiteSpace: 'nowrap',
-            overflow: 'visible'
+            overflow: 'visible',
+            willChange: 'transform, opacity, filter'
           }}
         >
-          {Array.from(word).map((char) => {
-            const currentIdx = globalCharIdx++;
-            return (
-              <motion.span
-                key={`char-${wordIndex}-${currentIdx}`}
-                variants={letterVariants}
-                style={{
-                  display: 'inline-block',
-                  transformOrigin: '50% 100%',
-                  paddingBottom: '3px',
-                  lineHeight: 'inherit'
-                }}
-              >
-                {char}
-              </motion.span>
-            );
-          })}
-        </span>
+          {word}
+        </motion.span>
       ))}
     </motion.span>
   );
@@ -154,12 +138,12 @@ export const Hero = () => {
     offset: ['start start', 'end start']
   });
 
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, 20]);
-  const floatingCardY = useTransform(scrollYProgress, [0, 1], [0, 30]);
-  const modelY = useTransform(scrollYProgress, [0, 1], [0, -25]);
-  const typographyY = useTransform(scrollYProgress, [0, 1], [0, -15]);
-  const bgTextY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const hudY = useTransform(scrollYProgress, [0, 1], [0, -8]);
+  // Layered movement: model moves noticeably slower than foreground elements during scroll
+  const bgScrollY = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const bgTextY = useTransform(scrollYProgress, [0, 1], [0, -32]);
+  const modelY = useTransform(scrollYProgress, [0, 1], [0, -28]); // Midground: moves slower
+  const typographyY = useTransform(scrollYProgress, [0, 1], [0, -56]); // Foreground text: moves faster
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, -78]); // Foreground card: moves fastest
   const glowOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.15]);
 
   // Mouse tilt perspective for visual lookbook card
@@ -167,18 +151,25 @@ export const Hero = () => {
   const mouseY = useMotionValue(0);
 
   // Softer spring physics for elegant, languid mouse parallax
-  const springConfig = { damping: 42, stiffness: 120 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
+  const springConfig = { damping: 38, stiffness: 105, mass: 0.8 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
 
   // Subtle directional parallax for depth layers
-  const bgMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [14, -14]), springConfig);
-  const bgMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
+  const bgMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [16, -16]), springConfig);
+  const bgMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), springConfig);
   const modelMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
   const modelMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-5, 5]), springConfig);
-  const cardMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
-  const cardMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-4, 4]), springConfig);
-  const textMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-4, 4]), springConfig);
+  const cardMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
+  const cardMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), springConfig);
+  const textMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
+  const textMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-4, 4]), springConfig);
+
+  // Combined Scroll + Mouse Transforms for seamless multi-axis movement
+  const combinedModelY = useTransform([modelY, modelMouseY], ([s, m]) => s + m);
+  const combinedCardY = useTransform([cardY, cardMouseY], ([s, m]) => s + m);
+  const combinedTypographyY = useTransform([typographyY, textMouseY], ([s, m]) => s + m);
+  const combinedBgY = useTransform([bgScrollY, bgMouseY], ([s, m]) => s + m);
 
   const handleMouseMove = (e) => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) return;
@@ -227,7 +218,7 @@ export const Hero = () => {
       onMouseLeave={handleMouseLeave}
     >
       {/* Background Visual Atmosphere & Ambient Mesh */}
-      <motion.div className="zenji-hero__backdrop" style={{ opacity: glowOpacity, x: bgMouseX, y: bgMouseY }}>
+      <motion.div className="zenji-hero__backdrop" style={{ opacity: glowOpacity, x: bgMouseX, y: combinedBgY }}>
         <div className="zenji-hero__glow zenji-hero__glow--primary" />
         <div className="zenji-hero__glow zenji-hero__glow--secondary" />
         <div className="zenji-hero__glow zenji-hero__glow--tertiary" />
@@ -308,16 +299,16 @@ export const Hero = () => {
         {/* Column 1 (Left): Kinetic Editorial Typography & CTAs */}
         <motion.div
           className="zenji-hero__content"
-          style={{ y: typographyY, x: textMouseX }}
+          style={{ y: combinedTypographyY, x: textMouseX }}
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.95, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Top Capsule Badge Row */}
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 16, filter: 'blur(3px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.8, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
             className="zenji-hero__badge-row"
           >
             <Badge variant="neon">
@@ -333,38 +324,38 @@ export const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Letter-by-Letter Masked Headline Reveal */}
+          {/* Staggered Word-by-Word Headline Reveal */}
           <div className="zenji-hero__title-wrap">
             <div className="zenji-hero__line-mask">
               <h2 className="zenji-hero__title zenji-hero__title--sub">
-                <AnimatedText text="PREMIUM JAPANESE STREETWEAR" delayOffset={0.16} charDelay={0.016} />
+                <AnimatedText text="PREMIUM JAPANESE STREETWEAR" delayOffset={0.16} wordDelay={0.08} />
               </h2>
             </div>
 
             <div className="zenji-hero__line-mask">
               <h1 className="zenji-hero__title zenji-hero__title--main">
-                <AnimatedText text="OVERSIZED HOODIES" delayOffset={0.26} charDelay={0.022} />
+                <AnimatedText text="OVERSIZED HOODIES" delayOffset={0.34} wordDelay={0.11} />
               </h1>
             </div>
 
             <div className="zenji-hero__line-mask">
               <h1 className="zenji-hero__title zenji-hero__title--stroke">
-                <AnimatedText text="& GRAPHIC TEES" delayOffset={0.38} charDelay={0.022} />
+                <AnimatedText text="& GRAPHIC TEES" delayOffset={0.52} wordDelay={0.10} />
               </h1>
             </div>
           </div>
 
-          {/* Editorial Subtitle & Specs */}
+          {/* Editorial Subtitle & Description — Smooth Upward Motion */}
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.48, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 26, filter: 'blur(4px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.9, delay: 0.74, ease: [0.16, 1, 0.3, 1] }}
             className="zenji-hero__subtitle"
           >
             Custom-milled <strong>500 GSM loopback cotton</strong>, relaxed oversized silhouettes, and tactical modular tailoring engineered in Tokyo. Limited small batch runs.
           </motion.p>
 
-          {/* Category Quick-Jump Chips — Individually Staggered */}
+          {/* Category Quick-Jump Chips — Staggered Upward Entrance */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -372,7 +363,7 @@ export const Hero = () => {
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.06, delayChildren: 0.56 }
+                transition: { staggerChildren: 0.07, delayChildren: 0.88 }
               }
             }}
             className="zenji-hero__chips-row"
@@ -381,10 +372,10 @@ export const Hero = () => {
               <motion.div
                 key={chip.label}
                 variants={{
-                  hidden: { opacity: 0, y: 12, scale: 0.92, filter: 'blur(3px)' },
+                  hidden: { opacity: 0, y: 16, scale: 0.94, filter: 'blur(3px)' },
                   visible: {
                     opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-                    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] }
+                    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
                   }
                 }}
               >
@@ -398,7 +389,7 @@ export const Hero = () => {
             ))}
           </motion.div>
 
-          {/* Magnetic Luxury CTA Action Group — Staggered Entrance */}
+          {/* Magnetic Luxury CTA Action Group — Delayed Entrance */}
           <motion.div
             initial="hidden"
             animate="visible"
@@ -406,17 +397,17 @@ export const Hero = () => {
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.12, delayChildren: 0.66 }
+                transition: { staggerChildren: 0.12, delayChildren: 1.08 }
               }
             }}
             className="zenji-hero__cta-group"
           >
             <motion.div
               variants={{
-                hidden: { opacity: 0, y: 18, scale: 0.95, filter: 'blur(2px)' },
+                hidden: { opacity: 0, y: 24, scale: 0.96, filter: 'blur(3px)' },
                 visible: {
                   opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-                  transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+                  transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
                 }
               }}
             >
@@ -437,10 +428,10 @@ export const Hero = () => {
 
             <motion.div
               variants={{
-                hidden: { opacity: 0, y: 18, scale: 0.95, filter: 'blur(2px)' },
+                hidden: { opacity: 0, y: 24, scale: 0.96, filter: 'blur(3px)' },
                 visible: {
                   opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
-                  transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+                  transition: { duration: 0.85, ease: [0.16, 1, 0.3, 1] }
                 }
               }}
             >
@@ -460,9 +451,9 @@ export const Hero = () => {
 
           {/* Editorial Specification Strip */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.78, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, y: 20, filter: 'blur(3px)' }}
+            animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            transition={{ duration: 0.85, delay: 1.28, ease: [0.16, 1, 0.3, 1] }}
             className="zenji-hero__stats zenji-hero__stats--editorial"
           >
             <div className="zenji-hero__stat-item">
@@ -490,7 +481,7 @@ export const Hero = () => {
         {/* Column 2 (Center-Right): Supporting Editorial Streetwear Fashion Model (Layered Depth) */}
         <motion.div
           className="zenji-hero__model-stage"
-          style={{ y: modelY, x: modelMouseX }}
+          style={{ y: combinedModelY, x: modelMouseX }}
           initial={{ opacity: 0, y: 40, scale: 0.94, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
           transition={{ duration: 1.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
@@ -530,22 +521,25 @@ export const Hero = () => {
           initial={{ opacity: 0, x: 38, y: 12, filter: 'blur(4px)' }}
           animate={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
           transition={{ duration: 1.15, delay: 0.38, ease: [0.16, 1, 0.3, 1] }}
-          style={{ y: cardY, x: cardMouseX }}
+          style={{ y: combinedCardY, x: cardMouseX }}
         >
-          {/* Layered Architectural Depth Backplate */}
+          {/* Layered Architectural Depth Backplates */}
           <div className="zenji-hero__card-depth-layer" aria-hidden="true" />
           <div className="zenji-hero__card-depth-layer-2" aria-hidden="true" />
+
+          {/* Dynamic Floating 3D Contact Shadow */}
+          <div className="zenji-hero__card-floating-shadow" aria-hidden="true" />
 
           {/* Continuous Floating & Breathing Animation Wrapper */}
           <motion.div
             className="zenji-hero__card-float-wrapper"
             animate={{
-              y: [-6, 6, -6],
-              rotateZ: [-0.5, 0.5, -0.5],
-              rotateX: [-0.8, 0.8, -0.8]
+              y: [-8, 8, -8],
+              rotateZ: [-0.6, 0.6, -0.6],
+              rotateX: [-1.2, 1.2, -1.2]
             }}
             transition={{
-              duration: 7.5,
+              duration: 7,
               repeat: Infinity,
               ease: 'easeInOut'
             }}
