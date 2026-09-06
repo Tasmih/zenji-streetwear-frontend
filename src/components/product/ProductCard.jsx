@@ -19,9 +19,9 @@ export const ProductCard = memo(({ product, onQuickView }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 22, stiffness: 280 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
+  const springConfig = { damping: 30, stiffness: 200 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [4, -4]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-4, 4]), springConfig);
 
   const handleMouseMove = (e) => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) return;
@@ -79,8 +79,8 @@ export const ProductCard = memo(({ product, onQuickView }) => {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        whileHover={{ y: -10, scale: 1.015 }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+        whileHover={{ y: -8, scale: 1.01 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
         {/* Animated Glowing Gradient Border Beam */}
         <div className="zenji-card__glow-border" aria-hidden="true" />

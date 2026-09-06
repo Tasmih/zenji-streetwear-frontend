@@ -491,9 +491,9 @@ export const Hero = () => {
         <motion.div
           className="zenji-hero__model-stage"
           style={{ y: modelY, x: modelMouseX }}
-          initial={{ opacity: 0, y: 35, scale: 0.98, filter: 'blur(4px)' }}
+          initial={{ opacity: 0, y: 40, scale: 0.94, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-          transition={{ duration: 1.15, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
           aria-hidden="true"
         >
           {/* Soft Cinematic Atmosphere & Volumetric Haze Behind Model */}
@@ -502,15 +502,15 @@ export const Hero = () => {
           <div className="zenji-hero__model-rim-glow-warm" />
           <div className="zenji-hero__model-ground-shadow" />
 
-          {/* Ultra-Slow, Luxury Fashion Floating Motion */}
+          {/* Ultra-Slow Luxury Floating + Cinematic Zoom Drift */}
           <motion.div
             className="zenji-hero__model-float-wrap"
             animate={{
-              y: [-5, 5, -5],
-              scale: [1, 1.006, 1]
+              y: [-4, 4, -4],
+              scale: [1, 1.012, 1]
             }}
             transition={{
-              duration: 12,
+              duration: 14,
               repeat: Infinity,
               ease: 'easeInOut'
             }}
