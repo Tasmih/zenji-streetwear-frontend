@@ -166,19 +166,19 @@ export const Hero = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Multi-layer spring physics for interactive mouse parallax
-  const springConfig = { damping: 28, stiffness: 180 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [6, -6]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
+  // Softer spring physics for elegant, languid mouse parallax
+  const springConfig = { damping: 42, stiffness: 120 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
 
   // Subtle directional parallax for depth layers
-  const bgMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [16, -16]), springConfig);
-  const bgMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), springConfig);
-  const modelMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
-  const modelMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), springConfig);
-  const cardMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
-  const cardMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-6, 6]), springConfig);
-  const textMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
+  const bgMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [14, -14]), springConfig);
+  const bgMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
+  const modelMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
+  const modelMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-5, 5]), springConfig);
+  const cardMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-6, 6]), springConfig);
+  const cardMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-4, 4]), springConfig);
+  const textMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-4, 4]), springConfig);
 
   const handleMouseMove = (e) => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) return;
@@ -364,56 +364,98 @@ export const Hero = () => {
             Custom-milled <strong>500 GSM loopback cotton</strong>, relaxed oversized silhouettes, and tactical modular tailoring engineered in Tokyo. Limited small batch runs.
           </motion.p>
 
-          {/* Category Quick-Jump Chips */}
+          {/* Category Quick-Jump Chips — Individually Staggered */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.58, ease: [0.16, 1, 0.3, 1] }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.06, delayChildren: 0.56 }
+              }
+            }}
             className="zenji-hero__chips-row"
           >
             {CATEGORY_CHIPS.map((chip) => (
-              <Link
+              <motion.div
                 key={chip.label}
-                to={chip.path}
-                className="zenji-hero__category-chip"
+                variants={{
+                  hidden: { opacity: 0, y: 12, scale: 0.92, filter: 'blur(3px)' },
+                  visible: {
+                    opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+                    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] }
+                  }
+                }}
               >
-                <span>{chip.label}</span>
-              </Link>
+                <Link
+                  to={chip.path}
+                  className="zenji-hero__category-chip"
+                >
+                  <span>{chip.label}</span>
+                </Link>
+              </motion.div>
             ))}
           </motion.div>
 
-          {/* Magnetic Luxury CTA Action Group */}
+          {/* Magnetic Luxury CTA Action Group — Staggered Entrance */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: { staggerChildren: 0.12, delayChildren: 0.66 }
+              }
+            }}
             className="zenji-hero__cta-group"
           >
-            <Link to="/shop" className="zenji-hero__cta-link">
-              <motion.div
-                whileHover={{ scale: 1.025, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="zenji-hero__cta-primary-wrap"
-              >
-                <Button variant="primary" size="lg" icon={ArrowRight}>
-                  SHOP COLLECTION
-                </Button>
-                <span className="zenji-hero__btn-glow" />
-              </motion.div>
-            </Link>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 18, scale: 0.95, filter: 'blur(2px)' },
+                visible: {
+                  opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+                  transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+                }
+              }}
+            >
+              <Link to="/shop" className="zenji-hero__cta-link">
+                <motion.div
+                  whileHover={{ scale: 1.025, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                  className="zenji-hero__cta-primary-wrap"
+                >
+                  <Button variant="primary" size="lg" icon={ArrowRight}>
+                    SHOP COLLECTION
+                  </Button>
+                  <span className="zenji-hero__btn-glow" />
+                </motion.div>
+              </Link>
+            </motion.div>
 
-            <Link to="/shop?category=hoodies" className="zenji-hero__cta-link">
-              <motion.div
-                whileHover={{ scale: 1.025, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <Button variant="outline" size="lg" icon={Sparkles}>
-                  EXPLORE HOODIES
-                </Button>
-              </motion.div>
-            </Link>
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 18, scale: 0.95, filter: 'blur(2px)' },
+                visible: {
+                  opacity: 1, y: 0, scale: 1, filter: 'blur(0px)',
+                  transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+                }
+              }}
+            >
+              <Link to="/shop?category=hoodies" className="zenji-hero__cta-link">
+                <motion.div
+                  whileHover={{ scale: 1.025, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Button variant="outline" size="lg" icon={Sparkles}>
+                    EXPLORE HOODIES
+                  </Button>
+                </motion.div>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* Editorial Specification Strip */}
@@ -445,7 +487,7 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Column 2 (Center-Right): Prominent Streetwear Lookbook Fashion Model */}
+        {/* Column 2 (Center-Right): Supporting Editorial Streetwear Fashion Model (Layered Depth) */}
         <motion.div
           className="zenji-hero__model-stage"
           style={{ y: modelY, x: modelMouseX }}
@@ -454,21 +496,21 @@ export const Hero = () => {
           transition={{ duration: 1.15, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           aria-hidden="true"
         >
-          {/* Multi-Layer Depth Atmosphere Behind Model */}
-          <div className="zenji-hero__model-depth-ring" />
-          <div className="zenji-hero__model-back-glow" />
+          {/* Soft Cinematic Atmosphere & Volumetric Haze Behind Model */}
+          <div className="zenji-hero__model-cinematic-glow" />
+          <div className="zenji-hero__model-rim-glow" />
+          <div className="zenji-hero__model-rim-glow-warm" />
           <div className="zenji-hero__model-ground-shadow" />
 
-          {/* Slow, High-Fashion Floating Motion */}
+          {/* Ultra-Slow, Luxury Fashion Floating Motion */}
           <motion.div
             className="zenji-hero__model-float-wrap"
             animate={{
-              y: [-8, 8, -8],
-              rotateZ: [-0.3, 0.3, -0.3],
-              scale: [1, 1.01, 1]
+              y: [-5, 5, -5],
+              scale: [1, 1.006, 1]
             }}
             transition={{
-              duration: 8.5,
+              duration: 12,
               repeat: Infinity,
               ease: 'easeInOut'
             }}
