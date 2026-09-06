@@ -3,86 +3,240 @@
    ========================================================================== */
 
 :root {
-  /* Tokyo Futuristic Color Palette */
+  /* Tokyo Futuristic Luxury Streetwear Color Matrix */
   --bg-primary: #080808;
   --bg-secondary: #0e0e13;
   --bg-surface: #14141b;
   --bg-surface-elevated: #1b1b24;
   --bg-glass: rgba(14, 14, 19, 0.85);
+  --bg-glass-card: rgba(18, 18, 24, 0.72);
+  --bg-glass-heavy: rgba(8, 8, 10, 0.94);
 
   --text-primary: #f4f4f7;
   --text-secondary: #a0a0ab;
   --text-muted: #6b6b77;
+  --text-dim: #454550;
   --text-inverse: #080808;
 
   /* Tokyo Brand Accent System */
   --accent-neon: #d4ff00;            /* Acid Lime */
   --accent-neon-glow: rgba(212, 255, 0, 0.28);
+  --accent-neon-bright: #e5ff33;
   --accent-cyan: #00f5ff;            /* Tokyo Neon Cyan */
   --accent-cyan-glow: rgba(0, 245, 255, 0.28);
+  --accent-cyan-dim: rgba(0, 245, 255, 0.12);
   --accent-silver: #c8c8c8;          /* Warm Silver */
   --accent-silver-dim: rgba(200, 200, 200, 0.18);
+  --accent-silver-bright: #e8e8ee;
   --accent-crimson: #ff304f;         /* Crimson Drop Accent */
   --accent-crimson-glow: rgba(255, 48, 79, 0.35);
+  --accent-crimson-dim: rgba(255, 48, 79, 0.12);
   --accent-violet: #8a2be2;
 
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(255, 255, 255, 0.18);
+  --border-strong: rgba(255, 255, 255, 0.3);
   --border-neon: rgba(212, 255, 0, 0.4);
   --border-cyan: rgba(0, 245, 255, 0.35);
   --border-crimson: rgba(255, 48, 79, 0.4);
+  --border-silver: rgba(200, 200, 200, 0.25);
+
+  /* Spacing Scale */
+  --space-3xs: 2px;
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
 
   /* Typography */
   --font-display: 'Syne', sans-serif;
   --font-mono: 'Space Grotesk', monospace;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Layout & Transitions */
+  /* Layout & Geometry */
   --max-width: 1360px;
+  --max-width-wide: 1520px;
+  --radius-xs: 2px;
   --radius-sm: 4px;
   --radius-md: 8px;
   --radius-lg: 12px;
+  --radius-xl: 18px;
   --radius-full: 9999px;
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* Elevation & Glows */
+  /* Premium Motion Tokens & Spring Physics Curves */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-dramatic: cubic-bezier(0.85, 0, 0.15, 1);
+
+  --duration-instant: 100ms;
+  --duration-fast: 180ms;
+  --duration-normal: 280ms;
+  --duration-slow: 450ms;
+  --duration-cinematic: 750ms;
+  --duration-ambient: 1200ms;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-cinematic: 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Elevation, Specular Highlights & Ambient Glows */
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 12px 36px -10px rgba(0, 0, 0, 0.85);
   --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.92);
   --shadow-neon: 0 0 22px rgba(212, 255, 0, 0.35);
   --shadow-cyan: 0 0 22px rgba(0, 245, 255, 0.35);
   --shadow-crimson: 0 0 20px rgba(255, 48, 79, 0.35);
+  --shadow-specular: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  /* Signature Gradients */
+  --grad-obsidian: linear-gradient(180deg, #080808 0%, #0e0e13 100%);
+  --grad-surface: linear-gradient(135deg, rgba(20, 20, 27, 0.9) 0%, rgba(14, 14, 19, 0.9) 100%);
+  --grad-beam: linear-gradient(120deg, transparent 35%, rgba(212, 255, 0, 0.7) 45%, rgba(0, 245, 255, 0.7) 55%, rgba(255, 48, 79, 0.6) 65%, transparent 75%);
+  --grad-cyan-lime: linear-gradient(90deg, var(--accent-cyan), var(--accent-neon));
 }
 
-@keyframes pulseNeon {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(0.95);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
+/* ==========================================================================
+   Design System Utilities & Luxury Editorial Patterns
+   ========================================================================== */
+
+/* Glassmorphism System */
+.zenji-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-specular);
 }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.zenji-glass-card {
+  background: var(--bg-glass-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card), var(--shadow-specular);
 }
 
-@keyframes scanline {
-  0% {
-    top: 0%;
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    top: 100%;
-    opacity: 0.2;
-  }
+.zenji-glass-panel {
+  background: rgba(14, 14, 20, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-focus);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), var(--shadow-specular);
+}
+
+/* Glow Utilities */
+.zenji-glow-neon {
+  box-shadow: 0 0 16px var(--accent-neon-glow);
+}
+
+.zenji-glow-cyan {
+  box-shadow: 0 0 16px var(--accent-cyan-glow);
+}
+
+.zenji-glow-crimson {
+  box-shadow: 0 0 16px var(--accent-crimson-glow);
+}
+
+.zenji-text-glow-neon {
+  text-shadow: 0 0 14px var(--accent-neon-glow);
+}
+
+.zenji-text-glow-cyan {
+  text-shadow: 0 0 14px var(--accent-cyan-glow);
+}
+
+.zenji-text-glow-crimson {
+  text-shadow: 0 0 14px var(--accent-crimson-glow);
+}
+
+/* Luxury Typography & Editorial Styling */
+.zenji-text-stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(244, 244, 247, 0.85);
+  transition: all var(--transition-normal);
+}
+
+.zenji-text-stroke:hover {
+  -webkit-text-stroke-color: var(--accent-neon);
+  text-shadow: 0 0 24px var(--accent-neon-glow);
+}
+
+.zenji-kicker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zenji-spec-sheet {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--accent-silver);
+  background: rgba(200, 200, 200, 0.06);
+  border: 1px solid var(--accent-silver-dim);
+  padding: 4px 10px;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Procedural Noise & Grid Textures */
+.zenji-noise-layer {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.zenji-scanlines {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+}
+
+/* Techwear Framing Crosshairs & Brackets */
+.zenji-brackets {
+  position: relative;
+}
+
+.zenji-brackets::before,
+.zenji-brackets::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 255, 255, 0.35);
+  pointer-events: none;
+}
+
+.zenji-brackets::before {
+  top: 0;
+  left: 0;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+
+.zenji-brackets::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
 }
 
 
@@ -3950,10 +4104,10 @@ img {
 }
 
 /* ==========================================================================
-   Comprehensive Responsive System & Breakpoints Audit
+   Comprehensive Responsive System & Breakpoints Hierarchy
    ========================================================================== */
 
-/* Base overflow & touch optimization */
+/* Base overflow, touch & focus optimization */
 html, body {
   overflow-x: hidden;
   width: 100%;
@@ -3963,6 +4117,21 @@ html, body {
 
 button, a, input, select {
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   Ultra-Wide Displays (> 1440px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1441px) {
+  .zenji-hero__container {
+    max-width: var(--max-width-wide);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -4418,6 +4587,18 @@ button, a, input, select {
   .zenji-footer__links {
     grid-template-columns: 1fr;
     gap: 24px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion Preferences
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
