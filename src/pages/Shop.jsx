@@ -11,7 +11,18 @@ export const Shop = () => {
 
   const [sortBy, setSortBy] = useState('featured');
   const [searchQuery, setSearchQuery] = useState('');
+  const [priceRange, setPriceRange] = useState('all');
+  const [gridCols, setGridCols] = useState(4);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
+
+  // Compute category counts
+  const categoryCounts = useMemo(() => {
+    const counts = { all: PRODUCTS.length };
+    PRODUCTS.forEach((p) => {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    });
+    return counts;
+  }, []);
 
   const handleSelectCategory = (categorySlug) => {
     const nextParams = new URLSearchParams(searchParams);
@@ -23,6 +34,13 @@ export const Shop = () => {
     setSearchParams(nextParams);
   };
 
+  const handleResetFilters = () => {
+    setSearchQuery('');
+    setPriceRange('all');
+    setSortBy('featured');
+    handleSelectCategory('all');
+  };
+
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];
 
@@ -31,7 +49,7 @@ export const Shop = () => {
       result = result.filter((p) => p.category === selectedCategory);
     }
 
-    // Filter by Search
+    // Filter by Search Query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase().trim();
       result = result.filter(
@@ -41,6 +59,15 @@ export const Shop = () => {
           p.category.toLowerCase().includes(q) ||
           (p.tag && p.tag.toLowerCase().includes(q))
       );
+    }
+
+    // Filter by Price Range
+    if (priceRange === 'under-100') {
+      result = result.filter((p) => p.price < 100);
+    } else if (priceRange === '100-200') {
+      result = result.filter((p) => p.price >= 100 && p.price <= 200);
+    } else if (priceRange === '200-plus') {
+      result = result.filter((p) => p.price > 200);
     }
 
     // Sort
@@ -56,15 +83,16 @@ export const Shop = () => {
     }
 
     return result;
-  }, [selectedCategory, searchQuery, sortBy]);
+  }, [selectedCategory, searchQuery, priceRange, sortBy]);
 
   return (
     <div className="zenji-shop-page">
+      {/* Editorial Header */}
       <div className="zenji-shop-hero">
-        <span className="zenji-shop-hero__badge">ARCHIVAL VAULT</span>
-        <h1 className="zenji-shop-hero__title">DROP CATALOGUE</h1>
+        <span className="zenji-shop-hero__badge">DROP ARCHIVES // SS26</span>
+        <h1 className="zenji-shop-hero__title">SEASONAL CATALOGUE</h1>
         <p className="zenji-shop-hero__sub">
-          Explore the complete seasonal assortment of bespoke luxury streetwear, tactical hardware & outerwear.
+          Explore bespoke 500 GSM loopback cotton, tactical Cordura® ripstop outerwear, and articulated Tokyo streetwear pieces.
         </p>
       </div>
 
@@ -76,12 +104,20 @@ export const Shop = () => {
           onSortChange={setSortBy}
           searchQuery={searchQuery}
           onSearchChange={setSearchQuery}
+          priceRange={priceRange}
+          onPriceRangeChange={setPriceRange}
+          gridCols={gridCols}
+          onGridColsChange={setGridCols}
+          categoryCounts={categoryCounts}
           totalResults={filteredProducts.length}
+          onResetFilters={handleResetFilters}
         />
 
         <ProductGrid
           products={filteredProducts}
+          gridCols={gridCols}
           onQuickView={(product) => setQuickViewProduct(product)}
+          onResetFilters={handleResetFilters}
         />
       </div>
 
