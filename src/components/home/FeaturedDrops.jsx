@@ -1,32 +1,72 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { ProductCard } from '../product/ProductCard';
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.15
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export const FeaturedDrops = ({ products, onQuickView }) => {
   const featured = products.filter((p) => p.isFeatured).slice(0, 4);
 
   return (
     <section className="zenji-section">
-      <div className="zenji-section__header">
+      <motion.div
+        className="zenji-section__header"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-50px' }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+      >
         <div>
           <span className="zenji-section__tag">FEATURED SELECTION</span>
           <h2 className="zenji-section__title">KEY PIECES FROM DROP 004</h2>
         </div>
         <Link to="/shop" className="zenji-section__link">
-          <span>VIEW ALL ARCHIVES</span>
-          <ArrowRight size={16} />
+          <motion.div
+            style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+          >
+            <span>VIEW ALL ARCHIVES</span>
+            <ArrowRight size={16} />
+          </motion.div>
         </Link>
-      </div>
+      </motion.div>
 
-      <div className="zenji-product-grid">
+      <motion.div
+        className="zenji-product-grid"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-50px' }}
+      >
         {featured.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onQuickView={onQuickView}
-          />
+          <motion.div key={product.id} variants={itemVariants}>
+            <ProductCard
+              product={product}
+              onQuickView={onQuickView}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

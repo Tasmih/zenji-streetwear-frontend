@@ -11,6 +11,7 @@ import {
   Plus,
   Minus
 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { PRODUCTS } from '../data/products';
 import { Badge } from '../components/common/Badge';
 import { Button } from '../components/common/Button';
@@ -64,7 +65,12 @@ export const ProductDetail = () => {
   return (
     <div className="zenji-detail-page">
       {/* Breadcrumbs */}
-      <div className="zenji-breadcrumbs">
+      <motion.div
+        className="zenji-breadcrumbs"
+        initial={{ opacity: 0, x: -12 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.4 }}
+      >
         <button onClick={() => navigate(-1)} className="zenji-breadcrumbs__back">
           <ArrowLeft size={16} />
           <span>BACK</span>
@@ -73,13 +79,26 @@ export const ProductDetail = () => {
         <Link to="/shop" className="zenji-breadcrumbs__link">SHOP</Link>
         <span className="zenji-breadcrumbs__div">/</span>
         <span className="zenji-breadcrumbs__current">{product.name}</span>
-      </div>
+      </motion.div>
 
       <div className="zenji-detail-layout">
         {/* Visual Gallery */}
-        <div className="zenji-detail-gallery">
+        <motion.div
+          className="zenji-detail-gallery"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="zenji-detail-gallery__main">
-            <img src={currentDisplayImg} alt={product.name} className="zenji-detail-gallery__img" />
+            <motion.img
+              key={currentDisplayImg}
+              src={currentDisplayImg}
+              alt={product.name}
+              className="zenji-detail-gallery__img"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4 }}
+            />
             {product.tag && (
               <div className="zenji-detail-gallery__badge">
                 <Badge variant="neon">{product.tag}</Badge>
@@ -90,22 +109,29 @@ export const ProductDetail = () => {
           {product.images?.length > 1 && (
             <div className="zenji-detail-gallery__thumbs">
               {product.images.map((img, idx) => (
-                <button
+                <motion.button
                   key={idx}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setActiveImage(img)}
                   className={`zenji-detail-gallery__thumb ${
                     currentDisplayImg === img ? 'zenji-detail-gallery__thumb--active' : ''
                   }`}
                 >
                   <img src={img} alt="" />
-                </button>
+                </motion.button>
               ))}
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Product Info & Purchase Bar */}
-        <div className="zenji-detail-info">
+        <motion.div
+          className="zenji-detail-info"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+        >
           <div className="zenji-detail-info__header">
             <span className="zenji-detail-info__cat">{product.category.toUpperCase()} // ARCHIVE</span>
             <h1 className="zenji-detail-info__title">{product.name}</h1>
@@ -139,8 +165,10 @@ export const ProductDetail = () => {
               </div>
               <div className="zenji-detail-option__colors">
                 {product.colors.map((c) => (
-                  <button
+                  <motion.button
                     key={c.name}
+                    whileHover={{ scale: 1.2 }}
+                    whileTap={{ scale: 0.9 }}
                     onClick={() => setSelectedColor(c.name)}
                     className={`zenji-color-swatch zenji-color-swatch--lg ${
                       selectedColor === c.name ? 'zenji-color-swatch--active' : ''
@@ -162,15 +190,17 @@ export const ProductDetail = () => {
               </div>
               <div className="zenji-detail-option__sizes">
                 {product.sizes.map((size) => (
-                  <button
+                  <motion.button
                     key={size}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedSize(size)}
                     className={`zenji-size-btn zenji-size-btn--lg ${
                       selectedSize === size ? 'zenji-size-btn--active' : ''
                     }`}
                   >
                     {size}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -179,40 +209,52 @@ export const ProductDetail = () => {
           {/* Quantity and Add to Bag */}
           <div className="zenji-detail-actions">
             <div className="zenji-detail-actions__qty">
-              <button
+              <motion.button
+                whileTap={{ scale: 0.85 }}
                 onClick={() => setQuantity((q) => Math.max(1, q - 1))}
                 className="zenji-detail-actions__qty-btn"
                 aria-label="Decrease quantity"
               >
                 <Minus size={14} />
-              </button>
+              </motion.button>
               <span className="zenji-detail-actions__qty-val">{quantity}</span>
-              <button
+              <motion.button
+                whileTap={{ scale: 0.85 }}
                 onClick={() => setQuantity((q) => q + 1)}
                 className="zenji-detail-actions__qty-btn"
                 aria-label="Increase quantity"
               >
                 <Plus size={14} />
-              </button>
+              </motion.button>
             </div>
 
-            <Button
-              variant="primary"
-              size="lg"
-              fullWidth
-              icon={ShoppingBag}
-              onClick={handleAddToCart}
-            >
-              ADD TO BAG • {formatCurrency(product.price * quantity)}
-            </Button>
+            <motion.div style={{ flex: 1 }} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+              <Button
+                variant="primary"
+                size="lg"
+                fullWidth
+                icon={ShoppingBag}
+                onClick={handleAddToCart}
+              >
+                ADD TO BAG • {formatCurrency(product.price * quantity)}
+              </Button>
+            </motion.div>
           </div>
 
-          {addedNotice && (
-            <div className="zenji-detail-notice">
-              <Check size={16} />
-              <span>Added {quantity}x {product.name} to your bag!</span>
-            </div>
-          )}
+          <AnimatePresence>
+            {addedNotice && (
+              <motion.div
+                className="zenji-detail-notice"
+                initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                transition={{ duration: 0.25 }}
+              >
+                <Check size={16} />
+                <span>Added {quantity}x {product.name} to your bag!</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Guarantee Badges */}
           <div className="zenji-detail-perks">
@@ -250,10 +292,10 @@ export const ProductDetail = () => {
               </ul>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
 
-      {/* Related Products */}
+      {/* Related Products with Staggered View */}
       {relatedProducts.length > 0 && (
         <section className="zenji-detail-related">
           <div className="zenji-section__header">
