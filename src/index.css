@@ -638,16 +638,17 @@ img {
   padding: 40px 24px 90px;
   overflow: hidden;
   border-bottom: 1px solid var(--border-subtle);
+  background: #08080a;
 }
 
 .zenji-hero--cinematic {
-  min-height: 85vh;
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-/* Background Atmosphere */
+/* Background Atmosphere & Ambient Lighting */
 .zenji-hero__backdrop {
   position: absolute;
   inset: 0;
@@ -663,30 +664,46 @@ img {
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, #000 70%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, #000 70%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 65%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 65%, transparent 100%);
+}
+
+.zenji-hero__noise-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+  opacity: 0.3;
 }
 
 .zenji-hero__glow {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
+  filter: blur(100px);
 }
 
 .zenji-hero__glow--primary {
   top: -15%;
-  left: 25%;
-  width: 600px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(212, 255, 0, 0.09) 0%, transparent 70%);
+  left: 20%;
+  width: 650px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.1) 0%, transparent 70%);
 }
 
 .zenji-hero__glow--secondary {
   bottom: 0%;
-  right: 15%;
-  width: 500px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%);
+  right: 10%;
+  width: 550px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.07) 0%, transparent 70%);
+}
+
+.zenji-hero__glow--tertiary {
+  top: 40%;
+  left: 5%;
+  width: 400px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.05) 0%, transparent 70%);
 }
 
 /* Cybernetic Top Coordinate Markers */
@@ -702,9 +719,21 @@ img {
   color: var(--text-muted);
   letter-spacing: 0.12em;
   padding: 0 4px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
   z-index: 2;
+}
+
+.zenji-hero__hud-left,
+.zenji-hero__hud-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zenji-hero__hud-marker {
+  color: var(--accent-neon);
+  font-weight: 700;
 }
 
 .zenji-hero__sys-badge {
@@ -714,11 +743,12 @@ img {
   background: rgba(212, 255, 0, 0.08);
   border: 1px solid rgba(212, 255, 0, 0.25);
   color: var(--accent-neon);
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   font-weight: 700;
   font-size: 10px;
   letter-spacing: 0.15em;
+  backdrop-filter: blur(8px);
 }
 
 .zenji-hero__sys-dot {
@@ -738,10 +768,10 @@ img {
 /* Japanese Kanji Watermark */
 .zenji-hero__kanji-bg {
   position: absolute;
-  right: 5%;
-  top: 15%;
+  right: 4%;
+  top: 12%;
   font-family: var(--font-display);
-  font-size: clamp(100px, 16vw, 240px);
+  font-size: clamp(120px, 18vw, 280px);
   font-weight: 900;
   color: rgba(255, 255, 255, 0.015);
   user-select: none;
@@ -759,7 +789,7 @@ img {
   width: 100%;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 56px;
+  gap: 60px;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -768,8 +798,12 @@ img {
 .zenji-hero__badge-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
+}
+
+.zenji-badge__icon {
+  margin-right: 4px;
 }
 
 .zenji-hero__season-tag {
@@ -778,6 +812,16 @@ img {
   font-weight: 700;
   color: var(--text-muted);
   letter-spacing: 0.18em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-hero__season-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-muted);
 }
 
 /* Kinetic Masked Typography */
@@ -789,7 +833,13 @@ img {
 
 .zenji-hero__line-mask {
   overflow: hidden;
-  padding-bottom: 4px;
+  padding-bottom: 6px;
+}
+
+.zenji-hero__headline-sub-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .zenji-hero__title {
@@ -801,66 +851,101 @@ img {
 }
 
 .zenji-hero__title--sub {
-  font-size: clamp(28px, 4vw, 44px);
+  font-size: clamp(28px, 4.5vw, 48px);
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   color: var(--text-secondary);
-  margin-bottom: 8px;
+}
+
+.zenji-hero__title-accent-tag {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.1em;
 }
 
 .zenji-hero__title--main {
-  font-size: clamp(48px, 8vw, 92px);
+  font-size: clamp(52px, 8.5vw, 98px);
   font-weight: 900;
   color: var(--text-primary);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .zenji-hero__title--stroke {
-  font-size: clamp(48px, 8vw, 92px);
+  font-size: clamp(52px, 8.5vw, 98px);
   font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 2px var(--text-primary);
+  -webkit-text-stroke: 2px rgba(244, 244, 246, 0.85);
   letter-spacing: 0.02em;
   transition: all var(--transition-normal);
+  cursor: default;
 }
 
 .zenji-hero__title--stroke:hover {
   -webkit-text-stroke-color: var(--accent-neon);
-  text-shadow: 0 0 25px var(--accent-neon-glow);
+  text-shadow: 0 0 30px var(--accent-neon-glow);
 }
 
 .zenji-hero__subtitle {
-  font-size: 16px;
-  line-height: 1.65;
+  font-size: 15px;
+  line-height: 1.7;
   color: var(--text-secondary);
   max-width: 520px;
-  margin-bottom: 40px;
+  margin-bottom: 38px;
   font-weight: 400;
+}
+
+.zenji-hero__subtitle strong {
+  color: var(--text-primary);
+  font-weight: 600;
 }
 
 .zenji-hero__cta-group {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 52px;
+  margin-bottom: 48px;
+}
+
+.zenji-hero__cta-link {
+  text-decoration: none;
 }
 
 .zenji-hero__cta-primary-wrap {
   position: relative;
+  display: inline-block;
+}
+
+.zenji-hero__btn-glow {
+  position: absolute;
+  inset: -2px;
+  background: var(--accent-neon);
+  border-radius: var(--radius-sm);
+  filter: blur(14px);
+  opacity: 0.4;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+}
+
+.zenji-hero__cta-primary-wrap:hover .zenji-hero__btn-glow {
+  opacity: 0.8;
 }
 
 /* Editorial Specs Strip */
 .zenji-hero__stats--editorial {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
   padding: 24px 0 0;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .zenji-hero__stat-val {
   display: block;
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: 0.05em;
@@ -869,7 +954,7 @@ img {
 
 .zenji-hero__stat-lbl {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: var(--text-muted);
   letter-spacing: 0.12em;
@@ -877,8 +962,8 @@ img {
 
 .zenji-hero__stat-div {
   width: 1px;
-  height: 28px;
-  background: var(--border-subtle);
+  height: 26px;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 /* 3D Visual Lookbook Card Showcase */
@@ -893,9 +978,25 @@ img {
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: var(--bg-secondary);
-  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 255, 0, 0.05);
-  aspect-ratio: 4/5.2;
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.95), 0 0 50px rgba(212, 255, 0, 0.04);
+  aspect-ratio: 4/5.3;
 }
+
+/* Corner Precision Marks */
+.zenji-hero__corner-mark {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  z-index: 5;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.zenji-hero__corner-mark--tl { top: 8px; left: 8px; }
+.zenji-hero__corner-mark--tr { top: 8px; right: 8px; }
+.zenji-hero__corner-mark--bl { bottom: 8px; left: 8px; }
+.zenji-hero__corner-mark--br { bottom: 8px; right: 8px; }
 
 .zenji-hero__card-scanline {
   position: absolute;
@@ -904,7 +1005,15 @@ img {
   background-size: 100% 4px;
   pointer-events: none;
   z-index: 2;
-  opacity: 0.4;
+  opacity: 0.35;
+}
+
+.zenji-hero__card-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.7);
+  pointer-events: none;
+  z-index: 2;
 }
 
 .zenji-hero__card-top-tag {
@@ -923,12 +1032,12 @@ img {
   align-items: center;
   gap: 6px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   color: var(--accent-neon);
   background: rgba(9, 9, 11, 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
   border: 1px solid rgba(212, 255, 0, 0.35);
@@ -936,14 +1045,15 @@ img {
 
 .zenji-hero__card-id {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   background: rgba(9, 9, 11, 0.85);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   padding: 4px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.08em;
 }
 
 .zenji-hero__card-img {
@@ -962,11 +1072,11 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 40px 24px 24px;
-  background: linear-gradient(to top, rgba(9, 9, 11, 0.98) 0%, rgba(9, 9, 11, 0.7) 60%, transparent 100%);
+  padding: 44px 22px 20px;
+  background: linear-gradient(to top, rgba(8, 8, 10, 0.98) 0%, rgba(8, 8, 10, 0.75) 60%, transparent 100%);
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
+  gap: 12px;
   z-index: 3;
 }
 
@@ -975,18 +1085,34 @@ img {
   flex-direction: column;
 }
 
+.zenji-hero__card-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
 .zenji-hero__card-tag {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
   color: var(--accent-neon);
-  letter-spacing: 0.18em;
-  margin-bottom: 4px;
+  letter-spacing: 0.16em;
+}
+
+.zenji-hero__card-pill {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  padding: 1px 4px;
+  border-radius: 2px;
 }
 
 .zenji-hero__card-name {
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
   letter-spacing: 0.05em;
   color: var(--text-primary);
@@ -995,26 +1121,53 @@ img {
 
 .zenji-hero__card-spec {
   font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
 }
 
-/* Lookbook Tabs */
+.zenji-hero__card-desc {
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+/* Lookbook Tabs Row */
+.zenji-hero__card-tabs-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.zenji-hero__tabs-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .zenji-hero__card-tabs {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .zenji-hero__card-tab {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: var(--text-secondary);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -1025,38 +1178,40 @@ img {
 
 .zenji-hero__card-tab:hover {
   color: var(--text-primary);
-  border-color: var(--border-focus);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .zenji-hero__card-tab--active {
   background: var(--accent-neon);
   color: var(--text-inverse);
   border-color: var(--accent-neon);
-  box-shadow: 0 0 12px var(--accent-neon-glow);
+  box-shadow: 0 0 10px var(--accent-neon-glow);
 }
 
 /* Floating Capsule Card */
 .zenji-hero__floating-card {
   position: absolute;
-  bottom: -20px;
-  left: -24px;
-  background: rgba(18, 18, 24, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  bottom: -18px;
+  left: -20px;
+  background: rgba(14, 14, 18, 0.92);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: var(--radius-md);
-  padding: 12px 18px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   gap: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75);
   z-index: 5;
   cursor: default;
+  transition: border-color var(--transition-normal);
 }
 
 .zenji-hero__floating-icon {
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: var(--radius-sm);
   background: rgba(212, 255, 0, 0.1);
   color: var(--accent-neon);
@@ -1072,7 +1227,7 @@ img {
 
 .zenji-hero__floating-text strong {
   font-family: var(--font-display);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
   color: var(--text-primary);
   letter-spacing: 0.05em;
@@ -1080,10 +1235,40 @@ img {
 
 .zenji-hero__floating-text span {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 9px;
   color: var(--text-muted);
   letter-spacing: 0.08em;
 }
+
+.zenji-hero__floating-arrow {
+  color: var(--accent-neon);
+  margin-left: 4px;
+}
+
+@media (max-width: 968px) {
+  .zenji-hero__container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .zenji-hero__hud-top {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .zenji-hero__visual-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .zenji-hero__floating-card {
+    left: 10px;
+    bottom: -10px;
+  }
+}
+
 
 /* ==========================================================================
    Sections & Grids
