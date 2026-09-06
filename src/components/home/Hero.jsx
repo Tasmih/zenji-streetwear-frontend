@@ -1,29 +1,55 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Flame } from 'lucide-react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { ArrowRight, Sparkles, Shield, Eye } from 'lucide-react';
+import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
 import { Button } from '../common/Button';
 import { Badge } from '../common/Badge';
 
+const LOOKBOOK_SLIDES = [
+  {
+    id: '01',
+    tag: 'LOOK 01 // FRONT',
+    title: 'VOID OMNI HOODIE',
+    spec: '500 GSM FRENCH TERRY',
+    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1000&q=80'
+  },
+  {
+    id: '02',
+    tag: 'LOOK 02 // TACTICAL',
+    title: 'MODULAR BOMBER',
+    spec: 'CORDURA® RIPSTOP',
+    image: 'https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80'
+  },
+  {
+    id: '03',
+    tag: 'LOOK 03 // ARCHIVE',
+    title: 'CYBER CARGO SYSTEM',
+    spec: '8-POCKET ARTICULATED',
+    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=80'
+  }
+];
+
 export const Hero = () => {
   const containerRef = useRef(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
-  // Scroll parallax
+  // Scroll parallax effects
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end start']
   });
 
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.8], [0.8, 0.2]);
+  const cardY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const bgTextY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const glowOpacity = useTransform(scrollYProgress, [0, 0.8], [0.9, 0.1]);
 
-  // Mouse tilt parallax for hero card
+  // Mouse tilt perspective for visual lookbook card
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 25, stiffness: 200 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
+  const springConfig = { damping: 25, stiffness: 220 };
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springConfig);
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -38,103 +64,191 @@ export const Hero = () => {
     mouseY.set(0);
   };
 
-  // Animation variants
+  // Kinetic Typography Animation Variants
+  const lineVariants = {
+    hidden: { y: '100%', opacity: 0 },
+    visible: (i) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.9,
+        delay: 0.15 * i,
+        ease: [0.16, 1, 0.3, 1]
+      }
+    })
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.1
+        staggerChildren: 0.1,
+        delayChildren: 0.05
       }
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
+  const currentSlideData = LOOKBOOK_SLIDES[activeSlide];
 
   return (
-    <section className="zenji-hero" ref={containerRef}>
-      <motion.div
-        className="zenji-hero__backdrop"
-        style={{ opacity: glowOpacity }}
-      >
-        <div className="zenji-hero__glow"></div>
+    <section className="zenji-hero zenji-hero--cinematic" ref={containerRef}>
+      {/* Background Visual Atmosphere */}
+      <motion.div className="zenji-hero__backdrop" style={{ opacity: glowOpacity }}>
+        <div className="zenji-hero__glow zenji-hero__glow--primary" />
+        <div className="zenji-hero__glow zenji-hero__glow--secondary" />
+        <div className="zenji-hero__grid-pattern" />
+      </motion.div>
+
+      {/* Cybernetic Coordinate Markers */}
+      <div className="zenji-hero__hud-top">
+        <span className="zenji-hero__coord">[+] 35.6764° N / 139.6500° E</span>
+        <span className="zenji-hero__sys-badge">
+          <span className="zenji-hero__sys-dot" />
+          SYSTEM: DROP 004 ACTIVE
+        </span>
+        <span className="zenji-hero__coord">EDITION OF 250 PCS</span>
+      </div>
+
+      {/* Ambient Japanese Typographic Watermark */}
+      <motion.div className="zenji-hero__kanji-bg" style={{ y: bgTextY }} aria-hidden="true">
+        <span>禅侍極限</span>
       </motion.div>
 
       <div className="zenji-hero__container">
-        {/* Animated Text Content */}
+        {/* Left Column: Kinetic Editorial Typography & CTAs */}
         <motion.div
           className="zenji-hero__content"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.div variants={itemVariants} className="zenji-hero__badge-row">
-            <Badge variant="neon">DROP 004 // LIVE NOW</Badge>
-            <span className="zenji-hero__tagline-sub">SS26 ARCHIVAL ARCHITECTURE</span>
+          {/* Top Status Capsule */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="zenji-hero__badge-row"
+          >
+            <Badge variant="neon">DROP 004 // CYBER OMNI</Badge>
+            <span className="zenji-hero__season-tag">SS26 ARCHIVAL RUN</span>
           </motion.div>
 
-          <motion.h1 variants={itemVariants} className="zenji-hero__title">
-            CYBERNETIC <br />
-            <span className="zenji-hero__title-accent">TACTICAL MINIMALISM</span>
-          </motion.h1>
+          {/* Masked Headline Reveal */}
+          <div className="zenji-hero__title-wrap">
+            <div className="zenji-hero__line-mask">
+              <motion.h1
+                custom={1}
+                variants={lineVariants}
+                initial="hidden"
+                animate="visible"
+                className="zenji-hero__title zenji-hero__title--sub"
+              >
+                TOKYO ARCHIVAL
+              </motion.h1>
+            </div>
 
-          <motion.p variants={itemVariants} className="zenji-hero__subtitle">
-            Engineered in Tokyo with custom 500 GSM French Terry, waterproof Cordura ripstop, and modular magnetic utility hardware.
+            <div className="zenji-hero__line-mask">
+              <motion.h1
+                custom={2}
+                variants={lineVariants}
+                initial="hidden"
+                animate="visible"
+                className="zenji-hero__title zenji-hero__title--main"
+              >
+                TACTICAL
+              </motion.h1>
+            </div>
+
+            <div className="zenji-hero__line-mask">
+              <motion.h1
+                custom={3}
+                variants={lineVariants}
+                initial="hidden"
+                animate="visible"
+                className="zenji-hero__title zenji-hero__title--stroke"
+              >
+                MINIMALISM
+              </motion.h1>
+            </div>
+          </div>
+
+          {/* Editorial Subtitle & Specs */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+            className="zenji-hero__subtitle"
+          >
+            Bespoke 500 GSM loopback cotton silhouettes engineered with weather-resistant Cordura® ripstop, modular German Fidlock® hardware, and raw dystopian anime tailoring.
           </motion.p>
 
-          <motion.div variants={itemVariants} className="zenji-hero__cta-group">
+          {/* Magnetic CTA Action Group */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            className="zenji-hero__cta-group"
+          >
             <Link to="/shop">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className="zenji-hero__cta-primary-wrap"
+              >
                 <Button variant="primary" size="lg" icon={ArrowRight}>
                   EXPLORE DROP 004
                 </Button>
               </motion.div>
             </Link>
+
             <Link to="/shop?category=hoodies">
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Button variant="outline" size="lg" icon={Flame}>
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Button variant="outline" size="lg" icon={Sparkles}>
                   VIEW HOODIES
                 </Button>
               </motion.div>
             </Link>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="zenji-hero__stats">
+          {/* Editorial Spec Strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="zenji-hero__stats zenji-hero__stats--editorial"
+          >
             <div className="zenji-hero__stat-item">
-              <span className="zenji-hero__stat-val">500+</span>
-              <span className="zenji-hero__stat-lbl">GSM CUSTOM MILLED</span>
+              <span className="zenji-hero__stat-val">500 GSM</span>
+              <span className="zenji-hero__stat-lbl">BESPOKE FRENCH TERRY</span>
             </div>
-            <div className="zenji-hero__stat-div"></div>
+            <div className="zenji-hero__stat-div" />
             <div className="zenji-hero__stat-item">
-              <span className="zenji-hero__stat-val">LIMITED</span>
-              <span className="zenji-hero__stat-lbl">BATCH RUNS</span>
+              <span className="zenji-hero__stat-val">CORDURA®</span>
+              <span className="zenji-hero__stat-lbl">WATERPROOF RIPSTOP</span>
             </div>
-            <div className="zenji-hero__stat-div"></div>
+            <div className="zenji-hero__stat-div" />
             <div className="zenji-hero__stat-item">
-              <span className="zenji-hero__stat-val">100%</span>
-              <span className="zenji-hero__stat-lbl">AUTHENTIC ARCHIVE</span>
+              <span className="zenji-hero__stat-val">FIDLOCK®</span>
+              <span className="zenji-hero__stat-lbl">MAGNETIC HARDWARE</span>
             </div>
           </motion.div>
         </motion.div>
 
-        {/* Hero Image with Tilt and Scroll Parallax */}
+        {/* Right Column: Cinematic 3D Lookbook Visual Showcase */}
         <motion.div
-          className="zenji-hero__visual"
-          initial={{ opacity: 0, scale: 0.94, y: 40 }}
+          className="zenji-hero__visual-wrap"
+          initial={{ opacity: 0, scale: 0.92, y: 50 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 1.1, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
           style={{ y: cardY }}
         >
+          {/* Main 3D Tilted Lookbook Card */}
           <motion.div
-            className="zenji-hero__card"
+            className="zenji-hero__card zenji-hero__card--cinematic"
             style={{
               rotateX,
               rotateY,
@@ -143,14 +257,71 @@ export const Hero = () => {
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            <img
-              src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=80"
-              alt="ZENJI Drop 004 Hero Lookbook"
-              className="zenji-hero__card-img"
-            />
+            {/* Scanline & Grain Texture */}
+            <div className="zenji-hero__card-scanline" />
+
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentSlideData.image}
+                src={currentSlideData.image}
+                alt={currentSlideData.title}
+                className="zenji-hero__card-img"
+                initial={{ opacity: 0, scale: 1.08 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              />
+            </AnimatePresence>
+
+            {/* Top Holographic Tag */}
+            <div className="zenji-hero__card-top-tag">
+              <span className="zenji-hero__hologram-pill">
+                <Shield size={12} />
+                NFC ENCRYPTED 004
+              </span>
+              <span className="zenji-hero__card-id">ARCHIVE // {currentSlideData.id}</span>
+            </div>
+
+            {/* Bottom Overlay Info */}
             <div className="zenji-hero__card-overlay">
-              <span className="zenji-hero__card-tag">EDITORIAL LOOKBOOK</span>
-              <h3 className="zenji-hero__card-name">ARCHIVE DROP 004</h3>
+              <div className="zenji-hero__card-meta">
+                <span className="zenji-hero__card-tag">{currentSlideData.tag}</span>
+                <h3 className="zenji-hero__card-name">{currentSlideData.title}</h3>
+                <p className="zenji-hero__card-spec">{currentSlideData.spec}</p>
+              </div>
+
+              {/* Lookbook Angle Switcher Tabs */}
+              <div className="zenji-hero__card-tabs">
+                {LOOKBOOK_SLIDES.map((slide, idx) => (
+                  <button
+                    key={slide.id}
+                    onClick={() => setActiveSlide(idx)}
+                    className={`zenji-hero__card-tab ${
+                      activeSlide === idx ? 'zenji-hero__card-tab--active' : ''
+                    }`}
+                    title={slide.title}
+                  >
+                    <span>{slide.id}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Floating Spec Capsule Card */}
+          <motion.div
+            className="zenji-hero__floating-card"
+            initial={{ opacity: 0, x: -20, y: 20 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            whileHover={{ scale: 1.05 }}
+          >
+            <div className="zenji-hero__floating-icon">
+              <Eye size={16} />
+            </div>
+            <div className="zenji-hero__floating-text">
+              <strong>EDITORIAL DROP 004</strong>
+              <span>LIMITED 250 PIECES • TOKYO</span>
             </div>
           </motion.div>
         </motion.div>
@@ -158,3 +329,4 @@ export const Hero = () => {
     </section>
   );
 };
+export default Hero;

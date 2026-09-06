@@ -451,128 +451,320 @@ img {
 }
 
 /* ==========================================================================
-   Hero Section
+   Hero Section — Luxury Streetwear Editorial
    ========================================================================== */
 
 .zenji-hero {
   position: relative;
-  padding: 60px 24px 80px;
+  padding: 40px 24px 90px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.zenji-hero--cinematic {
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Background Atmosphere */
+.zenji-hero__backdrop {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
   overflow: hidden;
 }
 
-.zenji-hero__backdrop {
+.zenji-hero__grid-pattern {
   position: absolute;
-  top: -10%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1000px;
-  height: 500px;
-  pointer-events: none;
-  z-index: 0;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, #000 70%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 35%, #000 70%, transparent 100%);
 }
 
 .zenji-hero__glow {
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(212, 255, 0, 0.07) 0%, rgba(168, 85, 247, 0.03) 40%, transparent 70%);
-  filter: blur(60px);
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
 }
 
+.zenji-hero__glow--primary {
+  top: -15%;
+  left: 25%;
+  width: 600px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.09) 0%, transparent 70%);
+}
+
+.zenji-hero__glow--secondary {
+  bottom: 0%;
+  right: 15%;
+  width: 500px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.06) 0%, transparent 70%);
+}
+
+/* Cybernetic Top Coordinate Markers */
+.zenji-hero__hud-top {
+  max-width: var(--max-width);
+  margin: 0 auto 36px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  padding: 0 4px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  z-index: 2;
+}
+
+.zenji-hero__sys-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 255, 0, 0.08);
+  border: 1px solid rgba(212, 255, 0, 0.25);
+  color: var(--accent-neon);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+}
+
+.zenji-hero__sys-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+  animation: pulseBeacon 2s infinite ease-in-out;
+}
+
+@keyframes pulseBeacon {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.7); }
+}
+
+/* Japanese Kanji Watermark */
+.zenji-hero__kanji-bg {
+  position: absolute;
+  right: 5%;
+  top: 15%;
+  font-family: var(--font-display);
+  font-size: clamp(100px, 16vw, 240px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.015);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  letter-spacing: 0.2em;
+  writing-mode: vertical-rl;
+  z-index: 1;
+}
+
+/* Hero Container */
 .zenji-hero__container {
   max-width: var(--max-width);
   margin: 0 auto;
+  width: 100%;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
-  gap: 48px;
+  gap: 56px;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .zenji-hero__badge-row {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
-.zenji-hero__tagline-sub {
+.zenji-hero__season-tag {
   font-family: var(--font-mono);
   font-size: 11px;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
+}
+
+/* Kinetic Masked Typography */
+.zenji-hero__title-wrap {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.zenji-hero__line-mask {
+  overflow: hidden;
+  padding-bottom: 4px;
 }
 
 .zenji-hero__title {
   font-family: var(--font-display);
-  font-size: clamp(38px, 6vw, 68px);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  margin-bottom: 24px;
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-transform: uppercase;
 }
 
-.zenji-hero__title-accent {
+.zenji-hero__title--sub {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+
+.zenji-hero__title--main {
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.zenji-hero__title--stroke {
+  font-size: clamp(48px, 8vw, 92px);
+  font-weight: 900;
   color: transparent;
-  -webkit-text-stroke: 1.5px var(--text-primary);
+  -webkit-text-stroke: 2px var(--text-primary);
+  letter-spacing: 0.02em;
+  transition: all var(--transition-normal);
+}
+
+.zenji-hero__title--stroke:hover {
+  -webkit-text-stroke-color: var(--accent-neon);
+  text-shadow: 0 0 25px var(--accent-neon-glow);
 }
 
 .zenji-hero__subtitle {
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-secondary);
-  max-width: 540px;
-  margin-bottom: 36px;
+  max-width: 520px;
+  margin-bottom: 40px;
+  font-weight: 400;
 }
 
 .zenji-hero__cta-group {
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 48px;
+  margin-bottom: 52px;
 }
 
-.zenji-hero__stats {
+.zenji-hero__cta-primary-wrap {
+  position: relative;
+}
+
+/* Editorial Specs Strip */
+.zenji-hero__stats--editorial {
   display: flex;
   align-items: center;
   gap: 24px;
-  padding-top: 32px;
+  padding: 24px 0 0;
   border-top: 1px solid var(--border-subtle);
 }
 
 .zenji-hero__stat-val {
   display: block;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 800;
   color: var(--text-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
 }
 
 .zenji-hero__stat-lbl {
   font-family: var(--font-mono);
   font-size: 10px;
+  font-weight: 600;
   color: var(--text-muted);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
 .zenji-hero__stat-div {
   width: 1px;
-  height: 32px;
+  height: 28px;
   background: var(--border-subtle);
 }
 
-.zenji-hero__visual {
+/* 3D Visual Lookbook Card Showcase */
+.zenji-hero__visual-wrap {
   position: relative;
+  perspective: 1200px;
 }
 
-.zenji-hero__card {
+.zenji-hero__card--cinematic {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--bg-secondary);
+  box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.9), 0 0 40px rgba(212, 255, 0, 0.05);
+  aspect-ratio: 4/5.2;
+}
+
+.zenji-hero__card-scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.4;
+}
+
+.zenji-hero__card-top-tag {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+}
+
+.zenji-hero__hologram-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-neon);
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(212, 255, 0, 0.35);
+}
+
+.zenji-hero__card-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(9, 9, 11, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
   border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-card);
-  aspect-ratio: 4/5;
 }
 
 .zenji-hero__card-img {
@@ -582,8 +774,8 @@ img {
   transition: transform var(--transition-smooth);
 }
 
-.zenji-hero__card:hover .zenji-hero__card-img {
-  transform: scale(1.04);
+.zenji-hero__card--cinematic:hover .zenji-hero__card-img {
+  transform: scale(1.05);
 }
 
 .zenji-hero__card-overlay {
@@ -591,17 +783,25 @@ img {
   bottom: 0;
   left: 0;
   right: 0;
-  padding: 30px 24px 20px;
-  background: linear-gradient(to top, rgba(9, 9, 11, 0.95), transparent);
+  padding: 40px 24px 24px;
+  background: linear-gradient(to top, rgba(9, 9, 11, 0.98) 0%, rgba(9, 9, 11, 0.7) 60%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  z-index: 3;
+}
+
+.zenji-hero__card-meta {
+  display: flex;
+  flex-direction: column;
 }
 
 .zenji-hero__card-tag {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   color: var(--accent-neon);
-  letter-spacing: 0.15em;
-  display: block;
+  letter-spacing: 0.18em;
   margin-bottom: 4px;
 }
 
@@ -610,6 +810,100 @@ img {
   font-size: 22px;
   font-weight: 800;
   letter-spacing: 0.05em;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.zenji-hero__card-spec {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Lookbook Tabs */
+.zenji-hero__card-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.zenji-hero__card-tab {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.zenji-hero__card-tab:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+.zenji-hero__card-tab--active {
+  background: var(--accent-neon);
+  color: var(--text-inverse);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 12px var(--accent-neon-glow);
+}
+
+/* Floating Capsule Card */
+.zenji-hero__floating-card {
+  position: absolute;
+  bottom: -20px;
+  left: -24px;
+  background: rgba(18, 18, 24, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+  z-index: 5;
+  cursor: default;
+}
+
+.zenji-hero__floating-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: rgba(212, 255, 0, 0.1);
+  color: var(--accent-neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zenji-hero__floating-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.zenji-hero__floating-text strong {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+}
+
+.zenji-hero__floating-text span {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
 }
 
 /* ==========================================================================
