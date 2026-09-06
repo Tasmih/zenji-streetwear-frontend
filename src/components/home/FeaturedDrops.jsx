@@ -1,3 +1,4 @@
+import { useMemo, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -23,8 +24,12 @@ const itemVariants = {
   }
 };
 
-export const FeaturedDrops = ({ products, onQuickView }) => {
-  const featured = products.filter((p) => p.isFeatured).slice(0, 4);
+export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
+  const featured = useMemo(
+    () => products.filter((p) => p.isFeatured).slice(0, 4),
+    [products]
+  );
+
 
   return (
     <section className="zenji-section">
@@ -69,4 +74,8 @@ export const FeaturedDrops = ({ products, onQuickView }) => {
       </motion.div>
     </section>
   );
-};
+});
+
+FeaturedDrops.displayName = 'FeaturedDrops';
+export default FeaturedDrops;
+

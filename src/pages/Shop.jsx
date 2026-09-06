@@ -1,13 +1,21 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ProductFilter } from '../components/product/ProductFilter';
 import { ProductGrid } from '../components/product/ProductGrid';
 import { ProductQuickView } from '../components/product/ProductQuickView';
 import { PRODUCTS } from '../data/products';
+import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedCategory = searchParams.get('category') || 'all';
+
+  useDocumentTitle(
+    selectedCategory !== 'all'
+      ? `Shop ${selectedCategory.toUpperCase()} // Archive`
+      : 'Shop All Archive Drops',
+    'Browse the full ZENJI streetwear archive: 500 GSM heavyweight hoodies, utility cargos, and modular technical jackets.'
+  );
 
   const [sortBy, setSortBy] = useState('featured');
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,7 +32,7 @@ export const Shop = () => {
     return counts;
   }, []);
 
-  const handleSelectCategory = (categorySlug) => {
+  const handleSelectCategory = useCallback((categorySlug) => {
     const nextParams = new URLSearchParams(searchParams);
     if (categorySlug === 'all') {
       nextParams.delete('category');
@@ -32,14 +40,15 @@ export const Shop = () => {
       nextParams.set('category', categorySlug);
     }
     setSearchParams(nextParams);
-  };
+  }, [searchParams, setSearchParams]);
 
-  const handleResetFilters = () => {
+  const handleResetFilters = useCallback(() => {
     setSearchQuery('');
     setPriceRange('all');
     setSortBy('featured');
     handleSelectCategory('all');
-  };
+  }, [handleSelectCategory]);
+
 
   const filteredProducts = useMemo(() => {
     let result = [...PRODUCTS];

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -18,6 +18,7 @@ import { Button } from '../components/common/Button';
 import { ProductCard } from '../components/product/ProductCard';
 import { useCart } from '../context/useCart';
 import { formatCurrency } from '../utils/formatCurrency';
+import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const ProductDetail = () => {
   const { id } = useParams();
@@ -25,6 +26,11 @@ export const ProductDetail = () => {
   const { addToCart } = useCart();
 
   const product = PRODUCTS.find((p) => p.id === id);
+
+  useDocumentTitle(
+    product ? `${product.name} // Archive Spec` : 'Archive Item',
+    product ? product.description : 'ZENJI luxury streetwear piece specification and sizing.'
+  );
 
   const [activeImage, setActiveImage] = useState(() => product?.images?.[0] || '');
   const [selectedSize, setSelectedSize] = useState(() => product?.sizes?.[0] || 'M');
@@ -35,6 +41,13 @@ export const ProductDetail = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
+
+  const handleAddToCart = useCallback(() => {
+    if (!product) return;
+    addToCart(product, selectedSize, selectedColor, quantity);
+    setAddedNotice(true);
+    setTimeout(() => setAddedNotice(false), 3000);
+  }, [product, selectedSize, selectedColor, quantity, addToCart]);
 
   if (!product) {
     return (
@@ -50,13 +63,8 @@ export const ProductDetail = () => {
     );
   }
 
-  const handleAddToCart = () => {
-    addToCart(product, selectedSize, selectedColor, quantity);
-    setAddedNotice(true);
-    setTimeout(() => setAddedNotice(false), 3000);
-  };
-
   const currentDisplayImg = activeImage || product.images?.[0] || '';
+
 
   const relatedProducts = PRODUCTS.filter(
     (p) => p.id !== product.id && (p.category === product.category || p.isFeatured)

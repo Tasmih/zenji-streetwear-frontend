@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Eye, Star, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -6,7 +6,7 @@ import { Badge } from '../common/Badge';
 import { useCart } from '../../context/useCart';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-export const ProductCard = ({ product, onQuickView }) => {
+export const ProductCard = memo(({ product, onQuickView }) => {
   const { addToCart } = useCart();
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -53,7 +53,7 @@ export const ProductCard = ({ product, onQuickView }) => {
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="zenji-card__media">
-        <Link to={`/product/${product.id}`} className="zenji-card__link">
+        <Link to={`/product/${product.id}`} className="zenji-card__link" aria-label={`View ${product.name}`}>
           {/* Main Image with Crossfade & Scale */}
           <motion.img
             key={currentDisplayImage}
@@ -61,6 +61,7 @@ export const ProductCard = ({ product, onQuickView }) => {
             alt={product.name}
             className="zenji-card__img"
             loading="lazy"
+            decoding="async"
             initial={{ opacity: 0.85 }}
             animate={{ opacity: 1, scale: isHovered ? 1.08 : 1 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -115,7 +116,7 @@ export const ProductCard = ({ product, onQuickView }) => {
                   onClick={handleQuickViewClick}
                   className="zenji-card__action-btn"
                   title="Quick View Details"
-                  aria-label="Quick View Details"
+                  aria-label={`Quick View Details for ${product.name}`}
                 >
                   <Eye size={16} />
                 </motion.button>
@@ -131,7 +132,7 @@ export const ProductCard = ({ product, onQuickView }) => {
                     : 'zenji-card__action-btn--primary'
                 }`}
                 title={justAdded ? 'Added to Bag!' : 'Quick Add to Bag'}
-                aria-label="Quick Add to Bag"
+                aria-label={`Quick Add ${product.name} to Bag`}
               >
                 {justAdded ? <Check size={16} /> : <ShoppingBag size={16} />}
               </motion.button>
@@ -184,6 +185,7 @@ export const ProductCard = ({ product, onQuickView }) => {
                   }`}
                   style={{ backgroundColor: color.hex }}
                   title={color.name}
+                  aria-label={`Select color ${color.name}`}
                 />
               ))}
             </div>
@@ -202,5 +204,8 @@ export const ProductCard = ({ product, onQuickView }) => {
       </div>
     </motion.div>
   );
-};
+});
+
+ProductCard.displayName = 'ProductCard';
 export default ProductCard;
+
