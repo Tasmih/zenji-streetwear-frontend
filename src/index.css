@@ -3705,103 +3705,474 @@ img {
 }
 
 /* ==========================================================================
-   Responsive Breakpoints
+   Comprehensive Responsive System & Breakpoints Audit
    ========================================================================== */
 
+/* Base overflow & touch optimization */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  -webkit-text-size-adjust: 100%;
+}
+
+button, a, input, select {
+  touch-action: manipulation;
+}
+
+/* --------------------------------------------------------------------------
+   Desktop & Laptops (1025px – 1280px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1280px) {
+  .zenji-hero__container {
+    gap: 40px;
+  }
+  
+  .zenji-hero__title--main,
+  .zenji-hero__title--stroke {
+    font-size: clamp(44px, 7vw, 84px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Tablets Landscape & Medium Screens (769px – 1080px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 1080px) {
   .zenji-product-grid {
     grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
   }
 
   .zenji-manifesto__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 
   .zenji-detail-layout {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 44px;
+  }
+
+  .zenji-detail-gallery__main {
+    max-height: 520px;
+  }
+
+  .zenji-lookbook-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .zenji-footer__container {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .zenji-footer__links {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
+/* --------------------------------------------------------------------------
+   Tablets Portrait & Large Mobile (481px – 768px)
+   -------------------------------------------------------------------------- */
 @media (max-width: 768px) {
+  /* Navigation */
   .zenji-nav__links {
     display: none;
   }
 
   .zenji-nav__toggle {
-    display: block;
+    display: flex;
+  }
+
+  .zenji-nav {
+    padding: 0 16px;
+    height: 64px;
+  }
+
+  .zenji-nav__actions {
+    gap: 8px;
+  }
+
+  .zenji-nav__btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Hero Section */
+  .zenji-hero {
+    padding: 24px 16px 60px;
+    min-height: auto;
   }
 
   .zenji-hero__container {
     grid-template-columns: 1fr;
-    text-align: center;
+    gap: 36px;
+    text-align: left;
+  }
+
+  .zenji-hero__hud-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
   }
 
   .zenji-hero__badge-row {
-    justify-content: center;
+    margin-bottom: 18px;
+  }
+
+  .zenji-hero__title-wrap {
+    margin-bottom: 18px;
+  }
+
+  .zenji-hero__title--sub {
+    font-size: clamp(22px, 5vw, 32px);
+  }
+
+  .zenji-hero__title--main,
+  .zenji-hero__title--stroke {
+    font-size: clamp(40px, 9vw, 64px);
   }
 
   .zenji-hero__subtitle {
-    margin-left: auto;
-    margin-right: auto;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 28px;
   }
 
   .zenji-hero__cta-group {
-    justify-content: center;
+    margin-bottom: 36px;
   }
 
-  .zenji-hero__stats {
-    justify-content: center;
-  }
-
-  .zenji-hero__visual {
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .zenji-product-grid {
+  .zenji-hero__stats--editorial {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-  }
-
-  .zenji-footer__container {
-    grid-template-columns: 1fr;
-    gap: 40px;
-  }
-
-  .zenji-footer__links {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .zenji-modal__content {
-    grid-template-columns: 1fr;
-    padding: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .zenji-product-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .zenji-manifesto__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .zenji-footer__links {
-    grid-template-columns: 1fr;
-  }
-
-  .zenji-newsletter__form {
-    flex-direction: column;
-  }
-
-  .zenji-hero__stats {
-    flex-direction: column;
-    gap: 12px;
+    padding-top: 18px;
   }
 
   .zenji-hero__stat-div {
     display: none;
   }
+
+  .zenji-hero__visual-wrap {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .zenji-hero__floating-card {
+    left: 10px;
+    bottom: -12px;
+    padding: 8px 14px;
+  }
+
+  /* Product Filters & Controls */
+  .zenji-filter {
+    padding: 18px;
+  }
+
+  .zenji-filter__categories {
+    overflow-x: auto;
+    padding-bottom: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .zenji-filter__categories::-webkit-scrollbar {
+    display: none;
+  }
+
+  .zenji-filter__controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .zenji-filter__search-wrap {
+    width: 100%;
+  }
+
+  .zenji-filter__right-group {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .zenji-filter__view-switch {
+    display: none;
+  }
+
+  .zenji-filter__select-wrap {
+    flex: 1;
+  }
+
+  .zenji-filter__select {
+    width: 100%;
+  }
+
+  /* Product Grid */
+  .zenji-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .zenji-product-card__content {
+    padding: 12px;
+  }
+
+  .zenji-product-card__title {
+    font-size: 13px;
+  }
+
+  .zenji-product-card__price {
+    font-size: 13px;
+  }
+
+  /* Section Spacing */
+  .zenji-section {
+    padding: 48px 16px;
+  }
+
+  .zenji-section__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .zenji-section__title {
+    font-size: 24px;
+  }
+
+  /* Quick View Modal */
+  .zenji-modal-overlay {
+    padding: 12px;
+  }
+
+  .zenji-modal {
+    max-height: 88vh;
+  }
+
+  .zenji-modal__content {
+    grid-template-columns: 1fr;
+    padding: 20px;
+    gap: 24px;
+  }
+
+  .zenji-modal__gallery-main {
+    aspect-ratio: 1/1;
+    max-height: 320px;
+  }
+
+  /* Cart Drawer */
+  .zenji-drawer {
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .zenji-drawer__header {
+    padding: 16px 20px;
+  }
+
+  .zenji-drawer__shipping-bar {
+    padding: 12px 20px;
+  }
+
+  .zenji-drawer__body {
+    padding: 16px 20px;
+  }
+
+  .zenji-drawer__footer {
+    padding: 16px 20px 20px;
+  }
+
+  /* Footer */
+  .zenji-footer {
+    padding-top: 48px;
+  }
+
+  .zenji-footer__container {
+    padding: 0 16px 40px;
+  }
+
+  .zenji-footer__links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .zenji-footer__bottom-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
 }
+
+/* --------------------------------------------------------------------------
+   Small Mobile Devices (<= 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  /* Global Touch Targets */
+  .zenji-btn--lg {
+    padding: 14px 20px;
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .zenji-btn--md {
+    padding: 11px 16px;
+    font-size: 12px;
+  }
+
+  /* Hero Section */
+  .zenji-hero__cta-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .zenji-hero__cta-link {
+    width: 100%;
+  }
+
+  .zenji-hero__cta-primary-wrap {
+    width: 100%;
+  }
+
+  .zenji-hero__title--main,
+  .zenji-hero__title--stroke {
+    font-size: clamp(34px, 11vw, 48px);
+  }
+
+  .zenji-hero__title--sub {
+    font-size: clamp(18px, 6vw, 24px);
+  }
+
+  .zenji-hero__stats--editorial {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .zenji-hero__stat-val {
+    font-size: 15px;
+  }
+
+  .zenji-hero__stat-lbl {
+    font-size: 8px;
+  }
+
+  .zenji-hero__card-name {
+    font-size: 18px;
+  }
+
+  .zenji-hero__card-desc {
+    display: none;
+  }
+
+  .zenji-hero__floating-card {
+    display: none;
+  }
+
+  /* Product Grid Single Column or Tight 2 Column */
+  .zenji-product-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* Product Card Image */
+  .zenji-product-card__img-wrap {
+    aspect-ratio: 1/1.1;
+  }
+
+  /* Product Detail Page */
+  .zenji-detail-page {
+    padding: 16px 16px 60px;
+  }
+
+  .zenji-detail-info__title {
+    font-size: 24px;
+  }
+
+  .zenji-detail-actions {
+    flex-direction: column;
+  }
+
+  .zenji-detail-actions__qty {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .zenji-detail-option__sizes {
+    gap: 8px;
+  }
+
+  .zenji-size-btn {
+    flex: 1;
+    min-width: 48px;
+    text-align: center;
+    padding: 10px 8px;
+  }
+
+  .zenji-detail-gallery__thumbs {
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .zenji-detail-gallery__thumb {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  /* Manifesto */
+  .zenji-manifesto__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Lookbook */
+  .zenji-lookbook-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Newsletter Form */
+  .zenji-newsletter__form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .zenji-newsletter__input {
+    width: 100%;
+  }
+
+  .zenji-newsletter__form button {
+    width: 100%;
+  }
+
+  /* Cart Drawer Fullscreen on Small Mobiles */
+  .zenji-drawer {
+    width: 100vw;
+    max-width: 100vw;
+  }
+
+  .zenji-cart-item {
+    grid-template-columns: 68px 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .zenji-cart-item__img-wrap {
+    width: 68px;
+    height: 82px;
+  }
+
+  .zenji-cart-item__title {
+    font-size: 12px;
+  }
+
+  /* Footer Links */
+  .zenji-footer__links {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
