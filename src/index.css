@@ -102,7 +102,8 @@ img {
 }
 
 /* ==========================================================================
-   Navigation & Header
+/* ==========================================================================
+   Navigation & Header — Luxury Glassmorphic System
    ========================================================================== */
 
 .zenji-header {
@@ -110,28 +111,29 @@ img {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
-  background: rgba(9, 9, 11, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-subtle);
-  transition: var(--transition-normal);
+  z-index: 100;
+  background: rgba(9, 9, 12, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-header--scrolled {
-  background: rgba(9, 9, 11, 0.96);
-  border-bottom-color: var(--border-focus);
+  background: rgba(9, 9, 12, 0.94);
+  border-bottom-color: rgba(212, 255, 0, 0.2);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.8), 0 0 20px rgba(212, 255, 0, 0.04);
 }
 
 /* Announcement Ticker */
 .zenji-ticker {
   background: #000;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 6px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 5px 16px;
   overflow: hidden;
   font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
   color: var(--accent-neon);
 }
 
@@ -139,17 +141,22 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 18px;
   white-space: nowrap;
 }
 
 .zenji-ticker__dot {
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.25);
 }
 
 /* Nav Container */
 .zenji-nav {
-  padding: 14px 24px;
+  padding: 14px 28px;
+  transition: padding 0.3s ease;
+}
+
+.zenji-header--scrolled .zenji-nav {
+  padding: 10px 28px;
 }
 
 .zenji-nav__container {
@@ -160,171 +167,269 @@ img {
   justify-content: space-between;
 }
 
-/* Logo */
+/* Brand Logo */
 .zenji-logo {
   display: inline-flex;
-  align-items: baseline;
-  gap: 6px;
+  align-items: center;
+  gap: 10px;
   text-decoration: none;
 }
 
 .zenji-logo__jp {
   font-family: var(--font-mono);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 13px;
+  font-weight: 800;
   color: var(--accent-neon);
-  background: rgba(212, 255, 0, 0.1);
-  padding: 2px 6px;
+  background: rgba(212, 255, 0, 0.08);
+  border: 1px solid rgba(212, 255, 0, 0.3);
+  padding: 3px 8px;
   border-radius: var(--radius-sm);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
+  box-shadow: 0 0 10px rgba(212, 255, 0, 0.15);
+}
+
+.zenji-logo__text-group {
+  display: flex;
+  flex-direction: column;
 }
 
 .zenji-logo__text {
   font-family: var(--font-display);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
   color: var(--text-primary);
+  line-height: 1;
 }
 
 .zenji-logo__sub {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 8.5px;
+  font-weight: 700;
   color: var(--text-muted);
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
+  margin-top: 3px;
 }
 
 /* Nav Links */
 .zenji-nav__links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 36px;
 }
 
 .zenji-nav__link {
   font-family: var(--font-mono);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  transition: var(--transition-fast);
+  transition: color var(--transition-fast);
   position: relative;
-  padding: 4px 0;
+  padding: 8px 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.zenji-nav__link:hover,
-.zenji-nav__link--active {
+.zenji-nav__link-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.zenji-nav__link-jp {
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast);
+}
+
+.zenji-nav__link:hover .zenji-nav__link-text,
+.zenji-nav__link--active .zenji-nav__link-text {
   color: var(--text-primary);
 }
 
-.zenji-nav__link--active::after {
-  content: '';
+.zenji-nav__link:hover .zenji-nav__link-jp,
+.zenji-nav__link--active .zenji-nav__link-jp {
+  opacity: 1;
+  color: var(--accent-neon);
+}
+
+/* Active Pill Underline */
+.zenji-nav__active-pill {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
   height: 2px;
   background: var(--accent-neon);
-  box-shadow: 0 0 8px var(--accent-neon);
+  box-shadow: 0 0 10px var(--accent-neon);
+  border-radius: 1px;
+}
+
+.zenji-nav__hover-dot {
+  position: absolute;
+  bottom: 2px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
 }
 
 /* Nav Actions */
 .zenji-nav__actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
 }
 
 .zenji-nav__action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   color: var(--text-secondary);
-  background: var(--bg-secondary);
+  background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  transition: var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .zenji-nav__action-btn:hover {
   color: var(--text-primary);
   border-color: var(--border-focus);
-  background: var(--bg-surface);
+  background: var(--bg-surface-elevated);
 }
 
 .zenji-cart-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
+  gap: 10px;
+  padding: 9px 16px;
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  transition: var(--transition-fast);
+  letter-spacing: 0.1em;
+  transition: all var(--transition-fast);
   position: relative;
 }
 
 .zenji-cart-btn:hover {
   border-color: var(--accent-neon);
-  box-shadow: 0 0 12px var(--accent-neon-glow);
+  box-shadow: 0 0 14px var(--accent-neon-glow);
+}
+
+.zenji-cart-btn__icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .zenji-cart-btn__badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
   background: var(--accent-neon);
   color: var(--text-inverse);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
-  padding: 1px 6px;
+  padding: 1px 5px;
   border-radius: var(--radius-full);
+  box-shadow: 0 0 8px var(--accent-neon);
 }
 
 .zenji-nav__toggle {
   display: none;
   background: transparent;
   color: var(--text-primary);
-  padding: 6px;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
 }
 
 /* Mobile Nav Drawer */
 .zenji-mobile-menu {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(16px);
-  z-index: 100;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 200;
   display: flex;
 }
 
 .zenji-mobile-menu__inner {
-  width: 300px;
-  max-width: 85%;
+  width: 320px;
+  max-width: 88%;
   background: var(--bg-primary);
   border-right: 1px solid var(--border-subtle);
   height: 100%;
-  padding: 24px;
+  padding: 28px 24px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
 .zenji-mobile-menu__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 36px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.zenji-mobile-menu__close {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+}
+
+.zenji-mobile-menu__search {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.zenji-mobile-menu__search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+}
+
+.zenji-mobile-menu__search-input {
+  width: 100%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px 10px 36px;
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.zenji-mobile-menu__search-input:focus {
+  border-color: var(--accent-neon);
 }
 
 .zenji-mobile-menu__nav {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
   flex: 1;
 }
 
@@ -332,19 +437,67 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family: var(--font-mono);
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   color: var(--text-primary);
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border-subtle);
+  transition: all var(--transition-fast);
+}
+
+.zenji-mobile-menu__link:hover,
+.zenji-mobile-menu__link--active {
+  border-color: var(--accent-neon);
+  background: var(--bg-surface-elevated);
+}
+
+.zenji-mobile-menu__link--active {
+  color: var(--accent-neon);
+}
+
+.zenji-mobile-menu__link-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.zenji-mobile-menu__link-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.zenji-mobile-menu__link-jp {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  margin-top: 2px;
 }
 
 .zenji-mobile-menu__footer {
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.zenji-mobile-menu__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.1em;
+}
+
+.zenji-mobile-menu__coords {
+  font-family: var(--font-mono);
+  font-size: 10px;
   color: var(--text-muted);
+  letter-spacing: 0.08em;
 }
 
 /* ==========================================================================

@@ -1,23 +1,55 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Search, Menu, X, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/useCart';
-import { ANNOUNCEMENT, NAV_LINKS, BRAND_NAME } from '../../utils/constants';
+import { ANNOUNCEMENT, BRAND_NAME } from '../../utils/constants';
+
+const NAV_ITEMS = [
+  { label: 'Home', jp: 'ホーム', path: '/' },
+  { label: 'Shop All', jp: '全作品', path: '/shop' },
+  { label: 'Drops', jp: '限定新作', path: '/shop?category=hoodies' },
+  { label: 'Outerwear', jp: 'アウター', path: '/shop?category=outerwear' }
+];
 
 export const Navbar = () => {
   const { totalItemsCount, toggleCart } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [mobileSearch, setMobileSearch] = useState('');
   const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 25);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Keyboard escape key listener for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
 
   return (
     <header className={`zenji-header ${isScrolled ? 'zenji-header--scrolled' : ''}`}>
@@ -28,106 +60,137 @@ export const Navbar = () => {
           <span className="zenji-ticker__dot">•</span>
           <span>LIMITED RELEASE SS26</span>
           <span className="zenji-ticker__dot">•</span>
+          <span>AUTHENTIC JAPANESE TAILORING</span>
+          <span className="zenji-ticker__dot">•</span>
           <span>{ANNOUNCEMENT}</span>
         </div>
       </div>
 
-      {/* Main Nav Bar */}
-      <div className="zenji-nav">
+      {/* Main Sticky Navigation Bar */}
+      <nav
+        className="zenji-nav"
+        role="navigation"
+        aria-label="Main Navigation"
+      >
         <div className="zenji-nav__container">
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Hamburger Menu Button */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             className="zenji-nav__toggle"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-label="Toggle mobile menu"
           >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
           </motion.button>
 
-          {/* Brand Logo */}
-          <Link to="/" className="zenji-logo" onClick={() => setMobileMenuOpen(false)}>
+          {/* Brand Logo with Tokyo Insignia */}
+          <Link
+            to="/"
+            className="zenji-logo"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="ZENJI Homepage"
+          >
             <motion.span
               className="zenji-logo__jp"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.08, rotate: -2 }}
               transition={{ duration: 0.2 }}
             >
               禅侍
             </motion.span>
-            <span className="zenji-logo__text">{BRAND_NAME}</span>
-            <span className="zenji-logo__sub">TOKYO</span>
+            <div className="zenji-logo__text-group">
+              <span className="zenji-logo__text">{BRAND_NAME}</span>
+              <span className="zenji-logo__sub">TOKYO ATELIER</span>
+            </div>
           </Link>
 
-          {/* Desktop Nav Links */}
-          <nav className="zenji-nav__links">
-            {NAV_LINKS.map((link) => {
-              const isActive = location.pathname === link.path;
+          {/* Desktop Navigation Links with Active Glide Indicator */}
+          <div className="zenji-nav__links">
+            {NAV_ITEMS.map((link, idx) => {
+              const isActive =
+                link.path === '/'
+                  ? location.pathname === '/'
+                  : location.pathname.startsWith(link.path.split('?')[0]);
+
               return (
                 <Link
                   key={link.label}
                   to={link.path}
-                  className={`zenji-nav__link ${isActive ? 'zenji-nav__link--active' : ''}`}
+                  onMouseEnter={() => setHoveredIndex(idx)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`zenji-nav__link ${
+                    isActive ? 'zenji-nav__link--active' : ''
+                  }`}
                 >
-                  {link.label}
+                  <span className="zenji-nav__link-text">{link.label}</span>
+                  <span className="zenji-nav__link-jp">{link.jp}</span>
+
+                  {/* Active Route Indicator */}
                   {isActive && (
                     <motion.div
                       layoutId="activeNavIndicator"
-                      style={{
-                        position: 'absolute',
-                        bottom: 0,
-                        left: 0,
-                        right: 0,
-                        height: '2px',
-                        background: 'var(--accent-neon)',
-                        boxShadow: '0 0 8px var(--accent-neon)'
-                      }}
+                      className="zenji-nav__active-pill"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+
+                  {/* Hover Floating Dot */}
+                  {hoveredIndex === idx && !isActive && (
+                    <motion.div
+                      layoutId="hoverNavDot"
+                      className="zenji-nav__hover-dot"
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.5 }}
+                      transition={{ duration: 0.2 }}
                     />
                   )}
                 </Link>
               );
             })}
-          </nav>
+          </div>
 
-          {/* Actions: Shop Link & Cart Drawer Toggle */}
+          {/* Action Tools: Search & Bag Drawer */}
           <div className="zenji-nav__actions">
-            <Link to="/shop">
+            <Link to="/shop" aria-label="Search Archives">
               <motion.div
-                whileHover={{ scale: 1.08 }}
+                whileHover={{ scale: 1.08, borderColor: 'var(--accent-neon)' }}
                 whileTap={{ scale: 0.92 }}
                 className="zenji-nav__action-btn"
-                title="Explore Shop"
+                title="Search Archives"
               >
-                <Search size={19} />
+                <Search size={18} />
               </motion.div>
             </Link>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
               className="zenji-cart-btn"
               onClick={toggleCart}
-              aria-label="Open Cart"
+              aria-label={`Shopping Bag (${totalItemsCount} items)`}
             >
-              <ShoppingBag size={20} />
+              <div className="zenji-cart-btn__icon-wrap">
+                <ShoppingBag size={18} />
+                {totalItemsCount > 0 && (
+                  <motion.span
+                    key={totalItemsCount}
+                    initial={{ scale: 0.4, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', damping: 14, stiffness: 360 }}
+                    className="zenji-cart-btn__badge"
+                  >
+                    {totalItemsCount}
+                  </motion.span>
+                )}
+              </div>
               <span className="zenji-cart-btn__label">BAG</span>
-              {totalItemsCount > 0 && (
-                <motion.span
-                  key={totalItemsCount}
-                  initial={{ scale: 0.5, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ type: 'spring', damping: 15, stiffness: 350 }}
-                  className="zenji-cart-btn__badge"
-                >
-                  {totalItemsCount}
-                </motion.span>
-              )}
             </motion.button>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Drawer Menu with AnimatePresence */}
+      {/* Mobile Drawer Menu with Staggered Animations */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -135,7 +198,7 @@ export const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.25 }}
             onClick={() => setMobileMenuOpen(false)}
           >
             <motion.div
@@ -143,33 +206,98 @@ export const Navbar = () => {
               initial={{ x: '-100%' }}
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
-              transition={{ type: 'spring', damping: 25, stiffness: 250 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 280 }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Mobile Drawer Header */}
               <div className="zenji-mobile-menu__header">
-                <span className="zenji-logo__jp">禅侍</span>
+                <div className="zenji-logo">
+                  <span className="zenji-logo__jp">禅侍</span>
+                  <span className="zenji-logo__text">{BRAND_NAME}</span>
+                </div>
                 <button
                   className="zenji-mobile-menu__close"
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
                 >
                   <X size={20} />
                 </button>
               </div>
-              <nav className="zenji-mobile-menu__nav">
-                {NAV_LINKS.map((link) => (
-                  <Link
-                    key={link.label}
-                    to={link.path}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="zenji-mobile-menu__link"
-                  >
-                    <span>{link.label}</span>
-                    <ArrowRight size={16} />
-                  </Link>
-                ))}
-              </nav>
+
+              {/* Mobile Search Input */}
+              <form
+                className="zenji-mobile-menu__search"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (mobileSearch.trim()) {
+                    window.location.href = `/shop?category=all`;
+                  }
+                }}
+              >
+                <Search size={16} className="zenji-mobile-menu__search-icon" />
+                <input
+                  type="text"
+                  placeholder="Search archives..."
+                  value={mobileSearch}
+                  onChange={(e) => setMobileSearch(e.target.value)}
+                  className="zenji-mobile-menu__search-input"
+                />
+              </form>
+
+              {/* Navigation Links with Stagger */}
+              <motion.nav
+                className="zenji-mobile-menu__nav"
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.07, delayChildren: 0.1 }
+                  }
+                }}
+              >
+                {NAV_ITEMS.map((link) => {
+                  const isActive = location.pathname === link.path;
+                  return (
+                    <motion.div
+                      key={link.label}
+                      variants={{
+                        hidden: { opacity: 0, x: -16 },
+                        visible: { opacity: 1, x: 0 }
+                      }}
+                    >
+                      <Link
+                        to={link.path}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className={`zenji-mobile-menu__link ${
+                          isActive ? 'zenji-mobile-menu__link--active' : ''
+                        }`}
+                      >
+                        <div className="zenji-mobile-menu__link-left">
+                          <span className="zenji-mobile-menu__link-title">
+                            {link.label}
+                          </span>
+                          <span className="zenji-mobile-menu__link-jp">
+                            {link.jp}
+                          </span>
+                        </div>
+                        <ArrowRight size={16} />
+                      </Link>
+                    </motion.div>
+                  );
+                })}
+              </motion.nav>
+
+              {/* Mobile Footer with Studio Coordinates */}
               <div className="zenji-mobile-menu__footer">
-                <p className="zenji-mobile-menu__info">DROP 004 // ARCHIVAL TACTICAL</p>
+                <div className="zenji-mobile-menu__badge">
+                  <ShieldCheck size={14} />
+                  <span>NFC VERIFIED TOKYO ATELIER</span>
+                </div>
+                <p className="zenji-mobile-menu__coords">
+                  TOKYO 35.6764° N, 139.6500° E // DROP 004
+                </p>
               </div>
             </motion.div>
           </motion.div>
@@ -178,3 +306,4 @@ export const Navbar = () => {
     </header>
   );
 };
+export default Navbar;
