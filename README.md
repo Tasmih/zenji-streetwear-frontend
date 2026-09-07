@@ -8,8 +8,11 @@
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-d4ff00?style=for-the-badge&logo=vercel&logoColor=black)](https://zenji-website-nine.vercel.app)
 
 **An ultra-premium Japanese-inspired streetwear e-commerce frontend engineering heavyweight silhouettes, cyberpunk technical apparel, and limited archival drops.**
+
+[🌐 **Explore Live Storefront**](https://zenji-website-nine.vercel.app) • [Key Features](#2-features) • [Tech Stack](#3-tech-stack) • [Installation](#4-installation)
 
 </div>
 
