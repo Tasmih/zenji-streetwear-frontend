@@ -13,8 +13,8 @@ import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const Home = () => {
   useDocumentTitle(
-    'Drop 004 // Cyber Omni Archive',
-    'Tokyo archival tactical minimalism. Heavy fleece hoodies, technical utility cargos, and modular outerwear.'
+    'ZENJI Tokyo Atelier | Premium Japanese Streetwear',
+    'ZENJI Tokyo Atelier creates premium Japanese-inspired streetwear with heavyweight fabrics, architectural silhouettes, and limited archive drops.'
   );
 
   const [quickViewProduct, setQuickViewProduct] = useState(null);

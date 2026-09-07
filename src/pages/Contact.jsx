@@ -5,8 +5,8 @@ import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const Contact = () => {
   useDocumentTitle(
-    'Contact Atelier // Tokyo Dispatch',
-    'Direct inquiry channel to ZENJI Tokyo Design Studio and client concierge.'
+    'Contact ZENJI | Tokyo Atelier',
+    'ZENJI Tokyo Atelier creates premium Japanese-inspired streetwear with heavyweight fabrics, architectural silhouettes, and limited archive drops.'
   );
 
   const [formData, setFormData] = useState({

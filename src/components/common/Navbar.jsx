@@ -8,8 +8,8 @@ import { ANNOUNCEMENT, BRAND_NAME } from '../../utils/constants';
 const NAV_ITEMS = [
   { label: 'Home', jp: 'ホーム', path: '/' },
   { label: 'Shop All', jp: '全作品', path: '/shop' },
-  { label: 'Drops', jp: '限定新作', path: '/shop?category=hoodies' },
-  { label: 'Outerwear', jp: 'アウター', path: '/shop?category=outerwear' },
+  { label: 'Drops', jp: '限定新作', path: '/drops' },
+  { label: 'Outerwear', jp: 'アウター', path: '/outerwear' },
   { label: 'Contact', jp: '連絡窓口', path: '/contact' }
 ];
 
@@ -126,10 +126,7 @@ export const Navbar = () => {
           {/* Desktop Navigation Links with Active Glide Indicator */}
           <div className="zenji-nav__links">
             {NAV_ITEMS.map((link, idx) => {
-              const isActive =
-                link.path === '/'
-                  ? location.pathname === '/'
-                  : location.pathname.startsWith(link.path.split('?')[0]);
+              const isActive = location.pathname === link.path;
 
               return (
                 <Link
@@ -138,7 +135,7 @@ export const Navbar = () => {
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
                   className={`zenji-nav__link ${
-                    isActive ? 'zenji-nav__link--active' : ''
+                    isActive ? 'active zenji-nav__link--active' : ''
                   }`}
                 >
                   <span className="zenji-nav__link-text">{link.label}</span>
@@ -316,7 +313,7 @@ export const Navbar = () => {
                         to={link.path}
                         onClick={() => setMobileMenuOpen(false)}
                         className={`zenji-mobile-menu__link ${
-                          isActive ? 'zenji-mobile-menu__link--active' : ''
+                          isActive ? 'active zenji-mobile-menu__link--active' : ''
                         }`}
                       >
                         <div className="zenji-mobile-menu__link-left">

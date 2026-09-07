@@ -83,6 +83,22 @@ export const AppRouter = () => {
             }
           />
           <Route
+            path="/drops"
+            element={
+              <PageWrapper>
+                <Shop />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/outerwear"
+            element={
+              <PageWrapper>
+                <Shop />
+              </PageWrapper>
+            }
+          />
+          <Route
             path="/product/:id"
             element={
               <PageWrapper>

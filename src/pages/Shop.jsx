@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ProductFilter } from '../components/product/ProductFilter';
 import { ProductGrid } from '../components/product/ProductGrid';
@@ -9,13 +9,30 @@ import { useDocumentTitle } from '../utils/useDocumentTitle';
 
 export const Shop = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const selectedCategory = searchParams.get('category') || 'all';
+  const location = useLocation();
+
+  const categoryFromRoute =
+    location.pathname === '/drops'
+      ? 'hoodies'
+      : location.pathname === '/outerwear'
+      ? 'outerwear'
+      : null;
+
+  const selectedCategory = searchParams.get('category') || categoryFromRoute || 'all';
+
+  const pageTitle = useMemo(() => {
+    if (location.pathname === '/drops') {
+      return 'ZENJI Archive Drops | Limited Edition Releases';
+    }
+    if (location.pathname === '/outerwear') {
+      return 'ZENJI Outerwear | Tokyo Technical Apparel';
+    }
+    return 'ZENJI Shop | Technical Streetwear Collection';
+  }, [location.pathname]);
 
   useDocumentTitle(
-    selectedCategory !== 'all'
-      ? `Shop ${selectedCategory.toUpperCase()} // Archive`
-      : 'Shop All Archive Drops',
-    'Browse the full ZENJI streetwear archive: 500 GSM heavyweight hoodies, utility cargos, and modular technical jackets.'
+    pageTitle,
+    'ZENJI Tokyo Atelier creates premium Japanese-inspired streetwear with heavyweight fabrics, architectural silhouettes, and limited archive drops.'
   );
 
   const [sortBy, setSortBy] = useState('featured');
