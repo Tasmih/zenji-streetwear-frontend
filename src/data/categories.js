@@ -13,13 +13,13 @@ export const COLLECTIONS = [
     name: 'DROP 004 // CYBER OMNI',
     season: 'SS 2026',
     description: 'Post-industrial tactical minimalism merged with raw Tokyo cyber streetwear aesthetics.',
-    image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1200&q=80'
+    image: '/collections/cyber-omni.jpg'
   },
   {
     id: 'tokyo-void',
     name: 'DROP 003 // TOKYO VOID',
     season: 'FW 2025',
     description: 'Monochromatic heavy cotton silhouettes with Japanese kanji typographic prints.',
-    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=80'
+    image: '/collections/tokyo-void.jpg'
   }
 ];

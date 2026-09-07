@@ -9,16 +9,17 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 42,
     images: [
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?auto=format&fit=crop&w=1000&q=85',
-      'https://images.unsplash.com/photo-1578587018452-892bacefd3f2?auto=format&fit=crop&w=1000&q=85'
+      '/products/prod-hoodie.jpg?v=2',
+      '/products/hoodie-texture.jpg?v=2',
+      '/products/hoodie-detail.jpg?v=2'
     ],
-    localFallback: '/products/prod-hoodie.jpg',
+    localFallback: '/products/prod-hoodie.jpg?v=2',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Obsidian Black', hex: '#111111' },
       { name: 'Acid Washed Grey', hex: '#4a4a4a' }
     ],
-    description: 'Constructed from 500 GSM custom-milled French Terry cotton. Features an architectural boxy drop-shoulder cut, double-layered structured hood, subtle tonal embroidery on the chest, and vintage garment acid wash finish.',
+    description: 'Constructed from 500 GSM custom-milled French Terry cotton. Features an architectural boxy drop-shoulder cut, double-layered structured hood with zero drawstrings, subtle tonal ZENJI embroidery on the chest, and vintage garment acid wash finish.',
     features: [
       '500 GSM 100% French Terry Cotton',
       'Custom boxy oversized silhouette',
@@ -39,16 +40,15 @@ export const PRODUCTS = [
     rating: 4.7,
     reviewsCount: 29,
     images: [
-      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=85',
-      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=85'
+      '/products/prod-tee.jpg?v=2'
     ],
-    localFallback: '/products/prod-tee.jpg',
+    localFallback: '/products/prod-tee.jpg?v=2',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Washed Black', hex: '#222222' },
       { name: 'Chalk White', hex: '#eaeaea' }
     ],
-    description: '300 GSM combed cotton vintage wash tee featuring high-density screenprinted dystopian anime-inspired graphic artwork on the reverse and minimalist chest insignia.',
+    description: '300 GSM combed cotton vintage wash tee featuring high-density screenprinted dystopian anime and cyberpunk kanji artwork on the reverse and minimalist chest insignia.',
     features: [
       '300 GSM ultra-heavyweight combed organic cotton',
       'Relaxed dropped shoulder vintage boxy cut',
@@ -61,30 +61,31 @@ export const PRODUCTS = [
   },
   {
     id: 'zenji-j01',
-    name: 'NEO-TACTICAL MODULAR BOMBER',
+    name: 'ARCHITECTURAL CHUNKY HEAVYWEIGHT SWEATER',
     category: 'outerwear',
-    price: 280,
-    originalPrice: null,
-    tag: 'LIMITED RUN',
+    price: 245,
+    originalPrice: 280,
+    tag: 'WINTER DROP',
     rating: 5.0,
-    reviewsCount: 18,
+    reviewsCount: 31,
     images: [
-      'https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=85',
-      'https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1000&q=85'
+      '/products/sweater-front.jpg',
+      '/products/sweater-texture.jpg',
+      '/products/sweater-back.jpg'
     ],
-    localFallback: '/products/prod-jacket.jpg',
-    sizes: ['M', 'L', 'XL'],
+    localFallback: '/products/sweater-front.jpg',
+    sizes: ['S', 'M', 'L', 'XL'],
     colors: [
-      { name: 'Cyber Matte Black', hex: '#0a0a0a' },
-      { name: 'Military Olive', hex: '#3b443b' }
+      { name: 'Charcoal Grey', hex: '#2c2d30' },
+      { name: 'Pitch Black', hex: '#111111' }
     ],
-    description: 'Weather-resistant Cordura nylon outer shell with detachable magnetic utility harness. Thermal Primaloft insulation for sub-zero urban exploration.',
+    description: 'Engineered from 700 GSM custom-spun wool-cotton blend. Features asymmetrical architectural cable and waffle knit textures, distressed raw hem details, mock-neck collar, and an oversized drop-shoulder Tokyo silhouette.',
     features: [
-      'Water-repellent 500D Cordura Ripstop shell',
-      'Detachable Fidlock magnetic chest sling system',
-      'Primaloft Eco recycled thermal insulation',
-      'Dual-way YKK matte waterproof zippers',
-      'Internal storm cuffs'
+      '700 GSM heavy-gauge wool-cotton architectural knit',
+      'Asymmetrical cable and waffle multi-stitch texture',
+      'Distressed raw-edge micro-frayed cuffs and hem',
+      'Structured mock-neck collar',
+      'Designed in Tokyo, crafted in Portugal'
     ],
     isFeatured: true,
     inStock: true
@@ -99,10 +100,9 @@ export const PRODUCTS = [
     rating: 4.8,
     reviewsCount: 64,
     images: [
-      'https://images.unsplash.com/photo-1517445312882-bc9910d016b7?auto=format&fit=crop&w=1000&q=85',
-      'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?auto=format&fit=crop&w=1000&q=85'
+      '/products/prod-cargo.jpg?v=2'
     ],
-    localFallback: '/products/prod-cargo.jpg',
+    localFallback: '/products/prod-cargo.jpg?v=2',
     sizes: ['30', '32', '34', '36'],
     colors: [
       { name: 'Pitch Black', hex: '#141414' },
@@ -129,9 +129,10 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 53,
     images: [
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-sling-bag.jpg',
+      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80'
     ],
+    localFallback: '/products/prod-sling-bag.jpg',
     sizes: ['ONE SIZE'],
     colors: [
       { name: 'Matte Stealth', hex: '#121212' }
@@ -157,9 +158,10 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 71,
     images: [
-      'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-kanji-hoodie.jpg',
+      'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1000&q=80'
     ],
+    localFallback: '/products/prod-kanji-hoodie.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Phantom Charcoal', hex: '#22252a' }
@@ -184,9 +186,10 @@ export const PRODUCTS = [
     rating: 4.8,
     reviewsCount: 38,
     images: [
-      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=1000&q=80',
+      '/products/prod-ecru-tee.jpg',
       'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=80'
     ],
+    localFallback: '/products/prod-ecru-tee.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Core Raw Ecru', hex: '#dedbd2' },
@@ -212,9 +215,10 @@ export const PRODUCTS = [
     rating: 4.6,
     reviewsCount: 19,
     images: [
-      'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=1000&q=80',
-      'https://images.unsplash.com/photo-1584824486509-112e4181ff6b?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-balaclava.jpg',
+      'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=1000&q=80'
     ],
+    localFallback: '/products/prod-balaclava.jpg',
     sizes: ['ONE SIZE'],
     colors: [
       { name: 'Obsidian', hex: '#111111' }

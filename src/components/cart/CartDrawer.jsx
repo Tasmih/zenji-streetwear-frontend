@@ -69,8 +69,8 @@ export const CartDrawer = () => {
   };
 
 
-  const handleBagOverview = () => {
-    setToastMessage('Session bag reserved. Frontend UI preview mode active.');
+  const handleCheckout = () => {
+    setToastMessage('CHECKOUT INITIATED // TOKYO ATELIER SECURE GATEWAY');
     setTimeout(() => {
       setToastMessage(null);
     }, 3500);
@@ -135,56 +135,6 @@ export const CartDrawer = () => {
               </motion.button>
             </div>
 
-
-            {/* Tiered Perks & Free Shipping Tracker */}
-            <div className="zenji-drawer__shipping-bar">
-              <div className="zenji-drawer__shipping-header">
-                <div className="zenji-drawer__shipping-status">
-                  {subtotal >= FREE_SHIPPING_THRESHOLD ? (
-                    <span className="zenji-drawer__shipping-msg zenji-drawer__shipping-msg--success">
-                      <CheckCircle2 size={13} />
-                      FREE WORLDWIDE EXPRESS UNLOCKED
-                    </span>
-                  ) : (
-                    <span className="zenji-drawer__shipping-msg">
-                      <Truck size={13} />
-                      ADD {formatCurrency(FREE_SHIPPING_THRESHOLD - subtotal)} FOR FREE EXPRESS
-                    </span>
-                  )}
-                </div>
-
-                <div className="zenji-drawer__shipping-tier-tag">
-                  {subtotal >= GIFT_THRESHOLD ? (
-                    <span className="zenji-drawer__gift-tag zenji-drawer__gift-tag--unlocked">
-                      <Gift size={11} /> VIP GIFT UNLOCKED
-                    </span>
-                  ) : (
-                    <span className="zenji-drawer__gift-tag">
-                      <Sparkles size={11} /> {formatCurrency(GIFT_THRESHOLD - subtotal)} TO VIP GIFT
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="zenji-drawer__progress-track">
-                <motion.div
-                  className="zenji-drawer__progress-fill"
-                  initial={{ width: 0 }}
-                  animate={{
-                    width: `${Math.min(100, (subtotal / GIFT_THRESHOLD) * 100)}%`
-                  }}
-                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                />
-                <div
-                  className={`zenji-drawer__progress-pin zenji-drawer__progress-pin--shipping ${
-                    subtotal >= FREE_SHIPPING_THRESHOLD ? 'is-active' : ''
-                  }`}
-                  style={{ left: `${(FREE_SHIPPING_THRESHOLD / GIFT_THRESHOLD) * 100}%` }}
-                  title="Free Express Shipping Milestone ($200)"
-                />
-              </div>
-            </div>
-
             {/* Notification Toast */}
             <AnimatePresence>
               {toastMessage && (
@@ -229,9 +179,9 @@ export const CartDrawer = () => {
                       variant="primary"
                       fullWidth
                       icon={ArrowRight}
-                      onClick={() => handleCategoryClick('all')}
+                      onClick={handleClose}
                     >
-                      EXPLORE FULL ARCHIVE
+                      CONTINUE SHOPPING
                     </Button>
                   </div>
 
@@ -290,52 +240,51 @@ export const CartDrawer = () => {
               )}
             </div>
 
-            {/* Drawer Footer (Pure Frontend Interaction) */}
+            {/* Bottom Section */}
             {cartItems.length > 0 && (
               <div className="zenji-drawer__footer">
-                {/* Cost Breakdown */}
-                <div className="zenji-drawer__summary">
-                  <div className="zenji-drawer__row">
-                    <span className="zenji-drawer__row-label">ITEM SUBTOTAL</span>
-                    <span className="zenji-drawer__amount">{formatCurrency(subtotal)}</span>
-                  </div>
-
-                  <div className="zenji-drawer__row zenji-drawer__row--sub">
-                    <span className="zenji-drawer__row-label">
-                      <Truck size={13} />
-                      EXPRESS COURIER
-                    </span>
-                    <span className="zenji-drawer__row-val">
-                      {subtotal >= FREE_SHIPPING_THRESHOLD ? (
-                        <span className="zenji-drawer__free-pill">FREE</span>
-                      ) : (
-                        formatCurrency(15)
-                      )}
+                {/* Shipping Announcement Banner */}
+                <div className="zenji-drawer__shipping-banner">
+                  <div className="zenji-drawer__shipping-banner-top">
+                    <Truck size={15} className="zenji-drawer__shipping-banner-icon" />
+                    <span className="zenji-drawer__shipping-banner-text">
+                      FREE WORLDWIDE EXPRESS SHIPPING ON ORDERS OVER $200
                     </span>
                   </div>
-
-                  <div className="zenji-drawer__row zenji-drawer__row--sub">
-                    <span className="zenji-drawer__row-label">
-                      <Layers size={13} />
-                      SIGNATURE PACKAGING
-                    </span>
-                    <span className="zenji-drawer__row-val">
-                      <span className="zenji-drawer__free-pill">COMPLIMENTARY</span>
-                    </span>
-                  </div>
-
-                  <div className="zenji-drawer__divider" />
-
-                  <div className="zenji-drawer__row zenji-drawer__row--total">
-                    <div className="zenji-drawer__total-label-wrap">
-                      <span className="zenji-drawer__total-title">ESTIMATED TOTAL</span>
-                      <span className="zenji-drawer__total-tax-hint">DUTIES & TAXES INCLUDED</span>
+                  <div className="zenji-drawer__shipping-progress-wrap">
+                    <div className="zenji-drawer__shipping-track">
+                      <motion.div
+                        className="zenji-drawer__shipping-fill"
+                        initial={{ width: 0 }}
+                        animate={{
+                          width: `${Math.min(100, (subtotal / FREE_SHIPPING_THRESHOLD) * 100)}%`
+                        }}
+                        transition={{ duration: 0.5, ease: 'easeOut' }}
+                      />
                     </div>
-                    <span className="zenji-drawer__total-amount">
-                      {formatCurrency(
-                        subtotal + (subtotal >= FREE_SHIPPING_THRESHOLD ? 0 : 15)
+                    <div className="zenji-drawer__shipping-note">
+                      {subtotal >= FREE_SHIPPING_THRESHOLD ? (
+                        <span className="zenji-drawer__shipping-note--unlocked">
+                          <CheckCircle2 size={12} />
+                          FREE EXPRESS SHIPPING UNLOCKED
+                        </span>
+                      ) : (
+                        <span>
+                          ADD {formatCurrency(FREE_SHIPPING_THRESHOLD - subtotal)} MORE TO UNLOCK FREE SHIPPING
+                        </span>
                       )}
-                    </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Subtotal Calculation */}
+                <div className="zenji-drawer__summary">
+                  <div className="zenji-drawer__row zenji-drawer__row--subtotal">
+                    <span className="zenji-drawer__subtotal-label">SUBTOTAL</span>
+                    <span className="zenji-drawer__subtotal-amount">{formatCurrency(subtotal)}</span>
+                  </div>
+                  <div className="zenji-drawer__subtotal-tax-note">
+                    Taxes and international duties calculated at checkout.
                   </div>
                 </div>
 
@@ -368,16 +317,26 @@ export const CartDrawer = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Primary Action Buttons */}
+                {/* Primary: CHECKOUT, Secondary: CONTINUE SHOPPING */}
                 <div className="zenji-drawer__actions">
                   <motion.div whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.985 }}>
                     <Button
                       variant="primary"
                       fullWidth
                       icon={ArrowRight}
-                      onClick={handleBagOverview}
+                      onClick={handleCheckout}
                     >
-                      BAG OVERVIEW & RESERVE ({formatCurrency(subtotal)})
+                      CHECKOUT
+                    </Button>
+                  </motion.div>
+
+                  <motion.div whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}>
+                    <Button
+                      variant="outline"
+                      fullWidth
+                      onClick={handleClose}
+                    >
+                      CONTINUE SHOPPING
                     </Button>
                   </motion.div>
 
@@ -391,7 +350,7 @@ export const CartDrawer = () => {
                     </button>
                     <span className="zenji-drawer__secure-badge">
                       <ShieldCheck size={12} />
-                      FRONTEND UI PREVIEW
+                      ENCRYPTED 256-BIT CHECKOUT
                     </span>
                   </div>
                 </div>

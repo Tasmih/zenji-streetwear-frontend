@@ -1,25 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CartContext } from './cartContextInstance';
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 'zenji-h01',
-      name: 'VOID OMNI HEAVYWEIGHT HOODIE',
-      price: 165,
-      size: 'L',
-      color: 'Obsidian Black',
-      image: 'https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80',
-      quantity: 1
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const saved = localStorage.getItem('zenji_cart');
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
     }
-  ]);
+  });
 
   const toggleCart = () => setIsCartOpen((prev) => !prev);
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
 
   const addToCart = (product, size = 'M', color = 'Default', quantity = 1) => {
+    if (!product) return;
+
     setCartItems((prevItems) => {
       const existingIndex = prevItems.findIndex(
         (item) => item.id === product.id && item.size === size && item.color === color
@@ -27,9 +28,18 @@ export const CartProvider = ({ children }) => {
 
       if (existingIndex > -1) {
         const updated = [...prevItems];
-        updated[existingIndex].quantity += quantity;
+        updated[existingIndex] = {
+          ...updated[existingIndex],
+          quantity: updated[existingIndex].quantity + quantity
+        };
         return updated;
       }
+
+      const productImage =
+        product.images?.[0] ||
+        product.image ||
+        product.localFallback ||
+        '';
 
       return [
         ...prevItems,
@@ -39,13 +49,22 @@ export const CartProvider = ({ children }) => {
           price: product.price,
           size,
           color,
-          image: product.images?.[0] || '',
+          image: productImage,
           quantity
         }
       ];
     });
+
     setIsCartOpen(true);
   };
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('zenji_cart', JSON.stringify(cartItems));
+    } catch {
+      // ignore
+    }
+  }, [cartItems]);
 
   const updateQuantity = (id, size, color, newQuantity) => {
     if (newQuantity <= 0) {
@@ -69,7 +88,14 @@ export const CartProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => setCartItems([]);
+  const clearCart = () => {
+    setCartItems([]);
+    try {
+      localStorage.removeItem('zenji_cart');
+    } catch {
+      // ignore
+    }
+  };
 
   const totalItemsCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
   const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);

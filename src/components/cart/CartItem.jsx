@@ -26,10 +26,10 @@ export const CartItem = ({ item }) => {
     <motion.div
       layout
       className="zenji-cart-item"
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 24 }}
+      animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, scale: 0.95, height: 0, marginBottom: 0, overflow: 'hidden' }}
-      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="zenji-cart-item__img-wrap">
         <img src={item.image} alt={item.name} className="zenji-cart-item__img" />

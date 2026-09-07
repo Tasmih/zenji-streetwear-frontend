@@ -9,7 +9,7 @@ const FILTER_TABS = [
   { id: 'all', label: 'All Disciplines', jp: '全作品' },
   { id: 'hoodies', label: 'Hoodies', jp: 'パーカー' },
   { id: 'tees', label: 'Graphic Tees', jp: 'グラフィックT' },
-  { id: 'outerwear', label: 'Jackets', jp: 'アウター' },
+  { id: 'outerwear', label: 'Outerwear', jp: 'アウター' },
   { id: 'pants', label: 'Cargos', jp: 'カーゴ' }
 ];
 

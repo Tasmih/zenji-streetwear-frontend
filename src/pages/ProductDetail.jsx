@@ -9,7 +9,8 @@ import {
   RotateCcw,
   Check,
   Plus,
-  Minus
+  Minus,
+  ZoomIn
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PRODUCTS } from '../data/products';
@@ -37,10 +38,31 @@ export const ProductDetail = () => {
   const [selectedColor, setSelectedColor] = useState(() => product?.colors?.[0]?.name || 'Default');
   const [quantity, setQuantity] = useState(1);
   const [addedNotice, setAddedNotice] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [id]);
+    if (product?.images?.[0]) {
+      setActiveImage(product.images[0]);
+    }
+  }, [id, product]);
+
+  const handleMouseMove = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    setZoomOrigin({ x, y });
+  }, []);
+
+  const handleMouseEnter = useCallback(() => {
+    setIsZoomed(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsZoomed(false);
+    setZoomOrigin({ x: 50, y: 50 });
+  }, []);
 
   const handleAddToCart = useCallback(() => {
     if (!product) return;
@@ -65,13 +87,17 @@ export const ProductDetail = () => {
 
   const currentDisplayImg = activeImage || product.images?.[0] || '';
 
-
   const relatedProducts = PRODUCTS.filter(
     (p) => p.id !== product.id && (p.category === product.category || p.isFeatured)
   ).slice(0, 3);
 
   return (
-    <div className="zenji-detail-page">
+    <motion.div
+      className="zenji-detail-page"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+    >
       {/* Breadcrumbs */}
       <motion.div
         className="zenji-breadcrumbs"
@@ -97,38 +123,66 @@ export const ProductDetail = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         >
-          <div className="zenji-detail-gallery__main">
-            <motion.img
-              key={currentDisplayImg}
-              src={currentDisplayImg}
-              alt={product.name}
-              className="zenji-detail-gallery__img"
-              initial={{ opacity: 0, scale: 1.04 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4 }}
-            />
+          <div
+            className="zenji-detail-gallery__main"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={currentDisplayImg}
+                src={currentDisplayImg}
+                alt={product.name}
+                className="zenji-detail-gallery__img"
+                initial={{ opacity: 0, scale: 1.02 }}
+                animate={{
+                  opacity: 1,
+                  scale: isZoomed ? 1.65 : 1,
+                  transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`
+                }}
+                exit={{ opacity: 0 }}
+                transition={{
+                  opacity: { duration: 0.32, ease: [0.16, 1, 0.3, 1] },
+                  scale: { duration: 0.22, ease: 'easeOut' }
+                }}
+              />
+            </AnimatePresence>
+
             {product.tag && (
               <div className="zenji-detail-gallery__badge">
                 <Badge variant="neon">{product.tag}</Badge>
               </div>
             )}
+
+            <div className={`zenji-detail-gallery__zoom-hint ${isZoomed ? 'zenji-detail-gallery__zoom-hint--active' : ''}`}>
+              <ZoomIn size={12} />
+              <span>{isZoomed ? 'MAGNIFIED VIEW' : 'HOVER TO ZOOM'}</span>
+            </div>
           </div>
 
           {product.images?.length > 1 && (
-            <div className="zenji-detail-gallery__thumbs">
-              {product.images.map((img, idx) => (
-                <motion.button
-                  key={idx}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setActiveImage(img)}
-                  className={`zenji-detail-gallery__thumb ${
-                    currentDisplayImg === img ? 'zenji-detail-gallery__thumb--active' : ''
-                  }`}
-                >
-                  <img src={img} alt="" />
-                </motion.button>
-              ))}
+            <div className="zenji-detail-gallery__thumbs" role="tablist" aria-label="Product imagery angles">
+              {product.images.map((img, idx) => {
+                const isActive = currentDisplayImg === img;
+                return (
+                  <motion.button
+                    key={idx}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-label={`View perspective ${idx + 1}`}
+                    whileHover={{ y: -3, scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setActiveImage(img)}
+                    className={`zenji-detail-gallery__thumb ${
+                      isActive ? 'zenji-detail-gallery__thumb--active' : ''
+                    }`}
+                  >
+                    <img src={img} alt={`${product.name} view 0${idx + 1}`} />
+                    <span className="zenji-detail-gallery__thumb-badge">0{idx + 1}</span>
+                  </motion.button>
+                );
+              })}
             </div>
           )}
         </motion.div>
@@ -156,7 +210,7 @@ export const ProductDetail = () => {
               {product.rating && (
                 <div className="zenji-card__rating">
                   <Star size={14} fill="currentColor" />
-                  <span>{product.rating} ({product.reviewsCount} customer reviews)</span>
+                  <span>{product.rating} ({product.reviewsCount} verified reviews)</span>
                 </div>
               )}
             </div>
@@ -168,15 +222,16 @@ export const ProductDetail = () => {
           {product.colors && product.colors.length > 0 && (
             <div className="zenji-detail-option">
               <div className="zenji-detail-option__label">
-                <span>COLOR:</span>
+                <span>COLOR SPECIFICATION:</span>
                 <strong>{selectedColor}</strong>
               </div>
               <div className="zenji-detail-option__colors">
                 {product.colors.map((c) => (
                   <motion.button
                     key={c.name}
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
+                    whileHover={{ scale: 1.2, y: -2 }}
+                    whileTap={{ scale: 0.92 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 25 }}
                     onClick={() => setSelectedColor(c.name)}
                     className={`zenji-color-swatch zenji-color-swatch--lg ${
                       selectedColor === c.name ? 'zenji-color-swatch--active' : ''
@@ -193,15 +248,16 @@ export const ProductDetail = () => {
           {product.sizes && (
             <div className="zenji-detail-option">
               <div className="zenji-detail-option__label">
-                <span>SELECT SIZE</span>
+                <span>SELECT ARCHIVE SIZE</span>
                 <span className="zenji-detail-option__hint">Oversized Boxy Fit</span>
               </div>
               <div className="zenji-detail-option__sizes">
                 {product.sizes.map((size) => (
                   <motion.button
                     key={size}
-                    whileHover={{ scale: 1.05 }}
+                    whileHover={{ y: -2, scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    transition={{ type: 'spring', stiffness: 380, damping: 25 }}
                     onClick={() => setSelectedSize(size)}
                     className={`zenji-size-btn zenji-size-btn--lg ${
                       selectedSize === size ? 'zenji-size-btn--active' : ''
@@ -325,7 +381,7 @@ export const ProductDetail = () => {
           </div>
         </motion.section>
       )}
-    </div>
+    </motion.div>
   );
 };
 export default ProductDetail;
