@@ -11,7 +11,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-hoodie-void.jpg',
       '/products/hoodie-texture.jpg',
-      '/products/prod-hoodie-editorial.jpg'
+      '/products/prod-hoodie-editorial.jpg',
+      '/products/prod-hoodie.jpg'
     ],
     localFallback: '/products/prod-hoodie-void.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -42,7 +43,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-tee-flat.jpg',
       '/products/prod-acid-flat.jpg',
-      '/categories/cat-tees.jpg'
+      '/categories/cat-tees.jpg',
+      '/products/prod-tee.jpg'
     ],
     localFallback: '/products/prod-tee-flat.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -73,7 +75,8 @@ export const PRODUCTS = [
     images: [
       '/products/sweater-front.jpg',
       '/products/sweater-texture.jpg',
-      '/products/sweater-back.jpg'
+      '/products/sweater-back.jpg',
+      '/products/prod-knitwear-showcase.jpg'
     ],
     localFallback: '/products/sweater-front.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -104,7 +107,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-cargo.jpg',
       '/products/prod-cargo-detail.jpg',
-      '/categories/cat-pants.jpg'
+      '/categories/cat-pants.jpg',
+      '/lookbook/look-03.jpg'
     ],
     localFallback: '/products/prod-cargo.jpg',
     sizes: ['30', '32', '34', '36'],
@@ -135,7 +139,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-sling-bag.jpg',
       '/products/prod-tactical-hardware.jpg',
-      '/products/hoodie-detail.jpg'
+      '/products/hoodie-detail.jpg',
+      '/atelier/tokyo-detail.jpg'
     ],
     localFallback: '/products/prod-sling-bag.jpg',
     sizes: ['ONE SIZE'],
@@ -165,7 +170,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-kanji-hoodie.jpg',
       '/products/prod-hoodie.jpg',
-      '/products/prod-knitwear-showcase.jpg'
+      '/products/prod-knitwear-showcase.jpg',
+      '/products/prod-hoodie-editorial.jpg'
     ],
     localFallback: '/products/prod-kanji-hoodie.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -194,7 +200,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-ecru-tee.jpg',
       '/products/prod-ecru-model.jpg',
-      '/atelier/tokyo-craft.jpg'
+      '/atelier/tokyo-craft.jpg',
+      '/lookbook/look-02.jpg'
     ],
     localFallback: '/products/prod-ecru-tee.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -224,7 +231,8 @@ export const PRODUCTS = [
     images: [
       '/products/prod-balaclava.jpg',
       '/products/prod-jacket-outerwear.jpg',
-      '/atelier/tokyo-detail.jpg'
+      '/atelier/tokyo-detail.jpg',
+      '/categories/cat-outerwear.jpg'
     ],
     localFallback: '/products/prod-balaclava.jpg',
     sizes: ['ONE SIZE'],

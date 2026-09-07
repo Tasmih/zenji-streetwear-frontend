@@ -160,8 +160,15 @@ export const Hero = () => {
   // Subtle directional parallax for depth layers
   const bgMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [16, -16]), springConfig);
   const bgMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [12, -12]), springConfig);
-  const modelMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig);
-  const modelMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-5, 5]), springConfig);
+
+  // Model interactive movement: responsive 3D tilt + smooth multi-axis coordinate drift
+  const modelSpring = { damping: 26, stiffness: 110, mass: 0.7 };
+  const modelMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-35, 35]), modelSpring);
+  const modelMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-22, 22]), modelSpring);
+  const modelRotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-16, 16]), modelSpring);
+  const modelRotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), modelSpring);
+  const modelScale = useSpring(useTransform(mouseY, [-0.5, 0.5], [1.02, 0.98]), modelSpring);
+
   const cardMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-12, 12]), springConfig);
   const cardMouseY = useSpring(useTransform(mouseY, [-0.5, 0.5], [-8, 8]), springConfig);
   const textMouseX = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
@@ -172,6 +179,17 @@ export const Hero = () => {
   const combinedCardY = useTransform([cardY, cardMouseY], ([s, m]) => s + m);
   const combinedTypographyY = useTransform([typographyY, textMouseY], ([s, m]) => s + m);
   const combinedBgY = useTransform([bgScrollY, bgMouseY], ([s, m]) => s + m);
+
+  // Model backglow counter-parallax
+  const modelGlowX = useTransform(modelMouseX, (v) => -v * 0.4);
+  const modelGlowY = useTransform(modelMouseY, (v) => -v * 0.4);
+
+  // Specular glare reflection on lookbook card
+  const cardSpecularGlare = useTransform(
+    [mouseX, mouseY],
+    ([latestX, latestY]) =>
+      `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, rgba(212, 255, 0, 0.16) 0%, rgba(0, 245, 255, 0.08) 35%, transparent 70%)`
+  );
 
   const handleMouseMove = (e) => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) return;
@@ -277,7 +295,11 @@ export const Hero = () => {
           <Clock size={11} className="zenji-hero__countdown-icon" />
           <span className="zenji-hero__countdown-lbl">DROP 004 EXPIRES:</span>
           <span className="zenji-hero__countdown-val">{timeLeft.hours}H : {timeLeft.minutes}M : {timeLeft.seconds}S</span>
-          <span className="zenji-hero__sys-dot" />
+          <div className="zenji-hero__sys-dot-wrap">
+            <span className="zenji-hero__sys-dot" />
+            <span className="zenji-hero__sys-dot-ring" />
+            <span className="zenji-hero__sys-dot-ring zenji-hero__sys-dot-ring--delay" />
+          </div>
         </div>
 
         <div className="zenji-hero__hud-right">
@@ -423,6 +445,7 @@ export const Hero = () => {
                   <Button variant="primary" size="lg" icon={ArrowRight}>
                     SHOP COLLECTION
                   </Button>
+                  <span className="zenji-hero__cta-shimmer" />
                   <span className="zenji-hero__btn-glow" />
                 </motion.div>
               </Link>
@@ -480,32 +503,50 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Column 2 (Center-Right): Supporting Editorial Streetwear Fashion Model (Layered Depth) */}
+        {/* Column 2 (Center-Right): Supporting Editorial Streetwear Fashion Model (Interactive Movable Parallax) */}
         <motion.div
           className="zenji-hero__model-stage"
-          style={{ y: combinedModelY, x: modelMouseX }}
+          style={{
+            y: combinedModelY,
+            x: modelMouseX,
+            rotateY: modelRotateY,
+            rotateX: modelRotateX,
+            scale: modelScale,
+            perspective: 1200,
+            transformStyle: 'preserve-3d'
+          }}
           initial={{ opacity: 0, y: 40, scale: 0.94, filter: 'blur(6px)' }}
           animate={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
-          transition={{ duration: 1.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-          aria-hidden="true"
+          transition={{ duration: 1.4, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           {/* Soft Cinematic Atmosphere & Volumetric Haze Behind Model */}
-          <div className="zenji-hero__model-cinematic-glow" />
+          <motion.div
+            className="zenji-hero__model-cinematic-glow"
+            style={{
+              x: modelGlowX,
+              y: modelGlowY
+            }}
+          />
           <div className="zenji-hero__model-rim-glow" />
           <div className="zenji-hero__model-rim-glow-warm" />
           <div className="zenji-hero__model-ground-shadow" />
 
-          {/* Ultra-Slow Luxury Floating + Cinematic Zoom Drift */}
+          {/* Interactive Drag + Continuous Kinetic Breathing Animation */}
           <motion.div
             className="zenji-hero__model-float-wrap"
+            drag
+            dragConstraints={{ left: -75, right: 75, top: -50, bottom: 50 }}
+            dragElastic={0.22}
+            dragTransition={{ bounceStiffness: 420, bounceDamping: 24 }}
+            whileHover={{ scale: 1.03 }}
+            whileDrag={{ scale: 1.08, cursor: 'grabbing' }}
             animate={{
-              y: [-4, 4, -4],
-              scale: [1, 1.012, 1]
+              y: [-6, 6, -6],
+              rotateZ: [-1.2, 1.2, -1.2]
             }}
             transition={{
-              duration: 14,
-              repeat: Infinity,
-              ease: 'easeInOut'
+              y: { duration: 6, repeat: Infinity, ease: 'easeInOut' },
+              rotateZ: { duration: 8, repeat: Infinity, ease: 'easeInOut' }
             }}
           >
             <img
@@ -513,7 +554,14 @@ export const Hero = () => {
               alt="ZENJI Tokyo Night Streetwear Editorial Campaign Model"
               className="zenji-hero__model-img"
               loading="eager"
+              draggable="false"
             />
+
+            {/* Interactive Cyber HUD Reticle / Drag Indicator Pill */}
+            <div className="zenji-hero__model-interactive-badge">
+              <span className="zenji-hero__model-drag-dot" />
+              <span>DRAG TO MOVE // 3D PARALLAX</span>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -561,11 +609,7 @@ export const Hero = () => {
               <motion.div
                 className="zenji-hero__card-dynamic-glare"
                 style={{
-                  background: useTransform(
-                    [mouseX, mouseY],
-                    ([latestX, latestY]) =>
-                      `radial-gradient(circle at ${(latestX + 0.5) * 100}% ${(latestY + 0.5) * 100}%, rgba(212, 255, 0, 0.16) 0%, rgba(0, 245, 255, 0.08) 35%, transparent 70%)`
-                  )
+                  background: cardSpecularGlare
                 }}
                 aria-hidden="true"
               />
@@ -574,7 +618,10 @@ export const Hero = () => {
               <div className="zenji-hero__card-border-beam" />
 
               {/* Holographic Scanning Laser Line */}
-              <div className="zenji-hero__card-scanner-beam" aria-hidden="true" />
+              <div className="zenji-hero__card-scanner-beam" aria-hidden="true">
+                <span className="zenji-hero__scanner-wash" />
+                <span className="zenji-hero__scanner-point" />
+              </div>
 
               {/* Corner Precision Crosshairs */}
               <span className="zenji-hero__corner-mark zenji-hero__corner-mark--tl">+</span>

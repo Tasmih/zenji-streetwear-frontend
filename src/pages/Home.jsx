@@ -14,7 +14,7 @@ import { useDocumentTitle } from '../utils/useDocumentTitle';
 export const Home = () => {
   useDocumentTitle(
     'ZENJI Tokyo Atelier | Premium Japanese Streetwear',
-    'ZENJI Tokyo Atelier creates premium Japanese-inspired streetwear with heavyweight fabrics, architectural silhouettes, and limited archive drops.'
+    'ZENJI Tokyo Atelier creates premium heavyweight streetwear with Japanese inspired design, limited drops, and architectural silhouettes.'
   );
 
   const [quickViewProduct, setQuickViewProduct] = useState(null);
