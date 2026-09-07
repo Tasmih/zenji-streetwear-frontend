@@ -6,6 +6,7 @@ import { BrandStory } from '../components/home/BrandStory';
 import { DesignPhilosophy } from '../components/home/DesignPhilosophy';
 import { ArchiveTimeline } from '../components/home/ArchiveTimeline';
 import { WhyChooseZenji } from '../components/home/WhyChooseZenji';
+import { CommunityReviews } from '../components/home/CommunityReviews';
 import { Newsletter } from '../components/home/Newsletter';
 import { ProductQuickView } from '../components/product/ProductQuickView';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
@@ -35,6 +36,7 @@ export const Home = () => {
       <DesignPhilosophy />
       <ArchiveTimeline />
       <WhyChooseZenji />
+      <CommunityReviews />
       <Newsletter />
 
       {quickViewProduct && (

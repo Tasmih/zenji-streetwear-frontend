@@ -6612,6 +6612,486 @@ img {
   }
 }
 
+/* ==========================================================================
+   ZENJI COMMUNITY REVIEWS SECTION
+   ========================================================================== */
+.zenji-reviews-section {
+  position: relative;
+  background: #07070a;
+  padding: 120px 24px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.zenji-reviews-section__bg-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 780px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.04) 0%, rgba(0, 245, 255, 0.015) 45%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.zenji-reviews-section__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.02) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.zenji-reviews-section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.zenji-reviews-section__header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 68px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zenji-reviews-section__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.28);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.zenji-reviews-section__kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+}
+
+.zenji-reviews-section__kicker-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.14em;
+}
+
+.zenji-reviews-section__kicker-jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  padding-left: 6px;
+  border-left: 1px solid rgba(212, 255, 0, 0.3);
+}
+
+.zenji-reviews-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.zenji-reviews-section__subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  max-width: 620px;
+}
+
+.zenji-reviews-section__hud-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-reviews-section__stars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.zenji-reviews-section__hud-star {
+  color: var(--accent-neon);
+  fill: var(--accent-neon);
+}
+
+.zenji-reviews-section__hud-score {
+  font-weight: 700;
+  color: #fff;
+}
+
+.zenji-reviews-section__hud-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.zenji-reviews-section__hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-reviews-section__hud-icon {
+  color: var(--accent-neon);
+}
+
+/* 3 Review Cards Grid */
+.zenji-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.zenji-reviews-card {
+  background: rgba(13, 13, 19, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 34px 28px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 330px;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease;
+}
+
+/* Hover Neon Border and Lift */
+.zenji-reviews-card:hover {
+  border-color: rgba(212, 255, 0, 0.55);
+  background: rgba(17, 18, 26, 0.9);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.9),
+    0 0 32px rgba(212, 255, 0, 0.16);
+}
+
+/* Tactical Corner Marks */
+.zenji-reviews-card__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 255, 255, 0.18);
+  transition: border-color var(--transition-fast);
+  pointer-events: none;
+}
+
+.zenji-reviews-card:hover .zenji-reviews-card__corner {
+  border-color: var(--accent-neon);
+}
+
+.zenji-reviews-card__corner--tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
+.zenji-reviews-card__corner--tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
+.zenji-reviews-card__corner--bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
+.zenji-reviews-card__corner--br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Neon Shimmer Top Beam */
+.zenji-reviews-card__beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-neon) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.zenji-reviews-card:hover .zenji-reviews-card__beam {
+  opacity: 1;
+}
+
+/* Decorative Watermark */
+.zenji-reviews-card__watermark {
+  position: absolute;
+  right: 18px;
+  bottom: 80px;
+  color: rgba(255, 255, 255, 0.025);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card Header */
+.zenji-reviews-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.zenji-reviews-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.zenji-reviews-card__star {
+  color: var(--accent-neon);
+  fill: var(--accent-neon);
+}
+
+.zenji-reviews-card__verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  background: rgba(212, 255, 0, 0.08);
+  border: 1px solid rgba(212, 255, 0, 0.3);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.08em;
+}
+
+.zenji-reviews-card__verified-icon {
+  color: var(--accent-neon);
+}
+
+/* Card Quote */
+.zenji-reviews-card__quote {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: #f1f5f9;
+  margin: 0 0 24px 0;
+  position: relative;
+  z-index: 1;
+  font-style: normal;
+}
+
+/* Card Divider */
+.zenji-reviews-card__divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 255, 0, 0.25), rgba(255, 255, 255, 0.05));
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Footer */
+.zenji-reviews-card__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.zenji-reviews-card__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Customer Avatar Placeholder */
+.zenji-reviews-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 255, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+}
+
+.zenji-reviews-card__initials {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.06em;
+}
+
+.zenji-reviews-card__avatar-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  border: 2px solid #0a0a0e;
+}
+
+.zenji-reviews-card__author-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zenji-reviews-card__author-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-reviews-card__name {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.zenji-reviews-card__jp-city {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+.zenji-reviews-card__location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.zenji-reviews-card__pin-icon {
+  color: var(--accent-neon);
+}
+
+.zenji-reviews-card__item-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 4px 8px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  width: fit-content;
+}
+
+/* Mobile Carousel Indicator Dots */
+.zenji-reviews-mobile-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.zenji-reviews-mobile-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.zenji-reviews-mobile-dot--active {
+  width: 20px;
+  border-radius: 3px;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+}
+
+/* Responsive Rules for Reviews Section */
+@media (max-width: 900px) {
+  .zenji-reviews-section {
+    padding: 80px 20px;
+  }
+
+  .zenji-reviews-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 10px 4px 20px 4px;
+    gap: 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .zenji-reviews-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .zenji-reviews-card {
+    flex: 0 0 calc(88vw - 32px);
+    max-width: 380px;
+    scroll-snap-align: center;
+    min-height: auto;
+    padding: 26px 22px 22px 22px;
+  }
+
+  .zenji-reviews-mobile-dots {
+    display: flex;
+  }
+}
+
+@media (max-width: 600px) {
+  .zenji-reviews-section {
+    padding: 64px 14px;
+  }
+
+  .zenji-reviews-section__header {
+    margin-bottom: 40px;
+  }
+
+  .zenji-reviews-section__hud-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+
+  .zenji-reviews-card {
+    flex: 0 0 calc(92vw - 28px);
+  }
+
+  .zenji-reviews-card__quote {
+    font-size: 14px;
+  }
+}
+
 /* Newsletter */
 .zenji-newsletter {
   background: linear-gradient(180deg, var(--bg-primary) 0%, #121217 100%);
