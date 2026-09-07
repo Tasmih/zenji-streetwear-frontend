@@ -3,6 +3,7 @@ import { CartContext } from './cartContextInstance';
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem('zenji_cart');
@@ -17,6 +18,12 @@ export const CartProvider = ({ children }) => {
   const toggleCart = () => setIsCartOpen((prev) => !prev);
   const openCart = () => setIsCartOpen(true);
   const closeCart = () => setIsCartOpen(false);
+
+  const openCheckout = () => {
+    setIsCartOpen(false);
+    setIsCheckoutOpen(true);
+  };
+  const closeCheckout = () => setIsCheckoutOpen(false);
 
   const addToCart = (product, size = 'M', color = 'Default', quantity = 1) => {
     if (!product) return;
@@ -104,10 +111,13 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         isCartOpen,
+        isCheckoutOpen,
         cartItems,
         toggleCart,
         openCart,
         closeCart,
+        openCheckout,
+        closeCheckout,
         addToCart,
         updateQuantity,
         removeFromCart,

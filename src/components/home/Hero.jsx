@@ -91,7 +91,7 @@ const AnimatedText = ({ text, className, delayOffset = 0, wordDelay = 0.09 }) =>
       animate="visible"
       style={{
         display: 'inline-flex',
-        flexWrap: 'nowrap',
+        flexWrap: 'wrap',
         overflow: 'visible',
         columnGap: '0.28em'
       }}

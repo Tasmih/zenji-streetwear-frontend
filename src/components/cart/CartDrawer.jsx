@@ -21,7 +21,7 @@ import { formatCurrency } from '../../utils/formatCurrency';
 import { CATEGORIES } from '../../data/categories';
 
 export const CartDrawer = () => {
-  const { isCartOpen, closeCart, cartItems, totalItemsCount, subtotal, clearCart } = useCart();
+  const { isCartOpen, closeCart, cartItems, totalItemsCount, subtotal, clearCart, openCheckout } = useCart();
   const navigate = useNavigate();
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
@@ -317,16 +317,16 @@ export const CartDrawer = () => {
                   )}
                 </AnimatePresence>
 
-                {/* Primary: CHECKOUT, Secondary: CONTINUE SHOPPING */}
+                {/* Primary: PROCEED TO CHECKOUT, Secondary: CONTINUE SHOPPING */}
                 <div className="zenji-drawer__actions">
                   <motion.div whileHover={{ scale: 1.015 }} whileTap={{ scale: 0.985 }}>
                     <Button
                       variant="primary"
                       fullWidth
                       icon={ArrowRight}
-                      onClick={handleCheckout}
+                      onClick={openCheckout}
                     >
-                      CHECKOUT
+                      PROCEED TO CHECKOUT
                     </Button>
                   </motion.div>
 
