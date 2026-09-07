@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProductCard } from '../product/ProductCard';
+import { cardVariants } from '../../utils/cardVariants';
 import { PRODUCTS } from '../../data/products';
 
 const FILTER_TABS = [
@@ -135,16 +136,8 @@ export const ProductShowcase = memo(({ onQuickView, products: customProducts }) 
               <motion.div
                 layout
                 key={product.id}
-                variants={{
-                  hidden: { opacity: 0, y: 32, scale: 0.96 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    scale: 1,
-                    transition: { duration: 0.65, ease: [0.16, 1, 0.3, 1] }
-                  },
-                  exit: { opacity: 0, scale: 0.94, y: 16 }
-                }}
+                variants={cardVariants}
+                exit="exit"
                 className="zenji-showcase-grid__item"
                 style={{ willChange: 'transform, opacity' }}
               >

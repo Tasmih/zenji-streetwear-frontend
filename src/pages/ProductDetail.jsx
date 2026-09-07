@@ -17,6 +17,7 @@ import { PRODUCTS } from '../data/products';
 import { Badge } from '../components/common/Badge';
 import { Button } from '../components/common/Button';
 import { ProductCard } from '../components/product/ProductCard';
+import { cardVariants, gridStaggerContainerVariants } from '../utils/cardVariants';
 import { useCart } from '../context/useCart';
 import { formatCurrency } from '../utils/formatCurrency';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
@@ -33,7 +34,14 @@ export const ProductDetail = () => {
     product ? product.description : 'ZENJI luxury streetwear piece specification and sizing.'
   );
 
-  const [activeImage, setActiveImage] = useState(() => product?.images?.[0] || '');
+  const [activeImageOverride, setActiveImageOverride] = useState(null);
+  const [prevId, setPrevId] = useState(id);
+
+  if (prevId !== id) {
+    setPrevId(id);
+    setActiveImageOverride(null);
+  }
+
   const [selectedSize, setSelectedSize] = useState(() => product?.sizes?.[0] || 'M');
   const [selectedColor, setSelectedColor] = useState(() => product?.colors?.[0]?.name || 'Default');
   const [quantity, setQuantity] = useState(1);
@@ -43,10 +51,7 @@ export const ProductDetail = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (product?.images?.[0]) {
-      setActiveImage(product.images[0]);
-    }
-  }, [id, product]);
+  }, [id]);
 
   const handleMouseMove = useCallback((e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -85,7 +90,7 @@ export const ProductDetail = () => {
     );
   }
 
-  const currentDisplayImg = activeImage || product.images?.[0] || '';
+  const currentDisplayImg = activeImageOverride || product.images?.[0] || '';
 
   const relatedProducts = PRODUCTS.filter(
     (p) => p.id !== product.id && (p.category === product.category || p.isFeatured)
@@ -173,7 +178,7 @@ export const ProductDetail = () => {
                     aria-label={`View perspective ${idx + 1}`}
                     whileHover={{ y: -3, scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => setActiveImage(img)}
+                    onClick={() => setActiveImageOverride(img)}
                     className={`zenji-detail-gallery__thumb ${
                       isActive ? 'zenji-detail-gallery__thumb--active' : ''
                     }`}
@@ -374,11 +379,19 @@ export const ProductDetail = () => {
               <h2 className="zenji-section__title">COMPLETE THE FIT</h2>
             </div>
           </div>
-          <div className="zenji-product-grid">
+          <motion.div 
+            className="zenji-product-grid"
+            variants={gridStaggerContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-40px', amount: 0.08 }}
+          >
             {relatedProducts.map((relProduct) => (
-              <ProductCard key={relProduct.id} product={relProduct} />
+              <motion.div key={relProduct.id} variants={cardVariants}>
+                <ProductCard product={relProduct} />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </motion.section>
       )}
     </motion.div>

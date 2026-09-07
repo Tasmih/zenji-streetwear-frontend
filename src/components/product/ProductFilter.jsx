@@ -70,7 +70,7 @@ export const ProductFilter = ({
           <Search size={16} className="zenji-filter__search-icon" />
           <input
             type="text"
-            placeholder="Search archive pieces (e.g., Hoodie, Cargo, Cordura)..."
+            placeholder="Search archive pieces (e.g. Hoodie, Cargo)..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="zenji-filter__search-input"

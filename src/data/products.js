@@ -9,11 +9,11 @@ export const PRODUCTS = [
     rating: 4.9,
     reviewsCount: 42,
     images: [
-      '/products/prod-hoodie.jpg?v=2',
-      '/products/hoodie-texture.jpg?v=2',
-      '/products/hoodie-detail.jpg?v=2'
+      '/products/prod-hoodie-void.jpg',
+      '/products/hoodie-texture.jpg',
+      '/products/prod-hoodie-editorial.jpg'
     ],
-    localFallback: '/products/prod-hoodie.jpg?v=2',
+    localFallback: '/products/prod-hoodie-void.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Obsidian Black', hex: '#111111' },
@@ -40,9 +40,11 @@ export const PRODUCTS = [
     rating: 4.7,
     reviewsCount: 29,
     images: [
-      '/products/prod-tee.jpg?v=2'
+      '/products/prod-tee-flat.jpg',
+      '/products/prod-acid-flat.jpg',
+      '/categories/cat-tees.jpg'
     ],
-    localFallback: '/products/prod-tee.jpg?v=2',
+    localFallback: '/products/prod-tee-flat.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Washed Black', hex: '#222222' },
@@ -100,9 +102,11 @@ export const PRODUCTS = [
     rating: 4.8,
     reviewsCount: 64,
     images: [
-      '/products/prod-cargo.jpg?v=2'
+      '/products/prod-cargo.jpg',
+      '/products/prod-cargo-detail.jpg',
+      '/categories/cat-pants.jpg'
     ],
-    localFallback: '/products/prod-cargo.jpg?v=2',
+    localFallback: '/products/prod-cargo.jpg',
     sizes: ['30', '32', '34', '36'],
     colors: [
       { name: 'Pitch Black', hex: '#141414' },
@@ -130,7 +134,8 @@ export const PRODUCTS = [
     reviewsCount: 53,
     images: [
       '/products/prod-sling-bag.jpg',
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-tactical-hardware.jpg',
+      '/products/hoodie-detail.jpg'
     ],
     localFallback: '/products/prod-sling-bag.jpg',
     sizes: ['ONE SIZE'],
@@ -159,7 +164,8 @@ export const PRODUCTS = [
     reviewsCount: 71,
     images: [
       '/products/prod-kanji-hoodie.jpg',
-      'https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-hoodie.jpg',
+      '/products/prod-knitwear-showcase.jpg'
     ],
     localFallback: '/products/prod-kanji-hoodie.jpg',
     sizes: ['S', 'M', 'L', 'XL'],
@@ -187,7 +193,8 @@ export const PRODUCTS = [
     reviewsCount: 38,
     images: [
       '/products/prod-ecru-tee.jpg',
-      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-ecru-model.jpg',
+      '/atelier/tokyo-craft.jpg'
     ],
     localFallback: '/products/prod-ecru-tee.jpg',
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
@@ -216,7 +223,8 @@ export const PRODUCTS = [
     reviewsCount: 19,
     images: [
       '/products/prod-balaclava.jpg',
-      'https://images.unsplash.com/photo-1576871337632-b9aef4c17ab9?auto=format&fit=crop&w=1000&q=80'
+      '/products/prod-jacket-outerwear.jpg',
+      '/atelier/tokyo-detail.jpg'
     ],
     localFallback: '/products/prod-balaclava.jpg',
     sizes: ['ONE SIZE'],

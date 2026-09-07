@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, Box, ShieldCheck, Compass, Sparkles } from 'lucide-react';
+import { Layers, Box, ShieldCheck, Compass } from 'lucide-react';
 
 const FEATURES = [
   {

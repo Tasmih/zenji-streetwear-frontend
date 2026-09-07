@@ -1,12 +1,19 @@
 import { useState, memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Eye, Star, Check } from 'lucide-react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Badge } from '../common/Badge';
 import { useCart } from '../../context/useCart';
 import { formatCurrency } from '../../utils/formatCurrency';
 
-export const ProductCard = memo(({ product, onQuickView, showAddButton = true, showAvailable = true }) => {
+
+export const ProductCard = memo(({
+  product,
+  onQuickView,
+  showAddButton = true,
+  showAvailable = true,
+  variants = null
+}) => {
   const { addToCart } = useCart();
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -16,23 +23,6 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
 
   const hasMultipleImages = product.images && product.images.length > 1;
 
-  // 3D Tilt Spring Physics
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 30, stiffness: 200 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [4, -4]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-4, 4]), springConfig);
-
-  const handleMouseMove = (e) => {
-    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
   const handleMouseEnter = () => {
     setIsHovered(true);
     if (hasMultipleImages && !imageError) setCurrentImgIndex(1);
@@ -41,8 +31,6 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
   const handleMouseLeave = () => {
     setIsHovered(false);
     setCurrentImgIndex(0);
-    mouseX.set(0);
-    mouseY.set(0);
   };
 
   const handleImageError = useCallback(() => {
@@ -76,23 +64,34 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
     : (product.images?.[currentImgIndex] || product.images?.[0]);
 
   return (
-    <div className="zenji-card-perspective-wrapper">
+    <motion.div
+      variants={variants}
+      className="zenji-card-perspective-wrapper"
+    >
       <motion.div
         layout
         className="zenji-card zenji-card--premium"
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d'
+        whileHover={{
+          y: -7,
+          transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] }
         }}
-        onMouseMove={handleMouseMove}
+        whileTap={{
+          y: -2,
+          transition: { duration: 0.15 }
+        }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        whileHover={{ y: -8, scale: 1.01 }}
-        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
       >
-        {/* Animated Glowing Gradient Border Beam */}
-        <div className="zenji-card__glow-border" aria-hidden="true" />
+        {/* Neon Lime Border Glow on Active Hover */}
+        <motion.div
+          className="zenji-card__glow-border"
+          initial={false}
+          animate={{
+            opacity: isHovered ? 1 : 0
+          }}
+          transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          aria-hidden="true"
+        />
 
         {/* Media / Product Visual Container */}
         <div className="zenji-card__media">
@@ -101,7 +100,7 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
             className="zenji-card__link"
             aria-label={`View ${product.name}`}
           >
-            {/* Main Product Image with Smooth Hover Zoom */}
+            {/* Main Product Image with Subtle Luxury Zoom on Hover */}
             <motion.img
               key={currentDisplayImage}
               src={currentDisplayImage}
@@ -110,10 +109,10 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
               loading="lazy"
               decoding="async"
               onError={handleImageError}
-              initial={{ opacity: 0.88 }}
+              initial={{ opacity: 0.92 }}
               animate={{
                 opacity: 1,
-                scale: isHovered ? 1.08 : 1
+                scale: isHovered ? 1.05 : 1
               }}
               transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
             />
@@ -123,11 +122,31 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
             <div className="zenji-card__scanline-overlay" />
           </Link>
 
-          {/* Corner Precision Crosshairs */}
-          <span className="zenji-card__corner zenji-card__corner--tl" aria-hidden="true">+</span>
-          <span className="zenji-card__corner zenji-card__corner--tr" aria-hidden="true">+</span>
-          <span className="zenji-card__corner zenji-card__corner--bl" aria-hidden="true">+</span>
-          <span className="zenji-card__corner zenji-card__corner--br" aria-hidden="true">+</span>
+          {/* Corner Precision Crosshairs with neon accent on active hover */}
+          <motion.span
+            className="zenji-card__corner zenji-card__corner--tl"
+            animate={{ color: isHovered ? 'var(--accent-neon)' : 'rgba(255, 255, 255, 0.3)' }}
+            transition={{ duration: 0.3 }}
+            aria-hidden="true"
+          >+</motion.span>
+          <motion.span
+            className="zenji-card__corner zenji-card__corner--tr"
+            animate={{ color: isHovered ? 'var(--accent-neon)' : 'rgba(255, 255, 255, 0.3)' }}
+            transition={{ duration: 0.3 }}
+            aria-hidden="true"
+          >+</motion.span>
+          <motion.span
+            className="zenji-card__corner zenji-card__corner--bl"
+            animate={{ color: isHovered ? 'var(--accent-neon)' : 'rgba(255, 255, 255, 0.3)' }}
+            transition={{ duration: 0.3 }}
+            aria-hidden="true"
+          >+</motion.span>
+          <motion.span
+            className="zenji-card__corner zenji-card__corner--br"
+            animate={{ color: isHovered ? 'var(--accent-neon)' : 'rgba(255, 255, 255, 0.3)' }}
+            transition={{ duration: 0.3 }}
+            aria-hidden="true"
+          >+</motion.span>
 
           {/* Campaign Tag Badge */}
           {product.tag && (
@@ -165,14 +184,14 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
             {isHovered && onQuickView && (
               <motion.div
                 className="zenji-card__actions"
-                initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 8, scale: 0.9 }}
+                exit={{ opacity: 0, y: 8, scale: 0.95 }}
                 transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
               >
                 <motion.button
-                  whileHover={{ scale: 1.12 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.92 }}
                   onClick={handleQuickViewClick}
                   className="zenji-card__action-btn"
                   title="Quick View Details"
@@ -206,22 +225,56 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
             <Link to={`/product/${product.id}`}>{product.name}</Link>
           </h3>
 
-          {/* Price & Rating Row */}
+          {/* Price & Rating Row with Framer Motion Fade Transitions */}
           <div className="zenji-card__price-row">
-            <div className="zenji-card__price-wrap">
-              <span className="zenji-card__price">{formatCurrency(product.price)}</span>
+            <motion.div
+              className="zenji-card__price-wrap"
+              animate={{
+                color: isHovered ? 'var(--accent-neon)' : 'var(--text-primary)'
+              }}
+              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <motion.span
+                className="zenji-card__price"
+                animate={{
+                  color: isHovered ? 'var(--accent-neon)' : 'var(--text-primary)'
+                }}
+                transition={{ duration: 0.28 }}
+              >
+                {formatCurrency(product.price)}
+              </motion.span>
               {product.originalPrice && (
                 <span className="zenji-card__price-original">
                   {formatCurrency(product.originalPrice)}
                 </span>
               )}
-            </div>
+            </motion.div>
 
             {product.rating && (
-              <div className="zenji-card__rating">
+              <motion.div
+                className="zenji-card__rating"
+                animate={{
+                  opacity: isHovered ? 1 : 0.8,
+                  scale: isHovered ? 1.02 : 1
+                }}
+                transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <Star size={11} fill="currentColor" />
                 <span>{product.rating}</span>
-              </div>
+                <AnimatePresence>
+                  {isHovered && product.reviewsCount && (
+                    <motion.span
+                      className="zenji-card__rating-count"
+                      initial={{ opacity: 0, width: 0, x: -4 }}
+                      animate={{ opacity: 1, width: 'auto', x: 0 }}
+                      exit={{ opacity: 0, width: 0, x: -4 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      ({product.reviewsCount})
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             )}
           </div>
 
@@ -302,7 +355,7 @@ export const ProductCard = memo(({ product, onQuickView, showAddButton = true, s
           )}
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 });
 

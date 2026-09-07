@@ -5,13 +5,11 @@ import {
   ShoppingBag,
   ArrowRight,
   Truck,
-  Gift,
   ShieldCheck,
   Sparkles,
   RotateCcw,
   CheckCircle2,
-  Trash2,
-  Layers
+  Trash2
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/useCart';
@@ -27,7 +25,6 @@ export const CartDrawer = () => {
   const [toastMessage, setToastMessage] = useState(null);
 
   const FREE_SHIPPING_THRESHOLD = 200;
-  const GIFT_THRESHOLD = 350;
 
   const handleClose = useCallback(() => {
     setShowClearConfirm(false);
@@ -44,7 +41,6 @@ export const CartDrawer = () => {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isCartOpen, handleClose]);
-
 
   // Disable background scrolling when drawer is open
   useEffect(() => {
@@ -66,14 +62,6 @@ export const CartDrawer = () => {
     } else {
       navigate(`/shop?category=${categorySlug}`);
     }
-  };
-
-
-  const handleCheckout = () => {
-    setToastMessage('CHECKOUT INITIATED // TOKYO ATELIER SECURE GATEWAY');
-    setTimeout(() => {
-      setToastMessage(null);
-    }, 3500);
   };
 
   const handleConfirmClear = () => {

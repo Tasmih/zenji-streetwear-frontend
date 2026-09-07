@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingBag, Search, Menu, X, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X, ArrowRight, ShieldCheck, Sun, Moon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useCart } from '../../context/useCart';
+import { useTheme } from '../../context/useTheme';
 import { ANNOUNCEMENT, BRAND_NAME } from '../../utils/constants';
 
 const NAV_ITEMS = [
@@ -15,6 +16,7 @@ const NAV_ITEMS = [
 
 export const Navbar = () => {
   const { totalItemsCount, toggleCart } = useCart();
+  const { theme, isDark, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -152,34 +154,51 @@ export const Navbar = () => {
                     </motion.div>
                   )}
 
-                  {/* Hover Floating Capsule & Dot */}
+                  {/* Hover Floating Capsule Background */}
                   {hoveredIndex === idx && !isActive && (
-                    <>
-                      <motion.div
-                        layoutId="hoverNavBg"
-                        className="zenji-nav__hover-bg"
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                      <motion.div
-                        layoutId="hoverNavDot"
-                        className="zenji-nav__hover-dot"
-                        initial={{ opacity: 0, scale: 0.5 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    </>
+                    <motion.div
+                      layoutId="hoverNavBg"
+                      className="zenji-nav__hover-bg"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                    />
                   )}
                 </Link>
               );
             })}
           </div>
 
-          {/* Action Tools: Search & Bag Drawer */}
+          {/* Action Tools: Theme Toggle, Search & Bag Drawer */}
           <div className="zenji-nav__actions">
+            {/* Theme Toggle Button (Dark / Light) */}
+            <motion.button
+              id="theme-toggle-zenji"
+              className="zenji-theme-toggle"
+              onClick={toggleTheme}
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.92 }}
+              aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+              title={isDark ? 'Switch to Light Mode // 明' : 'Switch to Dark Mode // 暗'}
+            >
+              <motion.div
+                className="zenji-theme-toggle__icon-wrap"
+                key={theme}
+                initial={{ rotate: -90, scale: 0.65, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 90, scale: 0.65, opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 24 }}
+              >
+                {isDark ? (
+                  <Sun size={18} className="zenji-theme-toggle__icon zenji-theme-toggle__icon--sun" />
+                ) : (
+                  <Moon size={18} className="zenji-theme-toggle__icon zenji-theme-toggle__icon--moon" />
+                )}
+              </motion.div>
+              <span className="zenji-theme-toggle__dot" aria-hidden="true" />
+            </motion.button>
+
             <Link to="/shop" aria-label="Search Archives">
               <motion.div
                 whileHover="hover"
@@ -330,6 +349,24 @@ export const Navbar = () => {
                   );
                 })}
               </motion.nav>
+
+              {/* Mobile Theme Switcher Bar */}
+              <div className="zenji-mobile-menu__theme-bar">
+                <span className="zenji-mobile-menu__theme-label">
+                  APPEARANCE // 外観
+                </span>
+                <button
+                  type="button"
+                  className="zenji-mobile-theme-btn"
+                  onClick={toggleTheme}
+                  aria-label={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+                >
+                  <span className="zenji-mobile-theme-btn__icon">
+                    {isDark ? <Sun size={15} /> : <Moon size={15} />}
+                  </span>
+                  <span>{isDark ? 'LIGHT MODE // 明' : 'DARK MODE // 暗'}</span>
+                </button>
+              </div>
 
               {/* Mobile Footer with Studio Coordinates */}
               <div className="zenji-mobile-menu__footer">

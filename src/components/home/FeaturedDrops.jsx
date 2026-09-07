@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ProductCard } from '../product/ProductCard';
+import { cardVariants } from '../../utils/cardVariants';
 import { scrollStaggerContainer, scrollSectionHeader } from '../../utils/motionVariants';
 
 const FILTER_TABS = [
@@ -111,10 +112,8 @@ export const FeaturedDrops = memo(({ products = [], onQuickView }) => {
             <motion.div
               layout
               key={product.id}
-              initial={{ opacity: 0, scale: 0.94, y: 24 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 16 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              variants={cardVariants}
+              exit="exit"
               style={{ willChange: 'transform, opacity' }}
             >
               <ProductCard

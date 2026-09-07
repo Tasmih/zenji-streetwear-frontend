@@ -2,37 +2,34 @@
    ZENJI — Luxury Streetwear Design System & Styles
   */
 
-:root {
-  /* Tokyo Futuristic Luxury Streetwear Color Matrix */
-  --bg-primary: #080808;
-  --bg-secondary: #0e0e13;
-  --bg-surface: #14141b;
-  --bg-surface-elevated: #1b1b24;
-  --bg-glass: rgba(14, 14, 19, 0.85);
-  --bg-glass-card: rgba(18, 18, 24, 0.72);
-  --bg-glass-heavy: rgba(8, 8, 10, 0.94);
+:root,
+[data-theme="dark"] {
+  /* Tokyo Futuristic Luxury Streetwear Color Matrix — Dark Mode (Default) */
+  --bg-primary: #050608;
+  --bg-secondary: #0c0e14;
+  --bg-surface: #12151B;
+  --bg-surface-elevated: #181d26;
+  --bg-glass: rgba(5, 6, 8, 0.88);
+  --bg-glass-card: #12151B;
+  --bg-glass-heavy: rgba(5, 6, 8, 0.96);
 
-  --text-primary: #f4f4f7;
-  --text-secondary: #a0a0ab;
-  --text-muted: #6b6b77;
-  --text-dim: #454550;
-  --text-inverse: #080808;
+  --text-primary: #F5F5F5;
+  --text-secondary: #a0a4b1;
+  --text-muted: #6b717f;
+  --text-dim: #444955;
+  --text-inverse: #050608;
 
   /* Tokyo Brand Accent System */
-  --accent-neon: #d4ff00;
-  /* Acid Lime */
-  --accent-neon-glow: rgba(212, 255, 0, 0.28);
-  --accent-neon-bright: #e5ff33;
+  --accent-neon: #C8FF00;
+  --accent-neon-glow: rgba(200, 255, 0, 0.28);
+  --accent-neon-bright: #d8ff33;
   --accent-cyan: #00f5ff;
-  /* Tokyo Neon Cyan */
   --accent-cyan-glow: rgba(0, 245, 255, 0.28);
   --accent-cyan-dim: rgba(0, 245, 255, 0.12);
   --accent-silver: #c8c8c8;
-  /* Warm Silver */
   --accent-silver-dim: rgba(200, 200, 200, 0.18);
   --accent-silver-bright: #e8e8ee;
   --accent-crimson: #ff304f;
-  /* Crimson Drop Accent */
   --accent-crimson-glow: rgba(255, 48, 79, 0.35);
   --accent-crimson-dim: rgba(255, 48, 79, 0.12);
   --accent-violet: #8a2be2;
@@ -40,7 +37,7 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-focus: rgba(255, 255, 255, 0.18);
   --border-strong: rgba(255, 255, 255, 0.3);
-  --border-neon: rgba(212, 255, 0, 0.4);
+  --border-neon: rgba(200, 255, 0, 0.4);
   --border-cyan: rgba(0, 245, 255, 0.35);
   --border-crimson: rgba(255, 48, 79, 0.4);
   --border-silver: rgba(200, 200, 200, 0.25);
@@ -105,17 +102,199 @@
   /* Elevation, Specular Highlights & Ambient Glows */
   --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.4);
   --shadow-card: 0 12px 36px -10px rgba(0, 0, 0, 0.85);
-  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.92);
-  --shadow-neon: 0 0 22px rgba(212, 255, 0, 0.35);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.95);
+  --shadow-neon: 0 0 22px rgba(200, 255, 0, 0.35);
   --shadow-cyan: 0 0 22px rgba(0, 245, 255, 0.35);
   --shadow-crimson: 0 0 20px rgba(255, 48, 79, 0.35);
   --shadow-specular: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 
   /* Signature Gradients */
-  --grad-obsidian: linear-gradient(180deg, #080808 0%, #0e0e13 100%);
-  --grad-surface: linear-gradient(135deg, rgba(20, 20, 27, 0.9) 0%, rgba(14, 14, 19, 0.9) 100%);
-  --grad-beam: linear-gradient(120deg, transparent 35%, rgba(212, 255, 0, 0.7) 45%, rgba(0, 245, 255, 0.7) 55%, rgba(255, 48, 79, 0.6) 65%, transparent 75%);
+  --grad-obsidian: linear-gradient(180deg, #050608 0%, #12151B 100%);
+  --grad-surface: linear-gradient(135deg, rgba(18, 21, 27, 0.9) 0%, rgba(10, 11, 15, 0.9) 100%);
+  --grad-beam: linear-gradient(120deg, transparent 35%, rgba(200, 255, 0, 0.7) 45%, rgba(0, 245, 255, 0.7) 55%, rgba(255, 48, 79, 0.6) 65%, transparent 75%);
   --grad-cyan-lime: linear-gradient(90deg, var(--accent-cyan), var(--accent-neon));
+}
+
+/* ==========================================================================
+   ZENJI Light Theme — Tokyo Architectural Luxury Editorial
+   ========================================================================== */
+[data-theme="light"] {
+  --bg-primary: #F4F3EE;
+  --bg-secondary: #EBEAE4;
+  --bg-surface: #FFFFFF;
+  --bg-surface-elevated: #FAF9F5;
+  --bg-glass: rgba(244, 243, 238, 0.9);
+  --bg-glass-card: #FFFFFF;
+  --bg-glass-heavy: rgba(244, 243, 238, 0.98);
+
+  --text-primary: #111111;
+  --text-secondary: #4a4e57;
+  --text-muted: #6e737e;
+  --text-dim: #989da8;
+  --text-inverse: #F5F5F5;
+
+  /* Tokyo Brand Accent System - Light Mode */
+  --accent-neon: #9DCC00;
+  --accent-neon-glow: rgba(157, 204, 0, 0.28);
+  --accent-neon-bright: #88b300;
+  --accent-cyan: #008fa0;
+  --accent-cyan-glow: rgba(0, 143, 160, 0.25);
+  --accent-cyan-dim: rgba(0, 143, 160, 0.12);
+  --accent-silver: #555861;
+  --accent-silver-dim: rgba(0, 0, 0, 0.08);
+  --accent-silver-bright: #2d3037;
+  --accent-crimson: #d91c3a;
+  --accent-crimson-glow: rgba(217, 28, 58, 0.25);
+  --accent-crimson-dim: rgba(217, 28, 58, 0.1);
+  --accent-violet: #6b1fb8;
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-focus: rgba(0, 0, 0, 0.18);
+  --border-strong: rgba(0, 0, 0, 0.32);
+  --border-neon: rgba(157, 204, 0, 0.55);
+  --border-cyan: rgba(0, 143, 160, 0.4);
+  --border-crimson: rgba(217, 28, 58, 0.4);
+  --border-silver: rgba(0, 0, 0, 0.15);
+
+  --shadow-subtle: 0 4px 16px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.18);
+  --shadow-neon: 0 0 20px rgba(157, 204, 0, 0.25);
+  --shadow-specular: inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  --grad-obsidian: linear-gradient(180deg, #F4F3EE 0%, #EBEAE4 100%);
+  --grad-surface: linear-gradient(135deg, #FFFFFF 0%, #FAF9F5 100%);
+  --grad-beam: linear-gradient(120deg, transparent 35%, rgba(157, 204, 0, 0.6) 45%, rgba(0, 143, 160, 0.6) 55%, rgba(217, 28, 58, 0.5) 65%, transparent 75%);
+  --grad-cyan-lime: linear-gradient(90deg, var(--accent-cyan), var(--accent-neon));
+}
+
+/* Global Smooth Color Transition for Theme Switching */
+html,
+body,
+.zenji-app,
+.zenji-header,
+.zenji-nav,
+.zenji-footer,
+.zenji-glass,
+.zenji-glass-card,
+.zenji-glass-panel,
+.zenji-card,
+.zenji-why-card,
+.zenji-reviews-card,
+.zenji-modal,
+.zenji-drawer,
+.zenji-checkout-modal,
+.zenji-filter-bar,
+.zenji-badge {
+  transition:
+    background-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Theme Toggle Navbar Element
+   ========================================================================== */
+.zenji-theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.zenji-theme-toggle:hover {
+  border-color: var(--accent-neon);
+  color: var(--accent-neon);
+  box-shadow: 0 0 16px var(--accent-neon-glow);
+}
+
+.zenji-theme-toggle__icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zenji-theme-toggle__icon {
+  stroke-width: 2px;
+}
+
+.zenji-theme-toggle__icon--sun {
+  color: var(--accent-neon);
+}
+
+.zenji-theme-toggle__icon--moon {
+  color: var(--accent-neon);
+}
+
+.zenji-theme-toggle__dot {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 6px var(--accent-neon);
+}
+
+/* Mobile Theme Switcher Bar in Mobile Drawer */
+.zenji-mobile-menu__theme-bar {
+  padding: 12px 14px;
+  margin: 14px 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.zenji-mobile-menu__theme-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.zenji-mobile-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--border-focus);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.zenji-mobile-theme-btn:hover {
+  border-color: var(--accent-neon);
+  color: var(--accent-neon);
+}
+
+.zenji-mobile-theme-btn__icon {
+  display: flex;
+  align-items: center;
+  color: var(--accent-neon);
 }
 
 /* ==========================================================================
@@ -280,6 +459,12 @@ html {
   max-width: 100vw;
 }
 
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
 body {
   min-height: 100vh;
   overflow-x: hidden;
@@ -290,7 +475,9 @@ body {
 }
 
 #root,
-.zenji-app {
+.zenji-app,
+.zenji-page,
+.zenji-main {
   overflow-x: hidden;
   width: 100%;
   max-width: 100vw;
@@ -592,14 +779,29 @@ img {
   flex-direction: column;
   align-items: center;
   border-radius: var(--radius-sm);
+  text-decoration: none !important;
+  border-bottom: none !important;
+  outline: none;
   transition:
     color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Inactive navigation items */
-.zenji-nav__link:not(.active) {
+.zenji-nav__link:hover,
+.zenji-nav__link:focus,
+.zenji-nav__link:active,
+.zenji-nav__link:visited {
+  text-decoration: none !important;
+  border-bottom: none !important;
+}
+
+/* Inactive navigation items — Strictly no underline or bottom bar */
+.zenji-nav__link:not(.active),
+.zenji-nav__link:not(.active):hover,
+.zenji-nav__link:not(.active):focus {
   color: var(--text-secondary);
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 .zenji-nav__link:not(.active) .zenji-nav__link-text {
@@ -614,14 +816,19 @@ img {
 }
 
 .zenji-nav__link:not(.active) .zenji-nav__active-pill,
-.zenji-nav__link:not(.active)::after {
+.zenji-nav__link:not(.active)::after,
+.zenji-nav__link:not(.active):hover::after {
   display: none !important;
+  content: none !important;
+  border-bottom: none !important;
 }
 
-/* Inactive Hover: subtle glow only, no permanent underline */
+/* Inactive Hover: subtle text brightness and soft capsule background only, no underline */
 .zenji-nav__link:not(.active):hover {
   color: var(--text-primary);
   transform: translateY(-1px);
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 .zenji-nav__link:not(.active):hover .zenji-nav__link-text {
@@ -3382,65 +3589,54 @@ img {
 }
 
 .zenji-card {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  background: linear-gradient(180deg, #131722 0%, #0d0f15 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   border-radius: var(--radius-md);
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  transform-style: preserve-3d;
   will-change: transform, box-shadow;
   transition:
-    border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
-    background 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .zenji-card--premium {
   box-shadow:
-    0 4px 12px -4px rgba(0, 0, 0, 0.5),
-    0 8px 24px -6px rgba(0, 0, 0, 0.4);
+    0 4px 16px -4px rgba(0, 0, 0, 0.6),
+    0 8px 24px -6px rgba(0, 0, 0, 0.45);
 }
 
 .zenji-card--premium:hover {
-  border-color: rgba(212, 255, 0, 0.4);
-  background: rgba(18, 18, 22, 1);
+  border-color: rgba(200, 255, 0, 0.45);
   box-shadow:
-    0 28px 60px -16px rgba(0, 0, 0, 0.95),
-    0 12px 32px -8px rgba(0, 0, 0, 0.6),
-    0 0 28px rgba(212, 255, 0, 0.08),
-    0 0 1px rgba(212, 255, 0, 0.5);
+    0 24px 48px -12px rgba(0, 0, 0, 0.9),
+    0 8px 20px -6px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(200, 255, 0, 0.12);
 }
 
-/* Animated Glowing Border Beam */
+/* Luxury Neon Lime Border Glow on Active Hover */
 .zenji-card__glow-border {
   position: absolute;
-  inset: -1px;
+  inset: 0;
   border-radius: var(--radius-md);
-  padding: 1px;
-  background: linear-gradient(135deg, transparent 20%, rgba(212, 255, 0, 0.75) 50%, rgba(0, 245, 255, 0.75) 80%, transparent 100%);
-  background-size: 250% 250%;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask-composite: xor;
+  border: 1px solid var(--accent-neon);
+  box-shadow:
+    0 0 22px -2px rgba(200, 255, 0, 0.22),
+    inset 0 0 10px -2px rgba(200, 255, 0, 0.12);
   pointer-events: none;
-  z-index: 5;
-}
-
-.zenji-card:hover .zenji-card__glow-border {
-  opacity: 1;
-  animation: borderBeam 6s linear infinite;
+  z-index: 6;
+  opacity: 0;
 }
 
 .zenji-card__media {
   position: relative;
-  aspect-ratio: 1/1.22;
-  background: #111116;
+  aspect-ratio: 4 / 5;
+  background: #0d0f15;
   overflow: hidden;
+  width: 100%;
 }
 
 .zenji-card__corner {
@@ -3637,6 +3833,14 @@ img {
   color: #facc15;
 }
 
+.zenji-card__rating-count {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .zenji-card__title {
   font-family: var(--font-display);
   font-size: 15px;
@@ -3647,6 +3851,8 @@ img {
 }
 
 .zenji-card__title a {
+  color: #FFFFFF;
+  text-decoration: none;
   transition: color var(--transition-fast);
 }
 
@@ -3664,10 +3870,16 @@ img {
 
 .zenji-card__price {
   font-family: var(--font-mono);
-  font-size: 16.5px;
+  font-size: 16px;
   font-weight: 800;
-  color: var(--text-primary);
-  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  letter-spacing: 0.03em;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.zenji-card:hover .zenji-card__price {
+  color: var(--accent-neon);
+  text-shadow: 0 0 10px rgba(212, 255, 0, 0.4);
 }
 
 .zenji-card__price-original {
@@ -7560,11 +7772,13 @@ img {
 .zenji-breadcrumbs {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 32px;
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--text-muted);
+  max-width: 100%;
 }
 
 .zenji-breadcrumbs__back {
@@ -7573,19 +7787,32 @@ img {
   gap: 6px;
   color: var(--text-secondary);
   font-weight: 700;
+  flex-shrink: 0;
 }
 
 .zenji-breadcrumbs__back:hover {
   color: var(--accent-neon);
 }
 
+.zenji-breadcrumbs__link {
+  flex-shrink: 0;
+}
+
 .zenji-breadcrumbs__link:hover {
   color: var(--text-primary);
+}
+
+.zenji-breadcrumbs__div {
+  flex-shrink: 0;
 }
 
 .zenji-breadcrumbs__current {
   color: var(--text-primary);
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(280px, 45vw);
 }
 
 .zenji-detail-layout {
@@ -10502,10 +10729,10 @@ select {
 }
 
 /* --------------------------------------------------------------------------
-   Tablets Portrait & Mobile (<= 768px)
+   Tablets Landscape & Medium Screens (<= 960px)
    -------------------------------------------------------------------------- */
-@media (max-width: 768px) {
-  /* Navigation */
+@media (max-width: 960px) {
+  /* Navigation switch to drawer to prevent text crowding or wrapping */
   .zenji-nav__links {
     display: none !important;
   }
@@ -10517,7 +10744,12 @@ select {
     align-items: center;
     justify-content: center;
   }
+}
 
+/* --------------------------------------------------------------------------
+   Tablets Portrait & Mobile (<= 768px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
   .zenji-nav {
     padding: 0 16px;
     height: 64px;
@@ -10585,6 +10817,12 @@ select {
   /* Filter */
   .zenji-filter {
     padding: 16px;
+  }
+
+  .zenji-filter__search-wrap {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   .zenji-filter__controls {
@@ -10924,9 +11162,411 @@ select {
     font-size: 12px;
   }
 
+  /* Footer adjustments for <= 480px */
+  .zenji-footer {
+    padding-top: 48px;
+  }
+
+  .zenji-footer__container {
+    padding: 0 16px 48px;
+    gap: 36px;
+  }
+
+  .zenji-footer__brand-title {
+    font-size: 14.5px;
+  }
+
+  .zenji-footer__desc {
+    max-width: 100%;
+    font-size: 12.5px;
+  }
+
+  .zenji-footer__divider-line {
+    max-width: 100%;
+  }
+
+  .zenji-footer__status-panel {
+    max-width: 100%;
+    width: 100%;
+    padding: 12px 14px;
+  }
+
+  .zenji-footer__status-location {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
   .zenji-footer__links {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 22px;
+  }
+
+  .zenji-footer__email {
+    max-width: 100%;
+    font-size: 11px;
+    word-break: break-all;
+  }
+
+  .zenji-footer__social-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .zenji-footer__bottom-container {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .zenji-footer__meta-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 8.5px;
+  }
+
+  /* Product Card on Mobile (<= 480px) */
+  .zenji-card__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .zenji-card__info {
+    padding: 12px 10px;
+  }
+
+  .zenji-card__title {
+    font-size: 14px;
+    line-height: 1.35;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .zenji-card__price-wrap {
+    margin-bottom: 8px;
+  }
+
+  .zenji-card__price {
+    font-size: 15px;
+  }
+
+  .zenji-card__footer-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 8px;
+  }
+
+  .zenji-card__sizes {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .zenji-card__size-dot {
+    font-size: 9.5px;
+    padding: 1px 4px;
+  }
+
+  /* Filter bar on <= 480px */
+  .zenji-filter {
+    padding: 12px;
+  }
+
+  .zenji-filter__categories {
+    padding-bottom: 4px;
+  }
+
+  .zenji-filter__pill {
+    padding: 5px 10px;
+    font-size: 10.5px;
+  }
+
+  .zenji-filter__search-input {
+    font-size: 12px;
+    padding-right: 30px;
+  }
+
+  .zenji-filter__price-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .zenji-filter__chip {
+    padding: 4px 8px;
+    font-size: 10.5px;
+  }
+
+  .zenji-filter__active-tags {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Ultra-Compact Mobile Devices (<= 360px, including iPhone SE & 320px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 360px) {
+  /* Prevent Any Layout Overflow */
+  body,
+  #root,
+  .zenji-app {
+    overflow-x: hidden !important;
+  }
+
+  /* Compact Navbar */
+  .zenji-nav {
+    padding: 0 8px;
+    height: 54px;
+  }
+
+  .zenji-nav__toggle {
+    width: 34px;
+    height: 34px;
+  }
+
+  .zenji-logo {
+    gap: 4px;
+  }
+
+  .zenji-logo__jp {
+    font-size: 10px;
+    padding: 1px 4px;
+    letter-spacing: 0.08em;
+  }
+
+  .zenji-logo__text {
+    font-size: 15px;
+    letter-spacing: 0.12em;
+  }
+
+  .zenji-logo__sub {
+    display: none !important;
+  }
+
+  .zenji-nav__actions {
+    gap: 4px;
+  }
+
+  .zenji-nav__action-btn,
+  .zenji-theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+
+  .zenji-cart-btn {
+    padding: 4px 6px;
+    font-size: 10px;
+  }
+
+  .zenji-cart-btn__icon-wrap svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Hero Section */
+  .zenji-hero {
+    padding: 56px 8px 24px;
+  }
+
+  .zenji-hero__title--main,
+  .zenji-hero__title--stroke {
+    font-size: 20px;
+    line-height: 1.15;
+  }
+
+  .zenji-hero__subtitle {
+    font-size: 11.5px;
+    line-height: 1.45;
+  }
+
+  .zenji-hero__stats--editorial {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  /* Section Spacing */
+  .zenji-section {
+    padding: 36px 8px;
+  }
+
+  .zenji-section__title {
+    font-size: 20px;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .zenji-section__tag {
+    font-size: 8.5px;
+  }
+
+  /* Product Cards on 320px */
+  .zenji-product-grid,
+  .zenji-showcase-grid {
+    gap: 12px;
+    padding: 0;
+  }
+
+  .zenji-card {
+    border-radius: var(--radius-sm);
+  }
+
+  .zenji-card__media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .zenji-card__info {
+    padding: 10px 8px;
+  }
+
+  .zenji-card__category {
+    font-size: 8.5px;
+  }
+
+  .zenji-card__available-badge {
+    font-size: 7.5px;
+    padding: 1px 4px;
+  }
+
+  .zenji-card__title {
+    font-size: 13px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+
+  .zenji-card__price {
+    font-size: 14px;
+  }
+
+  .zenji-card__price-original {
+    font-size: 11px;
+  }
+
+  .zenji-card__add-btn {
+    min-height: 40px;
+    font-size: 11px;
+  }
+
+  /* Product Detail on 320px */
+  .zenji-detail-page {
+    padding: 12px 8px 48px;
+  }
+
+  .zenji-breadcrumbs {
+    gap: 4px;
+    font-size: 10px;
+    margin-bottom: 20px;
+  }
+
+  .zenji-breadcrumbs__current {
+    max-width: 120px;
+  }
+
+  .zenji-detail-gallery__main {
+    max-height: 320px;
+  }
+
+  .zenji-detail-gallery__thumb {
+    width: 50px;
+    height: 50px;
+  }
+
+  .zenji-detail-info__title {
+    font-size: 20px;
+    word-break: break-word;
+  }
+
+  .zenji-detail-info__price {
+    font-size: 20px;
+  }
+
+  .zenji-size-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 11px;
+  }
+
+  /* Contact Page on 320px */
+  .zenji-contact-page {
+    padding: 80px 8px 40px;
+  }
+
+  .zenji-contact-page__title {
+    font-size: 22px;
+  }
+
+  .zenji-contact-page__subtitle {
+    font-size: 12px;
+  }
+
+  .zenji-contact-form-card,
+  .zenji-contact-info-card {
+    padding: 18px 12px;
+  }
+
+  .zenji-contact-info-item {
+    gap: 10px;
+  }
+
+  .zenji-contact-info-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Footer on 320px */
+  .zenji-footer {
+    padding-top: 36px;
+  }
+
+  .zenji-footer__container {
+    padding: 0 8px 36px;
+    gap: 24px;
+  }
+
+  .zenji-footer__desc {
+    font-size: 11.5px;
+    line-height: 1.5;
+  }
+
+  .zenji-footer__status-panel {
+    padding: 10px 8px;
+  }
+
+  .zenji-footer__status-location {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .zenji-footer__coords-text {
+    font-size: 8px;
+    word-break: break-all;
+  }
+
+  .zenji-footer__social-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .zenji-footer__social-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .zenji-footer__email {
+    font-size: 10px;
+    padding: 5px 8px;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .zenji-footer__bottom-container {
+    padding: 14px 8px;
+  }
+
+  .zenji-footer__meta-row {
+    font-size: 7.5px;
+    gap: 4px;
   }
 }
 
@@ -11443,6 +12083,789 @@ select {
 
   .zenji-contact-page__header {
     margin-bottom: 36px;
+  }
+}
+
+/* ==========================================================================
+   ZENJI THEME SYSTEM — LIGHT THEME SPECIFIC OVERRIDES
+   ========================================================================== */
+
+[data-theme="light"] body {
+  background-color: var(--bg-primary);
+  background-image: radial-gradient(circle at 50% 0%, #eae8de 0%, transparent 70%);
+}
+
+/* Background Atmosphere Light Mode Modulation */
+[data-theme="light"] .zenji-global-atmosphere__grid {
+  opacity: 0.035;
+  filter: invert(1);
+}
+
+[data-theme="light"] .zenji-global-atmosphere__noise {
+  opacity: 0.02;
+  filter: invert(1);
+}
+
+[data-theme="light"] .zenji-global-atmosphere__glow {
+  opacity: 0.03 !important;
+}
+
+/* Navigation & Ticker in Light Mode */
+[data-theme="light"] .zenji-ticker {
+  background: #E8E6DE;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-ticker__content span {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-ticker__highlight {
+  color: #111111;
+  font-weight: 700;
+}
+
+[data-theme="light"] .zenji-ticker__dot {
+  color: var(--accent-neon);
+}
+
+[data-theme="light"] .zenji-header {
+  background: rgba(244, 243, 238, 0.88);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-header--scrolled {
+  background: rgba(244, 243, 238, 0.96);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .zenji-logo__text {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-logo__sub {
+  color: #6e737e;
+}
+
+[data-theme="light"] .zenji-nav__link-text {
+  color: #333333;
+}
+
+[data-theme="light"] .zenji-nav__link-jp {
+  color: #888888;
+}
+
+[data-theme="light"] .zenji-nav__link:hover .zenji-nav__link-text,
+[data-theme="light"] .zenji-nav__link--active .zenji-nav__link-text {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-nav__active-pill {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="light"] .zenji-nav__active-beam {
+  background: var(--accent-neon);
+  box-shadow: 0 0 10px var(--accent-neon);
+}
+
+[data-theme="light"] .zenji-nav__action-btn {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-cart-btn {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-cart-btn__label {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-cart-btn__badge {
+  background: var(--accent-neon);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-mobile-menu {
+  background: rgba(244, 243, 238, 0.98);
+}
+
+[data-theme="light"] .zenji-mobile-menu__inner {
+  background: #F4F3EE;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-mobile-menu__link {
+  border-color: rgba(0, 0, 0, 0.06);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-mobile-menu__link:hover,
+[data-theme="light"] .zenji-mobile-menu__link--active {
+  background: rgba(0, 0, 0, 0.04);
+}
+
+/* Homepage Hero in Light Mode */
+[data-theme="light"] .zenji-hero__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-hero__sub {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-hero__hud {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-hero__badge {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+/* Why Choose ZENJI Cards in Light Mode */
+[data-theme="light"] .zenji-why-section__kicker-text {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-section__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-section__subtitle {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-why-section__hud-strip {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-why-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .zenji-why-card:hover {
+  background: #FFFFFF !important;
+  border-color: var(--accent-neon) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(157, 204, 0, 0.16) !important;
+}
+
+[data-theme="light"] .zenji-why-card__number {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-card__jp {
+  color: #888888;
+}
+
+[data-theme="light"] .zenji-why-card__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-card__desc {
+  color: #333333;
+}
+
+[data-theme="light"] .zenji-why-card__detail {
+  color: #666666;
+}
+
+[data-theme="light"] .zenji-why-card__spec {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-card__icon-badge {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-why-card__divider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-why-card__tag {
+  color: #6e737e;
+}
+
+[data-theme="light"] .zenji-why-card__corner {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Community Reviews Cards in Light Mode */
+[data-theme="light"] .zenji-reviews-section__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-reviews-section__subtitle {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-reviews-section__hud-strip {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-reviews-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .zenji-reviews-card:hover {
+  background: #FFFFFF !important;
+  border-color: var(--accent-neon) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(157, 204, 0, 0.16) !important;
+}
+
+[data-theme="light"] .zenji-reviews-card__quote {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-reviews-card__name {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-reviews-card__location {
+  color: #6e737e;
+}
+
+[data-theme="light"] .zenji-reviews-card__item-tag {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-reviews-card__verified-badge {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-reviews-card__watermark {
+  color: rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="light"] .zenji-reviews-card__divider {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-reviews-card__corner {
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Product Cards in Light Mode */
+[data-theme="light"] .zenji-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .zenji-card:hover {
+  border-color: var(--accent-neon) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08), 0 0 20px rgba(157, 204, 0, 0.14) !important;
+}
+
+[data-theme="light"] .zenji-card__media {
+  background: #F4F3EE;
+}
+
+[data-theme="light"] .zenji-card__title a {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-card__price {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-card__category {
+  color: #6e737e;
+}
+
+[data-theme="light"] .zenji-card__id-pill {
+  background: rgba(255, 255, 255, 0.92);
+  color: #111111;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+[data-theme="light"] .zenji-card__action-btn {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-card__action-btn:hover {
+  background: var(--accent-neon);
+  color: #111111;
+  border-color: var(--accent-neon);
+}
+
+[data-theme="light"] .zenji-card__add-btn {
+  background: #111111;
+  color: #FFFFFF;
+  border-color: #111111;
+}
+
+[data-theme="light"] .zenji-card__add-btn:hover {
+  background: var(--accent-neon);
+  color: #111111;
+  border-color: var(--accent-neon);
+}
+
+/* Shop Filters & Inputs in Light Mode */
+[data-theme="light"] .zenji-filter {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-filter__btn {
+  color: #555861;
+  border-color: transparent;
+}
+
+[data-theme="light"] .zenji-filter__btn--active,
+[data-theme="light"] .zenji-filter__btn:hover {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .zenji-shop-search__input,
+[data-theme="light"] .zenji-shop-sort__select {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111111;
+}
+
+/* Product Detail Page in Light Mode */
+[data-theme="light"] .zenji-detail {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__desc {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-detail__price {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__gallery-main {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-detail__thumb {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .zenji-detail__size-btn {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.15);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__size-btn--active {
+  background: #111111;
+  color: #FFFFFF;
+  border-color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__add-btn {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .zenji-detail__add-btn:hover {
+  background: var(--accent-neon);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-detail__spec-box {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-detail__accordion-item {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Contact Page in Light Mode */
+[data-theme="light"] .zenji-contact-page__title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-page__subtitle {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-contact-page__status-bar {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-info-card,
+[data-theme="light"] .zenji-contact-form-card {
+  background: #FFFFFF !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: var(--shadow-card);
+}
+
+[data-theme="light"] .zenji-contact-info-card__heading {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-info-value {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-info-sub {
+  color: #6e737e;
+}
+
+[data-theme="light"] .zenji-contact-info-icon {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-trust-box {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-contact-input,
+[data-theme="light"] .zenji-contact-textarea,
+[data-theme="light"] .zenji-contact-select {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.12);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-contact-input:focus,
+[data-theme="light"] .zenji-contact-textarea:focus,
+[data-theme="light"] .zenji-contact-select:focus {
+  border-color: var(--accent-neon);
+  background: #FFFFFF;
+}
+
+[data-theme="light"] .zenji-contact-submit-btn {
+  background: #111111;
+  color: #FFFFFF;
+}
+
+[data-theme="light"] .zenji-contact-submit-btn:hover {
+  background: var(--accent-neon);
+  color: #111111;
+}
+
+/* Footer in Light Mode */
+[data-theme="light"] .zenji-footer {
+  background: #ECEAE3;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__brand-box {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-footer__brand-desc {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-footer__status-badge {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__social-card {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-footer__social-icon-btn {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__social-icon-btn:hover {
+  background: #FFFFFF;
+  border-color: var(--accent-neon);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__col-title {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__links a {
+  color: #4a4e57;
+}
+
+[data-theme="light"] .zenji-footer__links a:hover {
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-footer__bottom {
+  border-color: rgba(0, 0, 0, 0.08);
+  color: #6e737e;
+}
+
+/* Cart Drawer & Modals in Light Mode */
+[data-theme="light"] .zenji-cart-drawer {
+  background: #FFFFFF;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-cart-item {
+  background: #FAF9F5;
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .zenji-checkout-modal {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+[data-theme="light"] .zenji-quickview {
+  background: #FFFFFF;
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #111111;
+}
+
+/* ==========================================================================
+   ZENJI INITIAL PRELOADER — LUXURY FASHION REVEAL
+   ========================================================================== */
+.zenji-initial-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #050608;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.zenji-initial-loader__glow {
+  position: absolute;
+  width: 580px;
+  height: 580px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 255, 0, 0.08) 0%, rgba(0, 245, 255, 0.02) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.zenji-initial-loader__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(200, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200, 255, 0, 0.02) 1px, transparent 1px);
+  background-size: 36px 36px;
+  pointer-events: none;
+}
+
+.zenji-initial-loader__corner {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: rgba(200, 255, 0, 0.45);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.zenji-initial-loader__corner--tl { top: 24px; left: 24px; }
+.zenji-initial-loader__corner--tr { top: 24px; right: 24px; }
+.zenji-initial-loader__corner--bl { bottom: 24px; left: 24px; }
+.zenji-initial-loader__corner--br { bottom: 24px; right: 24px; }
+
+.zenji-initial-loader__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 90vw;
+  width: 360px;
+  padding: 0 16px;
+}
+
+.zenji-initial-loader__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.16em;
+  margin-bottom: 28px;
+}
+
+.zenji-initial-loader__dot {
+  color: var(--accent-neon);
+}
+
+.zenji-initial-loader__coords {
+  color: var(--text-secondary);
+}
+
+.zenji-initial-loader__logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+.zenji-initial-loader__jp {
+  font-family: var(--font-mono);
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--accent-neon);
+  background: rgba(200, 255, 0, 0.08);
+  border: 1px solid rgba(200, 255, 0, 0.35);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.15em;
+  box-shadow: 0 0 24px rgba(200, 255, 0, 0.2);
+}
+
+.zenji-initial-loader__title-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.zenji-initial-loader__title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  margin: 0;
+}
+
+.zenji-initial-loader__sub {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.28em;
+  margin-top: 5px;
+}
+
+/* Precision Neon Lime Animated Line */
+.zenji-initial-loader__line-wrap {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  position: relative;
+  border-radius: 1px;
+  overflow: visible;
+  margin-bottom: 16px;
+}
+
+.zenji-initial-loader__line-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, rgba(200, 255, 0, 0.8) 50%, var(--accent-neon) 100%);
+  transform-origin: left;
+  box-shadow: 0 0 14px var(--accent-neon);
+}
+
+.zenji-initial-loader__line-glow {
+  position: absolute;
+  top: -3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 12px var(--accent-neon), 0 0 20px var(--accent-neon);
+  transform: translateX(-50%);
+}
+
+.zenji-initial-loader__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: var(--font-mono);
+}
+
+.zenji-initial-loader__status {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.zenji-initial-loader__counter {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent-neon);
+  letter-spacing: 0.06em;
+}
+
+@media (max-width: 480px) {
+  .zenji-initial-loader__content {
+    width: 290px;
+  }
+
+  .zenji-initial-loader__title {
+    font-size: 26px;
+  }
+
+  .zenji-initial-loader__jp {
+    font-size: 16px;
+    padding: 4px 10px;
+  }
+
+  .zenji-initial-loader__corner--tl { top: 16px; left: 16px; }
+  .zenji-initial-loader__corner--tr { top: 16px; right: 16px; }
+  .zenji-initial-loader__corner--bl { bottom: 16px; left: 16px; }
+  .zenji-initial-loader__corner--br { bottom: 16px; right: 16px; }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
