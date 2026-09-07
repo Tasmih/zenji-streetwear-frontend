@@ -4,86 +4,101 @@
 
 ![React](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=eslint&logoColor=white)
 
-**An ultra-premium, dark-futuristic Japanese streetwear e-commerce frontend inspired by Tokyo high-fashion ateliers, technical apparel engineering, and archival drops.**
-
-[Live Demo](#-getting-started) • [Key Features](#-features) • [Tech Stack](#-tech-stack) • [Architecture](#-project-structure) • [Installation](#-getting-started)
+**An ultra-premium Japanese-inspired streetwear e-commerce frontend engineering heavyweight silhouettes, cyberpunk technical apparel, and limited archival drops.**
 
 </div>
 
 ---
 
-## ⛩️ Project Overview
+## 1. Project Overview
 
-**ZENJI (禅侍)** is a luxury Japanese-inspired technical streetwear storefront crafted with modern web performance and high-fashion aesthetics. Engineering heavyweight garments through Japanese precision, architectural silhouettes, and limited archive releases, the web application delivers an immersive editorial shopping experience.
+**ZENJI** is a premium Japanese-inspired streetwear ecommerce frontend designed with a dark, high-fashion Tokyo atelier aesthetic. It merges post-industrial technical apparel specifications (500 GSM bespoke French Terry, Cordura® ripstop, modular Fidlock® hardware) with fluid, modern web performance.
 
-The frontend is built with **React**, **Vite**, **Framer Motion**, and a bespoke **Vanilla CSS design system** that combines dark luxury minimalism (`#050608`), cybernetic neon accents (`#D4FF00`), and typography tailored with `Syne`, `Space Grotesk`, and `JetBrains Mono`.
-
-> [!NOTE]
-> **Frontend Demonstration Notice:** This repository represents an exploratory frontend client. It contains **no backend server, external database, user authentication, or real financial payment processing**. Cart state, search filters, and theme preferences persist locally in the browser via React Context and `localStorage`.
+Built from scratch using React, Vite, and Framer Motion, ZENJI features an obsidian black canvas (`#050608`), cybernetic neon lime accents (`#D4FF00`), and a bespoke Vanilla CSS design system for 60 FPS fluidity.
 
 ---
 
-## ✨ Features
+## 2. Features
 
-### 1. Animated Editorial Hero & Brand Preloader
-- **Luxury Initial Preloader:** Tokyo Atelier brand insignia reveal with neon line drawing animation and smooth homepage crossfade.
-- **Cinematic Lookbook Carousel:** Interactive drop showcases featuring bespoke 500 GSM heavyweight hoodies, modular outerwear, and vintage graphic tees.
-- **Micro-Interactions:** Word stagger text reveals, Tokyo Shibuya GPS coordinates (`35.6580° N, 139.7016° E`), and atmospheric radial light hazes.
-
-### 2. Interactive Product Catalog & Archival Filtering
-- **Dynamic Multi-Criteria Filters:** Filter pieces by categories (Hoodies, Cargos, Tees, Outerwear, Accessories), price ranges, keyword search, or sort by price and rating.
-- **URL-Synchronized Navigation:** Dedicated collection routes (`/shop`, `/drops`, `/outerwear`) seamlessly pre-filter the archive grid.
-- **Product Quick View:** Modal dialog with instant specification inspection, size selection, and direct bag insertion without leaving the feed.
-
-### 3. Fashion-Grade Product Detail Pages (`/product/:id`)
-- **Magnification Visual Gallery:** High-resolution multi-angle perspectives with mouse-tracking interactive hover zoom.
-- **Garment Architecture Specs:** GSM weight tags, technical fabrication breakdowns (Cordura®, French Terry, Ripstop), and stock availability indicators.
-- **Contextual Recommendations:** Dynamic "Related Pieces" carousel based on silhouette discipline and collection tag.
-
-### 4. Interactive Slide-Over Cart Drawer
-- **Persistent Local Bag:** Stores items with selected size and color variant in `localStorage`.
-- **Live Quantity Controls:** Direction-aware animated quantity counter with automated removal threshold.
-- **Free Worldwide Shipping Progress:** Dynamic calculation bar tracking distance to the $200 free express dispatch tier.
-- **Bag Management:** Inline item removal and empty bag confirmation modal with quick-category jumps.
-
-### 5. Brand Storytelling & Editorial Sections
-- **Tokyo Atelier Manifesto:** Architectural streetwear philosophy and technical craftsmanship pillars.
-- **Archive Drop Timeline:** Release history across seasons (SS25 – FW26 editions).
-- **Verified Community Reviews:** Client reviews featuring authentic piece verification badges.
-
-### 6. Transmission Terminal (Contact Page)
-- **Atelier Direct Line:** Interactive communication terminal with Shibuya studio coordinates, standard response timelines, and dispatch status indicators.
-- **Transmission Form:** Input validation with simulated asynchronous dispatch confirmation.
-
-### 7. Dark & Light Theme System
-- **Dual Luxury Palettes:** Dark Mode (`#050608` deep obsidian) and Light Mode (`#F4F3EE` editorial bone white).
-- **Smooth Transitioning:** Coordinated CSS variable switching, icon rotation animations, and persistent `localStorage` preference memory.
-
-### 8. True Multi-Device Responsiveness
-- Optimized down to **320px mobile**, **375px smartphones**, **768px tablets**, and **4K desktop monitors**.
-- Zero horizontal overflow (`overflow-x: hidden`), fluid aspect ratios (`4:5`), and responsive typography (`clamp()`).
+- **Responsive Design:** Optimized for fluid viewing across mobile (320px & 375px), tablets (768px), and ultra-wide 4K desktop displays with zero horizontal overflow.
+- **Animated Hero Section:** Cinematic lookbook carousel with word-stagger typography, atmospheric radial light hazes, Tokyo Shibuya GPS coordinates (`35.6580° N, 139.7016° E`), and an initial luxury brand preloader.
+- **Product Showcase:** Multi-discipline catalog with real-time category filtering (Hoodies, Cargos, Graphic Tees, Outerwear, Accessories), keyword search, price range filtering, and interactive Quick View modals.
+- **Product Detail Pages:** High-resolution perspective gallery with interactive mouse-tracking hover zoom, GSM technical fabric specifications, size/color selectors, and dynamic related piece recommendations.
+- **Cart Drawer:** Full slide-over shopping bag with persistent `localStorage`, live directional quantity adjusters, automated item removal, and a real-time Free Worldwide Express Shipping calculation bar ($200 tier).
+- **Brand Storytelling Sections:** Tokyo Design Studio atelier manifesto, craftsmanship engineering pillars, archival release timeline, and verified client community reviews.
+- **Contact Page:** Transmission terminal interface with studio location coordinates, dispatch status indicators, and an interactive transmission form with simulated asynchronous submission feedback.
+- **Framer Motion Animations:** Spring-physics page transitions, staggered grid reveals, micro-interactions, and GPU-accelerated transforms.
+- **Dark / Light Theme Toggle:** Dual luxury palettes with smooth CSS custom property transitions and persistent theme memory.
 
 ---
 
-## 🛠️ Tech Stack
+## 3. Tech Stack
 
-| Technology | Purpose |
-| :--- | :--- |
-| **React 19** | Component architecture, state management, and modern hooks (`useMemo`, `useCallback`) |
-| **Vite 8** | Next-generation build tool and ultra-fast hot module replacement (HMR) |
-| **JavaScript (ESNext)** | Modern syntax, asynchronous operations, and modular utility design |
-| **Vanilla CSS** | Fully customized design tokens, CSS custom variables, and responsive media queries |
-| **Framer Motion** | Declarative GPU-accelerated layout transitions, spring physics, and scroll reveal animations |
-| **React Router v7** | Client-side routing with route-based lazy loading and Suspense fallbacks |
-| **Lucide React** | Lightweight, clean technical iconography |
+- **React** (v19) — Component architecture, state management, and custom hooks
+- **Vite** (v8) — Fast development bundling and production build pipeline
+- **JavaScript** (ESNext) — Modern modular logic, async operations, and state flow
+- **CSS** (Vanilla CSS) — Bespoke design token system, CSS variables, and fluid media queries
+- **Framer Motion** — Declarative UI animations, layout transitions, and spring physics
+- **React Router** (v7) — Client-side routing with lazy-loading and Suspense boundaries
+- **Lucide React** — Minimalist technical iconography
 
 ---
 
-## 📁 Project Structure
+## 4. Installation
+
+### Prerequisites
+- **Node.js** (v18.0.0 or higher recommended)
+- **npm** (or yarn / pnpm)
+
+### Setup Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Tasmih/zenji-streetwear-frontend.git
+   cd zenji-streetwear-frontend
+   ```
+
+2. **Install project dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the local development server:**
+   ```bash
+   npm run dev
+   ```
+   Open your browser and navigate to `http://localhost:5173/`.
+
+---
+
+## 5. Build
+
+Compile and bundle the project for production deployment:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+Run static code analysis and linting:
+
+```bash
+npm run lint
+```
+
+---
+
+## 6. Project Structure Overview
 
 ```text
 zenji-website/
@@ -129,69 +144,17 @@ zenji-website/
 
 ---
 
-## 🚀 Getting Started
+## 7. Frontend-Only Note
 
-### Prerequisites
-- **Node.js**: v18.0.0 or higher
-- **npm** or **yarn** / **pnpm**
-
-### Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/Tasmih/zenji-streetwear-frontend.git
-   cd zenji-streetwear-frontend
-   ```
-
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-3. **Start the local development server:**
-   ```bash
-   npm run dev
-   ```
-   Open your browser and navigate to `http://localhost:5173/`.
-
----
-
-## 📦 Build & Production Verification
-
-Compile and bundle the frontend for production:
-
-```bash
-npm run build
-```
-
-Preview the production build locally:
-
-```bash
-npm run preview
-```
-
-Run static code analysis and linting:
-
-```bash
-npm run lint
-```
-
----
-
-## 🛡️ Quality & Performance Assurance
-
-- **0 ESLint Errors / Warnings:** Complies strictly with modern React and React Refresh standards.
-- **Fast Production Bundling:** Production build completes in under **1 second** with tree-shaken route chunks.
-- **Hardware Acceleration:** All animations use GPU-composited CSS properties (`transform`, `opacity`) for smooth 60 FPS performance.
-- **Accessibility & SEO:** Dynamic meta page titles, semantic HTML5 landmarks, image `alt` tags, and full ARIA modal attributes.
+> [!IMPORTANT]
+> **Client-Side Portfolio Project:**
+> This repository is a **frontend-only** implementation. It includes **no backend server, database, user authentication, or real financial payment processing**. All shopping bag items, search filters, and theme preferences are managed entirely on the client side using React Context and the browser's `localStorage` API.
 
 ---
 
 ## 📄 License
 
-This project is created for portfolio demonstration purposes under the [MIT License](LICENSE).
-
----
+This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
   <sub>ZENJI TOKYO ATELIER // SHIBUYA 35.6580° N, 139.7016° E</sub>
