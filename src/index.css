@@ -5256,6 +5256,1362 @@ img {
   }
 }
 
+/* ==========================================================================
+   ZENJI DESIGN PHILOSOPHY SECTION
+   ========================================================================== */
+.zenji-philosophy-section {
+  position: relative;
+  background: #08080a;
+  padding: 110px 24px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.zenji-philosophy-section__bg-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.05) 0%, rgba(0, 245, 255, 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  filter: blur(60px);
+  z-index: 0;
+}
+
+.zenji-philosophy-section__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 255, 0, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.zenji-philosophy-section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.zenji-philosophy-section__header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 64px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zenji-philosophy-section__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.28);
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.zenji-philosophy-section__kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+  animation: zenjiPulse 2s infinite ease-in-out;
+}
+
+.zenji-philosophy-section__kicker-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--accent-neon);
+}
+
+.zenji-philosophy-section__kicker-jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  padding-left: 8px;
+}
+
+.zenji-philosophy-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.2vw, 44px);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #fff;
+  line-height: 1.15;
+  margin: 0 0 16px 0;
+  text-transform: uppercase;
+}
+
+.zenji-philosophy-section__subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.8vw, 16px);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  max-width: 620px;
+}
+
+.zenji-philosophy-section__hud-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 6px 16px;
+  border-radius: 99px;
+}
+
+.zenji-philosophy-section__hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-philosophy-section__hud-bullet {
+  color: var(--accent-neon);
+  font-weight: 700;
+}
+
+.zenji-philosophy-section__hud-icon {
+  color: var(--accent-neon);
+}
+
+.zenji-philosophy-section__hud-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* 4-Card Grid */
+.zenji-philosophy-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.zenji-philosophy-card {
+  background: rgba(14, 14, 19, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+  min-height: 310px;
+}
+
+.zenji-philosophy-card:hover {
+  border-color: rgba(212, 255, 0, 0.45);
+  background: rgba(18, 18, 25, 0.85);
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    0 0 25px rgba(212, 255, 0, 0.15);
+}
+
+/* Tactical Corner Crosshairs */
+.zenji-philosophy-card__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 255, 255, 0.2);
+  transition: border-color var(--transition-fast);
+  pointer-events: none;
+}
+
+.zenji-philosophy-card:hover .zenji-philosophy-card__corner {
+  border-color: var(--accent-neon);
+}
+
+.zenji-philosophy-card__corner--tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
+.zenji-philosophy-card__corner--tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
+.zenji-philosophy-card__corner--bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
+.zenji-philosophy-card__corner--br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+.zenji-philosophy-card__hover-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.zenji-philosophy-card:hover .zenji-philosophy-card__hover-glow {
+  opacity: 1;
+}
+
+/* Card Top */
+.zenji-philosophy-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.zenji-philosophy-card__number-wrap {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--accent-neon);
+  line-height: 1;
+  text-shadow: 0 0 18px rgba(212, 255, 0, 0.35);
+  letter-spacing: -0.02em;
+}
+
+.zenji-philosophy__number-val {
+  display: inline-block;
+}
+
+.zenji-philosophy-card__meta-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.zenji-philosophy-card__jp-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.zenji-philosophy-card__icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.2);
+  color: var(--accent-neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.zenji-philosophy-card:hover .zenji-philosophy-card__icon-badge {
+  transform: scale(1.08);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 12px rgba(212, 255, 0, 0.3);
+}
+
+/* Card Beam */
+.zenji-philosophy-card__beam {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 255, 0, 0.3), rgba(255, 255, 255, 0.04));
+  margin-bottom: 20px;
+}
+
+/* Card Content */
+.zenji-philosophy-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.zenji-philosophy-card__spec-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.zenji-philosophy-card__spec-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+}
+
+.zenji-philosophy-card__title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.zenji-philosophy-card__desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0 0 20px 0;
+}
+
+/* Card Footer */
+.zenji-philosophy-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-mono);
+}
+
+.zenji-philosophy-card__tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  background: rgba(212, 255, 0, 0.08);
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+
+.zenji-philosophy-card__status {
+  font-size: 8px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+/* Responsive Rules for Philosophy Section */
+@media (max-width: 1024px) {
+  .zenji-philosophy-section {
+    padding: 80px 20px;
+  }
+
+  .zenji-philosophy-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .zenji-philosophy-section {
+    padding: 64px 14px;
+  }
+
+  .zenji-philosophy-section__header {
+    margin-bottom: 40px;
+  }
+
+  .zenji-philosophy-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .zenji-philosophy-card {
+    min-height: auto;
+    padding: 22px 18px;
+  }
+
+  .zenji-philosophy-card__number-wrap {
+    font-size: 36px;
+  }
+}
+
+/* ==========================================================================
+   ZENJI ARCHIVE TIMELINE SECTION
+   ========================================================================== */
+.zenji-archive-timeline {
+  position: relative;
+  background: #060608;
+  padding: 120px 24px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.zenji-archive-timeline__bg-glow {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.035) 0%, rgba(0, 245, 255, 0.015) 45%, transparent 70%);
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.zenji-archive-timeline__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.02) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.zenji-archive-timeline__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.zenji-archive-timeline__header {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 72px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zenji-archive-timeline__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.28);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.zenji-archive-timeline__kicker-icon {
+  color: var(--accent-neon);
+  animation: beaconPulse 2.5s infinite;
+}
+
+.zenji-archive-timeline__kicker-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.14em;
+}
+
+.zenji-archive-timeline__kicker-jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  padding-left: 6px;
+  border-left: 1px solid rgba(212, 255, 0, 0.3);
+}
+
+.zenji-archive-timeline__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.zenji-archive-timeline__subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  max-width: 620px;
+}
+
+.zenji-archive-timeline__badge-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(14, 14, 20, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-archive-timeline__badge-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-archive-timeline__badge-item--active {
+  color: var(--accent-neon);
+  font-weight: 700;
+}
+
+.zenji-archive-timeline__badge-sep {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+/* Timeline Track */
+.zenji-archive-timeline__track {
+  position: relative;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Animated Vertical Neon Lime Line */
+.zenji-archive-timeline__line {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  bottom: 20px;
+  width: 2px;
+  transform: translateX(-50%);
+  transform-origin: top;
+  background: linear-gradient(
+    180deg,
+    rgba(212, 255, 0, 0.2) 0%,
+    var(--accent-neon) 12%,
+    var(--accent-neon) 88%,
+    rgba(212, 255, 0, 0.2) 100%
+  );
+  box-shadow: 0 0 14px rgba(212, 255, 0, 0.5), 0 0 24px rgba(212, 255, 0, 0.2);
+  z-index: 1;
+}
+
+/* Entries Container */
+.zenji-archive-timeline__entries {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  position: relative;
+  z-index: 2;
+}
+
+.zenji-archive-timeline__entry {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.zenji-archive-timeline__entry--left {
+  justify-content: flex-start;
+  padding-right: calc(50% + 48px);
+}
+
+.zenji-archive-timeline__entry--right {
+  justify-content: flex-end;
+  padding-left: calc(50% + 48px);
+}
+
+/* Center Node Indicator */
+.zenji-archive-timeline__node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #0a0a0f;
+  border: 1px solid rgba(212, 255, 0, 0.45);
+  box-shadow: 0 0 14px rgba(212, 255, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  transition: all 0.35s ease;
+}
+
+.zenji-archive-timeline__node-inner {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zenji-archive-timeline__node-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-neon);
+  opacity: 0.6;
+  animation: neonNodePulse 2.4s infinite ease-out;
+}
+
+@keyframes neonNodePulse {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.zenji-archive-timeline__node-label {
+  display: none;
+}
+
+.zenji-archive-timeline__node--hovered,
+.zenji-archive-timeline__node--current {
+  border-color: var(--accent-neon);
+  transform: translate(-50%, -50%) scale(1.18);
+  box-shadow: 0 0 22px rgba(212, 255, 0, 0.65);
+}
+
+/* Card Wrap */
+.zenji-archive-timeline__card-wrap {
+  width: 100%;
+}
+
+/* Glass Card */
+.zenji-archive-timeline__card {
+  background: rgba(12, 12, 18, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 30px 28px 24px 28px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+}
+
+.zenji-archive-timeline__card--current {
+  border-color: rgba(212, 255, 0, 0.3);
+  background: rgba(15, 16, 22, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 255, 0, 0.08);
+}
+
+.zenji-archive-timeline__card:hover {
+  border-color: rgba(212, 255, 0, 0.55);
+  background: rgba(18, 18, 26, 0.9);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(212, 255, 0, 0.16);
+}
+
+/* Tactical Glass Corner Marks */
+.zenji-archive-timeline__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 255, 255, 0.18);
+  transition: border-color var(--transition-fast);
+  pointer-events: none;
+}
+
+.zenji-archive-timeline__card:hover .zenji-archive-timeline__corner {
+  border-color: var(--accent-neon);
+}
+
+.zenji-archive-timeline__corner--tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
+.zenji-archive-timeline__corner--tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
+.zenji-archive-timeline__corner--bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
+.zenji-archive-timeline__corner--br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Neon Shimmer Top Beam */
+.zenji-archive-timeline__card-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-neon), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.zenji-archive-timeline__card:hover .zenji-archive-timeline__card-beam,
+.zenji-archive-timeline__card--current .zenji-archive-timeline__card-beam {
+  opacity: 1;
+}
+
+/* Card Header */
+.zenji-archive-timeline__card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+  gap: 12px;
+}
+
+.zenji-archive-timeline__card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zenji-archive-timeline__card-dropnum {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--accent-neon);
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 12px rgba(212, 255, 0, 0.3);
+}
+
+.zenji-archive-timeline__card-period {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-archive-timeline__card-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zenji-archive-timeline__card-jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+}
+
+.zenji-archive-timeline__card-status-pill {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+}
+
+.zenji-archive-timeline__card-status-pill--active {
+  color: var(--accent-neon);
+  background: rgba(212, 255, 0, 0.08);
+  border-color: rgba(212, 255, 0, 0.35);
+  box-shadow: 0 0 10px rgba(212, 255, 0, 0.2);
+}
+
+/* Card Body */
+.zenji-archive-timeline__card-body {
+  margin-bottom: 20px;
+}
+
+.zenji-archive-timeline__card-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #fff;
+  margin: 0 0 6px 0;
+  line-height: 1.25;
+}
+
+.zenji-archive-timeline__card-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+}
+
+.zenji-archive-timeline__card-desc {
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Card Specs */
+.zenji-archive-timeline__card-specs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  padding: 10px 14px;
+  margin-bottom: 20px;
+}
+
+.zenji-archive-timeline__spec-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.zenji-archive-timeline__spec-key {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+.zenji-archive-timeline__spec-val {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+/* Card Footer */
+.zenji-archive-timeline__card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: var(--font-mono);
+}
+
+.zenji-archive-timeline__footer-id {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-archive-timeline__footer-icon {
+  color: var(--accent-neon);
+}
+
+.zenji-archive-timeline__action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  padding: 4px 10px;
+  background: rgba(212, 255, 0, 0.08);
+  border: 1px solid rgba(212, 255, 0, 0.25);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.zenji-archive-timeline__action-link:hover {
+  background: var(--accent-neon);
+  color: #000;
+  box-shadow: 0 0 14px rgba(212, 255, 0, 0.4);
+}
+
+.zenji-archive-timeline__archived-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Responsive Rules for Archive Timeline */
+@media (max-width: 900px) {
+  .zenji-archive-timeline {
+    padding: 80px 20px;
+  }
+
+  .zenji-archive-timeline__line {
+    left: 20px;
+    transform: none;
+  }
+
+  .zenji-archive-timeline__entries {
+    gap: 40px;
+  }
+
+  .zenji-archive-timeline__entry {
+    padding-left: 56px !important;
+    padding-right: 0 !important;
+    justify-content: flex-start !important;
+  }
+
+  .zenji-archive-timeline__node {
+    left: 20px;
+    transform: translate(-50%, 0);
+    top: 32px;
+  }
+
+  .zenji-archive-timeline__node--hovered,
+  .zenji-archive-timeline__node--current {
+    transform: translate(-50%, 0) scale(1.15);
+  }
+
+  .zenji-archive-timeline__card-wrap {
+    max-width: 100%;
+  }
+
+  .zenji-archive-timeline__card {
+    padding: 24px 20px 20px 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .zenji-archive-timeline {
+    padding: 64px 14px;
+  }
+
+  .zenji-archive-timeline__header {
+    margin-bottom: 48px;
+  }
+
+  .zenji-archive-timeline__badge-strip {
+    flex-wrap: wrap;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+
+  .zenji-archive-timeline__card-specs {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .zenji-archive-timeline__card-title {
+    font-size: 19px;
+  }
+}
+
+/* ==========================================================================
+   ZENJI WHY CHOOSE ZENJI SECTION
+   ========================================================================== */
+.zenji-why-section {
+  position: relative;
+  background: #08080c;
+  padding: 120px 24px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.zenji-why-section__bg-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(212, 255, 0, 0.04) 0%, rgba(0, 245, 255, 0.015) 45%, transparent 70%);
+  pointer-events: none;
+  filter: blur(75px);
+  z-index: 0;
+}
+
+.zenji-why-section__bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212, 255, 0, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212, 255, 0, 0.02) 1px, transparent 1px);
+  background-size: 44px 44px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.zenji-why-section__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.zenji-why-section__header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 68px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zenji-why-section__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.28);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
+}
+
+.zenji-why-section__kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+  box-shadow: 0 0 8px var(--accent-neon);
+}
+
+.zenji-why-section__kicker-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  letter-spacing: 0.14em;
+}
+
+.zenji-why-section__kicker-jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  padding-left: 6px;
+  border-left: 1px solid rgba(212, 255, 0, 0.3);
+}
+
+.zenji-why-section__title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  margin: 0 0 16px 0;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.zenji-why-section__subtitle {
+  font-family: var(--font-sans);
+  font-size: clamp(14px, 1.8vw, 17px);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+  max-width: 620px;
+}
+
+.zenji-why-section__hud-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(14, 14, 20, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-why-section__hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.zenji-why-section__hud-icon {
+  color: var(--accent-neon);
+}
+
+.zenji-why-section__hud-bullet {
+  color: var(--accent-neon);
+  font-weight: 700;
+}
+
+.zenji-why-section__hud-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* 4 Feature Cards Grid */
+.zenji-why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.zenji-why-card {
+  background: rgba(14, 14, 20, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-sm);
+  padding: 30px 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 350px;
+  transition:
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    background 0.4s ease;
+}
+
+/* Hover Neon Glow & Lift */
+.zenji-why-card:hover {
+  border-color: rgba(212, 255, 0, 0.55);
+  background: rgba(18, 19, 28, 0.88);
+  box-shadow:
+    0 24px 50px rgba(0, 0, 0, 0.9),
+    0 0 32px rgba(212, 255, 0, 0.18);
+}
+
+/* Animated Neon Border Beam on Hover */
+.zenji-why-card__border-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-neon) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.zenji-why-card:hover .zenji-why-card__border-beam {
+  opacity: 1;
+}
+
+/* Tactical Corner Brackets */
+.zenji-why-card__corner {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: rgba(255, 255, 255, 0.2);
+  transition: border-color var(--transition-fast);
+  pointer-events: none;
+}
+
+.zenji-why-card:hover .zenji-why-card__corner {
+  border-color: var(--accent-neon);
+}
+
+.zenji-why-card__corner--tl { top: 8px; left: 8px; border-top: 1px solid; border-left: 1px solid; }
+.zenji-why-card__corner--tr { top: 8px; right: 8px; border-top: 1px solid; border-right: 1px solid; }
+.zenji-why-card__corner--bl { bottom: 8px; left: 8px; border-bottom: 1px solid; border-left: 1px solid; }
+.zenji-why-card__corner--br { bottom: 8px; right: 8px; border-bottom: 1px solid; border-right: 1px solid; }
+
+/* Top Row */
+.zenji-why-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.zenji-why-card__number {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--accent-neon);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 18px rgba(212, 255, 0, 0.35);
+}
+
+.zenji-why-card__top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.zenji-why-card__jp {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.zenji-why-card__icon-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(212, 255, 0, 0.06);
+  border: 1px solid rgba(212, 255, 0, 0.2);
+  color: var(--accent-neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.zenji-why-card:hover .zenji-why-card__icon-badge {
+  transform: scale(1.08);
+  border-color: var(--accent-neon);
+  box-shadow: 0 0 12px rgba(212, 255, 0, 0.3);
+}
+
+/* Middle Divider Beam */
+.zenji-why-card__divider {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(212, 255, 0, 0.3), rgba(255, 255, 255, 0.04));
+  margin-bottom: 18px;
+}
+
+/* Card Body */
+.zenji-why-card__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.zenji-why-card__spec {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.zenji-why-card__spec-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent-neon);
+}
+
+.zenji-why-card__title {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #fff;
+  margin: 0 0 10px 0;
+  line-height: 1.25;
+}
+
+.zenji-why-card__desc {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: #f1f5f9;
+  line-height: 1.55;
+  margin: 0 0 10px 0;
+}
+
+.zenji-why-card__detail {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin: 0 0 18px 0;
+}
+
+/* Card Footer */
+.zenji-why-card__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-mono);
+}
+
+.zenji-why-card__tag {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--accent-neon);
+  background: rgba(212, 255, 0, 0.08);
+  padding: 2px 6px;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+
+.zenji-why-card__verified {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 8.5px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.zenji-why-card__arrow {
+  color: var(--accent-neon);
+  transition: transform var(--transition-fast);
+}
+
+.zenji-why-card:hover .zenji-why-card__arrow {
+  transform: translate(2px, -2px);
+}
+
+/* Responsive Rules for Why Choose ZENJI */
+@media (max-width: 1024px) {
+  .zenji-why-section {
+    padding: 80px 20px;
+  }
+
+  .zenji-why-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 640px) {
+  .zenji-why-section {
+    padding: 64px 14px;
+  }
+
+  .zenji-why-section__header {
+    margin-bottom: 40px;
+  }
+
+  .zenji-why-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .zenji-why-card {
+    min-height: auto;
+    padding: 22px 18px;
+  }
+
+  .zenji-why-card__number {
+    font-size: 36px;
+  }
+}
+
 /* Newsletter */
 .zenji-newsletter {
   background: linear-gradient(180deg, var(--bg-primary) 0%, #121217 100%);

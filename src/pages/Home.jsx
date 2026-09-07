@@ -3,6 +3,9 @@ import { Hero } from '../components/home/Hero';
 import { CategoryShowcase } from '../components/home/CategoryShowcase';
 import { ProductShowcase } from '../components/home/ProductShowcase';
 import { BrandStory } from '../components/home/BrandStory';
+import { DesignPhilosophy } from '../components/home/DesignPhilosophy';
+import { ArchiveTimeline } from '../components/home/ArchiveTimeline';
+import { WhyChooseZenji } from '../components/home/WhyChooseZenji';
 import { Newsletter } from '../components/home/Newsletter';
 import { ProductQuickView } from '../components/product/ProductQuickView';
 import { useDocumentTitle } from '../utils/useDocumentTitle';
@@ -29,6 +32,9 @@ export const Home = () => {
       <CategoryShowcase />
       <ProductShowcase onQuickView={handleOpenQuickView} />
       <BrandStory />
+      <DesignPhilosophy />
+      <ArchiveTimeline />
+      <WhyChooseZenji />
       <Newsletter />
 
       {quickViewProduct && (
