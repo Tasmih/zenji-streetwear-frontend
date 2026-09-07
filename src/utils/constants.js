@@ -28,6 +28,6 @@ export const FOOTER_LINKS = {
     { label: 'Shipping & Customs', path: '#' },
     { label: 'Returns & Exchange', path: '#' },
     { label: 'Size Guide', path: '#' },
-    { label: 'Contact Atelier', path: '#' }
+    { label: 'Contact Atelier', path: '/contact' }
   ]
 };

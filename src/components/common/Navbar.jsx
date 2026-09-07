@@ -9,7 +9,8 @@ const NAV_ITEMS = [
   { label: 'Home', jp: 'ホーム', path: '/' },
   { label: 'Shop All', jp: '全作品', path: '/shop' },
   { label: 'Drops', jp: '限定新作', path: '/shop?category=hoodies' },
-  { label: 'Outerwear', jp: 'アウター', path: '/shop?category=outerwear' }
+  { label: 'Outerwear', jp: 'アウター', path: '/shop?category=outerwear' },
+  { label: 'Contact', jp: '連絡窓口', path: '/contact' }
 ];
 
 export const Navbar = () => {

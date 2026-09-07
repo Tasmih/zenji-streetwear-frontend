@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 const Home = lazy(() => import('../pages/Home'));
 const Shop = lazy(() => import('../pages/Shop'));
 const ProductDetail = lazy(() => import('../pages/ProductDetail'));
+const Contact = lazy(() => import('../pages/Contact'));
 
 const pageVariants = {
   initial: { opacity: 0, y: 16 },
@@ -86,6 +87,14 @@ export const AppRouter = () => {
             element={
               <PageWrapper>
                 <ProductDetail />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <PageWrapper>
+                <Contact />
               </PageWrapper>
             }
           />
